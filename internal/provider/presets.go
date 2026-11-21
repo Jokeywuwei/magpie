@@ -18,6 +18,10 @@ const (
 	// KindRemote is another computer's magpie: not a relay, so the add
 	// lists give it a heading of its own, after this machine's
 	KindRemote Kind = "remote"
+	// KindPartner is kept for providers added from a partner before the
+	// add sheet's Partners were removed: nothing makes one now, and such a
+	// provider keeps its endpoints, key and catalog as it was saved.
+	KindPartner Kind = "partner"
 )
 
 // PresetDef describes one preset.
@@ -34,10 +38,9 @@ type PresetDef struct {
 	Website   string   `json:"website,omitempty"`
 	SiteHost  string   `json:"siteHost,omitempty"` // a partner's: the host its usemagpie.ai/go Website sends the browser to, which the editor's link reads
 	KeysURL   string   `json:"keysUrl,omitempty"`
-	NoKey     bool     `json:"noKey,omitempty"`     // local servers: a key is optional
-	KeyHint   string   `json:"keyHint,omitempty"`   // the key field's placeholder, when it says more than NoKey's
-	Sponsored bool     `json:"sponsored,omitempty"` // shown first, with a tag
-	Note      string   `json:"note,omitempty"`      // one line under the name
+	NoKey     bool     `json:"noKey,omitempty"`   // local servers: a key is optional
+	KeyHint   string   `json:"keyHint,omitempty"` // the key field's placeholder, when it says more than NoKey's
+	Note      string   `json:"note,omitempty"`    // one line under the name
 	Short     string   `json:"short,omitempty"`     // the add sheet's name for it, when Name is long
 	Regions   []Region `json:"regions,omitempty"`   // base-URL choices (a relay's regional endpoints, a vendor's plans)
 	// RegionLabel names what the Regions choose between, "Region" if unset.
@@ -866,20 +869,9 @@ func mantleRegions(ids ...string) []Region {
 	return out
 }
 
-// Presets lists every preset, sponsored ones first within their kind.
+// Presets lists every preset.
 func Presets() []PresetDef {
-	out := make([]PresetDef, 0, len(presets))
-	for _, p := range presets {
-		if p.Sponsored {
-			out = append(out, p)
-		}
-	}
-	for _, p := range presets {
-		if !p.Sponsored {
-			out = append(out, p)
-		}
-	}
-	return out
+	return slices.Clone(presets)
 }
 
 // presetAliases are ids presets carried before, each the preset since and
@@ -959,16 +951,13 @@ func (p *Provider) moveEndpoints() {
 }
 
 // Preset finds a preset by id, or by an id it carried before
-// (presetAliases), or a partner listed now or before (partners.go).
+// (presetAliases). A provider added from a partner's preset keeps its
+// endpoints, key and catalog in providers.json; its id is no preset now.
 func Preset(id string) *PresetDef {
-	if pr := builtinPreset(id); pr != nil {
-		return pr
-	}
-	return partnerPreset(id)
+	return builtinPreset(id)
 }
 
-// builtinPreset is the preset of that id built into magpie, partners'
-// aside.
+// builtinPreset is the preset of that id built into magpie.
 func builtinPreset(id string) *PresetDef {
 	if a, ok := presetAliases[id]; ok {
 		id = a.preset

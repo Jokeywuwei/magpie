@@ -17,7 +17,7 @@ const amd = {
   responses: "", anthropic: "", catalog: "", website: "", keysUrl: "", proxy: "", balanceToken: { takes: false, set: false },
   key: { set: true, masked: "sk-…abcd" }, ready: true, chosen: [], fallback: [], routing: "", affinity: "",
   models: [{ id: "Qwen3.8-27B", name: "Qwen3.8 27B", efforts: ["low", "medium"], images: false, on: true, list: { input: 0, output: 0, cache_read: 0, cache_write: 0 } }],
-  exposed: 1, unlisted: false, off: false, fetched: "just now", agents: [], sponsored: false, keyList: [],
+  exposed: 1, unlisted: false, off: false, fetched: "just now", agents: [], keyList: [],
 };
 const providers = { providers: [amd], presets: [], excluded: [], gateway: { running: true, window: true } };
 

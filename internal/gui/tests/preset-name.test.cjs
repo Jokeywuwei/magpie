@@ -17,7 +17,7 @@ const row = (id, name, preset, host) => ({
   website: "", keysUrl: "", proxy: "", balanceToken: { takes: false, set: false },
   key: { set: true, masked: "sk-…abcd", optional: false }, ready: true, chosen: [], fallback: [], routing: "", affinity: "",
   models: [{ id: "kimi-k2", name: "kimi-k2", efforts: [], given: true, images: false, on: true }],
-  exposed: 1, unlisted: false, off: false, fetched: "just now", agents: [], sponsored: false, keyList: [],
+  exposed: 1, unlisted: false, off: false, fetched: "just now", agents: [], keyList: [],
 });
 const preset = (id, name, host) => ({ id, name, icon: "", kind: "api", chat: `https://${host}/v1`, website: `https://${host}`, added: true });
 const providers = {
