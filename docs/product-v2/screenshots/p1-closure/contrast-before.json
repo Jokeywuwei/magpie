@@ -1,0 +1,1445 @@
+[
+ {
+  "surface": "admin",
+  "page": "providers",
+  "scheme": "light",
+  "failures": [
+   {
+    "text": "网关 127.0.0.1:3425",
+    "cr": 3.33,
+    "need": 4.5,
+    "size": 11.5,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(244, 244, 246)",
+    "sel": "aside#side > div.side-foot > button#sideGw > span"
+   },
+   {
+    "text": "添加第一个供应商",
+    "cr": 3.33,
+    "need": 4.5,
+    "size": 11,
+    "weight": 600,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(244, 244, 246)",
+    "sel": "main#view-providers > section#addSheet > div.row-head > span.label"
+   },
+   {
+    "text": "登录即可，无需密钥",
+    "cr": 1.77,
+    "need": 4.5,
+    "size": 12,
+    "weight": 400,
+    "fg": "rgb(185, 185, 194)",
+    "bg": "rgb(244, 244, 246)",
+    "sel": "section#addSheet > div.tiles > div.kind > span"
+   },
+   {
+    "text": "模型厂商的 API",
+    "cr": 1.77,
+    "need": 4.5,
+    "size": 12,
+    "weight": 400,
+    "fg": "rgb(185, 185, 194)",
+    "bg": "rgb(244, 244, 246)",
+    "sel": "section#addSheet > div.tiles > div.kind > span"
+   },
+   {
+    "text": "一个密钥，多家模型",
+    "cr": 1.77,
+    "need": 4.5,
+    "size": 12,
+    "weight": 400,
+    "fg": "rgb(185, 185, 194)",
+    "bg": "rgb(244, 244, 246)",
+    "sel": "section#addSheet > div.tiles > div.kind > span"
+   },
+   {
+    "text": "在它的局域网上共享",
+    "cr": 1.77,
+    "need": 4.5,
+    "size": 12,
+    "weight": 400,
+    "fg": "rgb(185, 185, 194)",
+    "bg": "rgb(244, 244, 246)",
+    "sel": "section#addSheet > div.tiles > div.kind > span"
+   }
+  ],
+  "disabled": [],
+  "docW": 1440,
+  "vw": 1440
+ },
+ {
+  "surface": "admin",
+  "page": "routing",
+  "scheme": "light",
+  "failures": [
+   {
+    "text": "网关 127.0.0.1:3425",
+    "cr": 3.33,
+    "need": 4.5,
+    "size": 11.5,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(244, 244, 246)",
+    "sel": "aside#side > div.side-foot > button#sideGw > span"
+   },
+   {
+    "text": "路由",
+    "cr": 3.33,
+    "need": 4.5,
+    "size": 11,
+    "weight": 600,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(244, 244, 246)",
+    "sel": "body.window.web > main#view-routing > div.row-head > span.label"
+   },
+   {
+    "text": "实时 · 网关正在做的决定",
+    "cr": 1.77,
+    "need": 4.5,
+    "size": 11,
+    "weight": 400,
+    "fg": "rgb(185, 185, 194)",
+    "bg": "rgb(244, 244, 246)",
+    "sel": "body.window.web > main#view-routing > div.row-head > span.note"
+   },
+   {
+    "text": "127.0.0.1:3425",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 11,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "section#rt > div.rt-stage > div.rt-node.rt-hub > small"
+   },
+   {
+    "text": "还没有请求",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 13,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "section#rt > div.rt-stage > ol.rt-accts > li.idle"
+   },
+   {
+    "text": "请求",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 11,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "div.rt-foot > div.rt-stats > span > span"
+   },
+   {
+    "text": "改道",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 11,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "div.rt-foot > div.rt-stats > span > span"
+   }
+  ],
+  "disabled": [
+   {
+    "text": "Agent 收到的错误",
+    "cr": 3.66,
+    "size": 11,
+    "sel": "div.rt-foot > div.rt-stats > span.rt-errs > span"
+   }
+  ],
+  "docW": 1440,
+  "vw": 1440
+ },
+ {
+  "surface": "admin",
+  "page": "usage",
+  "scheme": "light",
+  "failures": [
+   {
+    "text": "网关 127.0.0.1:3425",
+    "cr": 3.33,
+    "need": 4.5,
+    "size": 11.5,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(244, 244, 246)",
+    "sel": "aside#side > div.side-foot > button#sideGw > span"
+   },
+   {
+    "text": "24 小时",
+    "cr": 3.25,
+    "need": 4.5,
+    "size": 12,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(241, 241, 244)",
+    "sel": "main#view-usage > div.usage-head > div#period > button.opt"
+   },
+   {
+    "text": "7 天",
+    "cr": 3.25,
+    "need": 4.5,
+    "size": 12,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(241, 241, 244)",
+    "sel": "main#view-usage > div.usage-head > div#period > button.opt"
+   },
+   {
+    "text": "30 天",
+    "cr": 3.25,
+    "need": 4.5,
+    "size": 12,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(241, 241, 244)",
+    "sel": "main#view-usage > div.usage-head > div#period > button.opt"
+   },
+   {
+    "text": "全部",
+    "cr": 3.25,
+    "need": 4.5,
+    "size": 12,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(241, 241, 244)",
+    "sel": "main#view-usage > div.usage-head > div#period > button.opt"
+   },
+   {
+    "text": "自定义",
+    "cr": 3.25,
+    "need": 4.5,
+    "size": 12,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(241, 241, 244)",
+    "sel": "div.usage-head > div#period > button.opt.range-opt > span"
+   },
+   {
+    "text": "5 秒",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 12,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "div.usage-head > span#usageRefresh > button#usageEvery > span"
+   },
+   {
+    "text": "生效价格",
+    "cr": 3.33,
+    "need": 4.5,
+    "size": 12,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(244, 244, 246)",
+    "sel": "main#view-usage > div.usage-head > span#usageCost > span"
+   },
+   {
+    "text": "仅统计网关调用；会话日志调用请查看「请求」。本地拒绝的请求不计入汇总。",
+    "cr": 1.77,
+    "need": 4.5,
+    "size": 11,
+    "weight": 400,
+    "fg": "rgb(185, 185, 194)",
+    "bg": "rgb(244, 244, 246)",
+    "sel": "body.window.web > main#view-usage > div#usagePane > p#usageScope"
+   },
+   {
+    "text": "今天没有调用。 不设置任何提供商也行：经过网关的调用，以及 Claude Code 和 Codex 自己会话文件里记录的",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 13,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "main#view-usage > div#usagePane > section#stats > div.none"
+   }
+  ],
+  "disabled": [],
+  "docW": 1440,
+  "vw": 1440
+ },
+ {
+  "surface": "admin",
+  "page": "plugins",
+  "scheme": "light",
+  "failures": [
+   {
+    "text": "网关 127.0.0.1:3425",
+    "cr": 3.33,
+    "need": 4.5,
+    "size": 11.5,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(244, 244, 246)",
+    "sel": "aside#side > div.side-foot > button#sideGw > span"
+   },
+   {
+    "text": "国内镜像",
+    "cr": 3.33,
+    "need": 4.5,
+    "size": 12,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(244, 244, 246)",
+    "sel": "main#view-plugins > div.lib-head.pm-head > button.pm-mirror > span"
+   },
+   {
+    "text": "11月23日",
+    "cr": 3.33,
+    "need": 4.5,
+    "size": 11.5,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(244, 244, 246)",
+    "sel": "div.lib-body.pm-body > section.pm-sec.pm-recs > div.pm-rectitle > span"
+   },
+   {
+    "text": "magpie 社区",
+    "cr": 3.62,
+    "need": 4.5,
+    "size": 11,
+    "weight": 500,
+    "fg": "rgb(24, 154, 88)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "div.pm-who > div.pm-by > span.pm-verified > span"
+   },
+   {
+    "text": "上周下载",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 11,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "article.pm-hero > div.pm-stats > div.pm-stat > span"
+   },
+   {
+    "text": "类型",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 11,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "article.pm-hero > div.pm-stats > div.pm-stat > span"
+   },
+   {
+    "text": "版本",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 11,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "article.pm-hero > div.pm-stats > div.pm-stat > span"
+   },
+   {
+    "text": "npm 上周",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 11,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "div.pm-rec.two > div.pm-rank > div.pm-rhead > span"
+   },
+   {
+    "text": "1",
+    "cr": 1.95,
+    "need": 4.5,
+    "size": 11.5,
+    "weight": 600,
+    "fg": "rgb(185, 185, 194)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "div.pm-rec.two > div.pm-rank > div.pm-rrow > span.pm-rnum"
+   },
+   {
+    "text": "订阅 · ↓105k/周",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 11,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "div.pm-rank > div.pm-rrow > div.pm-rwho > span"
+   },
+   {
+    "text": "2",
+    "cr": 1.95,
+    "need": 4.5,
+    "size": 11.5,
+    "weight": 600,
+    "fg": "rgb(185, 185, 194)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "div.pm-rec.two > div.pm-rank > div.pm-rrow > span.pm-rnum"
+   },
+   {
+    "text": "订阅 · ↓86k/周",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 11,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "div.pm-rank > div.pm-rrow > div.pm-rwho > span"
+   },
+   {
+    "text": "3",
+    "cr": 1.95,
+    "need": 4.5,
+    "size": 11.5,
+    "weight": 600,
+    "fg": "rgb(185, 185, 194)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "div.pm-rec.two > div.pm-rank > div.pm-rrow > span.pm-rnum"
+   },
+   {
+    "text": "订阅 · ↓84k/周",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 11,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "div.pm-rank > div.pm-rrow > div.pm-rwho > span"
+   },
+   {
+    "text": "4",
+    "cr": 1.95,
+    "need": 4.5,
+    "size": 11.5,
+    "weight": 600,
+    "fg": "rgb(185, 185, 194)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "div.pm-rec.two > div.pm-rank > div.pm-rrow > span.pm-rnum"
+   },
+   {
+    "text": "订阅 · ↓33k/周",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 11,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "div.pm-rank > div.pm-rrow > div.pm-rwho > span"
+   },
+   {
+    "text": "5",
+    "cr": 1.95,
+    "need": 4.5,
+    "size": 11.5,
+    "weight": 600,
+    "fg": "rgb(185, 185, 194)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "div.pm-rec.two > div.pm-rank > div.pm-rrow > span.pm-rnum"
+   },
+   {
+    "text": "订阅 · ↓16k/周",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 11,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "div.pm-rank > div.pm-rrow > div.pm-rwho > span"
+   },
+   {
+    "text": "126",
+    "cr": 3.25,
+    "need": 4.5,
+    "size": 10.5,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(241, 241, 244)",
+    "sel": "div.pm-bar > div.segs.pm-kinds > button.opt.on > em"
+   },
+   {
+    "text": "订阅",
+    "cr": 3.25,
+    "need": 4.5,
+    "size": 12,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(241, 241, 244)",
+    "sel": "div.lib-body.pm-body > div.pm-bar > div.segs.pm-kinds > button.opt"
+   },
+   {
+    "text": "51",
+    "cr": 1.73,
+    "need": 4.5,
+    "size": 10.5,
+    "weight": 400,
+    "fg": "rgb(185, 185, 194)",
+    "bg": "rgb(241, 241, 244)",
+    "sel": "div.pm-bar > div.segs.pm-kinds > button.opt > em"
+   },
+   {
+    "text": "中间件",
+    "cr": 3.25,
+    "need": 4.5,
+    "size": 12,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(241, 241, 244)",
+    "sel": "div.lib-body.pm-body > div.pm-bar > div.segs.pm-kinds > button.opt"
+   },
+   {
+    "text": "24",
+    "cr": 1.73,
+    "need": 4.5,
+    "size": 10.5,
+    "weight": 400,
+    "fg": "rgb(185, 185, 194)",
+    "bg": "rgb(241, 241, 244)",
+    "sel": "div.pm-bar > div.segs.pm-kinds > button.opt > em"
+   },
+   {
+    "text": "Agent",
+    "cr": 3.25,
+    "need": 4.5,
+    "size": 12,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(241, 241, 244)",
+    "sel": "div.lib-body.pm-body > div.pm-bar > div.segs.pm-kinds > button.opt"
+   },
+   {
+    "text": "28",
+    "cr": 1.73,
+    "need": 4.5,
+    "size": 10.5,
+    "weight": 400,
+    "fg": "rgb(185, 185, 194)",
+    "bg": "rgb(241, 241, 244)",
+    "sel": "div.pm-bar > div.segs.pm-kinds > button.opt > em"
+   },
+   {
+    "text": "工具",
+    "cr": 3.25,
+    "need": 4.5,
+    "size": 12,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(241, 241, 244)",
+    "sel": "div.lib-body.pm-body > div.pm-bar > div.segs.pm-kinds > button.opt"
+   },
+   {
+    "text": "8",
+    "cr": 1.73,
+    "need": 4.5,
+    "size": 10.5,
+    "weight": 400,
+    "fg": "rgb(185, 185, 194)",
+    "bg": "rgb(241, 241, 244)",
+    "sel": "div.pm-bar > div.segs.pm-kinds > button.opt > em"
+   },
+   {
+    "text": "页面",
+    "cr": 3.25,
+    "need": 4.5,
+    "size": 12,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(241, 241, 244)",
+    "sel": "div.lib-body.pm-body > div.pm-bar > div.segs.pm-kinds > button.opt"
+   },
+   {
+    "text": "15",
+    "cr": 1.73,
+    "need": 4.5,
+    "size": 10.5,
+    "weight": 400,
+    "fg": "rgb(185, 185, 194)",
+    "bg": "rgb(241, 241, 244)",
+    "sel": "div.pm-bar > div.segs.pm-kinds > button.opt > em"
+   },
+   {
+    "text": "正在 GitHub 上查找",
+    "cr": 1.77,
+    "need": 4.5,
+    "size": 11,
+    "weight": 400,
+    "fg": "rgb(185, 185, 194)",
+    "bg": "rgb(244, 244, 246)",
+    "sel": "div.lib-body.pm-body > div.pm-bar > span.pm-ghlook > span"
+   },
+   {
+    "text": "来源",
+    "cr": 3.33,
+    "need": 4.5,
+    "size": 12,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(244, 244, 246)",
+    "sel": "div.lib-body.pm-body > div.pm-bar > button.pm-pop > span"
+   },
+   {
+    "text": "排序",
+    "cr": 3.33,
+    "need": 4.5,
+    "size": 12,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(244, 244, 246)",
+    "sel": "div.lib-body.pm-body > div.pm-bar > button.pm-pop > span"
+   },
+   {
+    "text": "51",
+    "cr": 1.77,
+    "need": 4.5,
+    "size": 11,
+    "weight": 400,
+    "fg": "rgb(185, 185, 194)",
+    "bg": "rgb(244, 244, 246)",
+    "sel": "div.lib-body.pm-body > section.pm-sec > div.pm-sechead > span.pm-n"
+   },
+   {
+    "text": "查看全部",
+    "cr": 3.33,
+    "need": 4.5,
+    "size": 11.5,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(244, 244, 246)",
+    "sel": "section.pm-sec > div.pm-sechead > button.pm-more > span"
+   },
+   {
+    "text": "105k/周",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 11,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "div.pm-card > div.pm-meta > span.pm-dl > span"
+   },
+   {
+    "text": "v0.2.37",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 10.5,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "div.pm-grid > div.pm-card > div.pm-meta > span.pm-ver"
+   },
+   {
+    "text": "替代内置",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 10.5,
+    "weight": 500,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "div.pm-grid > div.pm-card > div.pm-meta > span.pm-chip.soft"
+   },
+   {
+    "text": "86k/周",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 11,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "div.pm-card > div.pm-meta > span.pm-dl > span"
+   },
+   {
+    "text": "v0.2.50",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 10.5,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "div.pm-grid > div.pm-card > div.pm-meta > span.pm-ver"
+   },
+   {
+    "text": "84k/周",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 11,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "div.pm-card > div.pm-meta > span.pm-dl > span"
+   },
+   {
+    "text": "v0.1.69",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 10.5,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "div.pm-grid > div.pm-card > div.pm-meta > span.pm-ver"
+   },
+   {
+    "text": "33k/周",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 11,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "div.pm-card > div.pm-meta > span.pm-dl > span"
+   },
+   {
+    "text": "v0.2.71",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 10.5,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "div.pm-grid > div.pm-card > div.pm-meta > span.pm-ver"
+   },
+   {
+    "text": "16k/周",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 11,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "div.pm-card > div.pm-meta > span.pm-dl > span"
+   },
+   {
+    "text": "v0.1.28",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 10.5,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "div.pm-grid > div.pm-card > div.pm-meta > span.pm-ver"
+   },
+   {
+    "text": "v0.1.41",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 10.5,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "div.pm-grid > div.pm-card > div.pm-meta > span.pm-ver"
+   },
+   {
+    "text": "24",
+    "cr": 1.77,
+    "need": 4.5,
+    "size": 11,
+    "weight": 400,
+    "fg": "rgb(185, 185, 194)",
+    "bg": "rgb(244, 244, 246)",
+    "sel": "div.lib-body.pm-body > section.pm-sec > div.pm-sechead > span.pm-n"
+   },
+   {
+    "text": "1.6k/周",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 11,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "div.pm-card > div.pm-meta > span.pm-dl > span"
+   },
+   {
+    "text": "v0.2.4",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 10.5,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "div.pm-grid > div.pm-card > div.pm-meta > span.pm-ver"
+   },
+   {
+    "text": "1.4k/周",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 11,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "div.pm-card > div.pm-meta > span.pm-dl > span"
+   },
+   {
+    "text": "v0.25.0",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 10.5,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "div.pm-grid > div.pm-card > div.pm-meta > span.pm-ver"
+   },
+   {
+    "text": "371/周",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 11,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "div.pm-card > div.pm-meta > span.pm-dl > span"
+   },
+   {
+    "text": "v0.1.0",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 10.5,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "div.pm-grid > div.pm-card > div.pm-meta > span.pm-ver"
+   },
+   {
+    "text": "28",
+    "cr": 1.77,
+    "need": 4.5,
+    "size": 11,
+    "weight": 400,
+    "fg": "rgb(185, 185, 194)",
+    "bg": "rgb(244, 244, 246)",
+    "sel": "div.lib-body.pm-body > section.pm-sec.pm-agents > div.pm-sechead > span.pm-n"
+   },
+   {
+    "text": "查看全部",
+    "cr": 3.33,
+    "need": 4.5,
+    "size": 11.5,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(244, 244, 246)",
+    "sel": "section.pm-sec.pm-agents > div.pm-sechead > button.pm-more > span"
+   },
+   {
+    "text": "v0.1.1",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 10.5,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "div.pm-grid > div.pm-card > div.pm-meta > span.pm-ver"
+   },
+   {
+    "text": "v0.2.0",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 10.5,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "div.pm-grid > div.pm-card > div.pm-meta > span.pm-ver"
+   },
+   {
+    "text": "8",
+    "cr": 1.77,
+    "need": 4.5,
+    "size": 11,
+    "weight": 400,
+    "fg": "rgb(185, 185, 194)",
+    "bg": "rgb(244, 244, 246)",
+    "sel": "div.lib-body.pm-body > section.pm-sec > div.pm-sechead > span.pm-n"
+   },
+   {
+    "text": "v0.1.2",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 10.5,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "div.pm-grid > div.pm-card > div.pm-meta > span.pm-ver"
+   },
+   {
+    "text": "15",
+    "cr": 1.77,
+    "need": 4.5,
+    "size": 11,
+    "weight": 400,
+    "fg": "rgb(185, 185, 194)",
+    "bg": "rgb(244, 244, 246)",
+    "sel": "div.lib-body.pm-body > section.pm-sec > div.pm-sechead > span.pm-n"
+   },
+   {
+    "text": "v1.3.9",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 10.5,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "div.pm-grid > div.pm-card > div.pm-meta > span.pm-ver"
+   },
+   {
+    "text": "v0.3.6",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 10.5,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "div.pm-grid > div.pm-card > div.pm-meta > span.pm-ver"
+   },
+   {
+    "text": "已有想装的？",
+    "cr": 3.33,
+    "need": 4.5,
+    "size": 12,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(244, 244, 246)",
+    "sel": "main#view-plugins > div.lib-body.pm-body > form.pm-manual > span.pm-mlabel"
+   },
+   {
+    "text": "插件是他人的代码，会拿到你的登录或看到你的请求：只安装你信任的。",
+    "cr": 3.33,
+    "need": 4.5,
+    "size": 11.5,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(244, 244, 246)",
+    "sel": "div.lib-body.pm-body > div.pm-foot > p.pm-trust > span"
+   },
+   {
+    "text": "npm 源",
+    "cr": 3.33,
+    "need": 4.5,
+    "size": 12,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(244, 244, 246)",
+    "sel": "main#view-plugins > div.lib-body.pm-body > div.pm-registry > span.pm-mlabel"
+   },
+   {
+    "text": "npm 官方源",
+    "cr": 3.33,
+    "need": 4.5,
+    "size": 12,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(244, 244, 246)",
+    "sel": "main#view-plugins > div.lib-body.pm-body > div.pm-registry > span.pm-reg-from"
+   }
+  ],
+  "disabled": [],
+  "docW": 1440,
+  "vw": 1440
+ },
+ {
+  "surface": "admin",
+  "page": "masking",
+  "scheme": "light",
+  "failures": [
+   {
+    "text": "网关 127.0.0.1:3425",
+    "cr": 3.33,
+    "need": 4.5,
+    "size": 11.5,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(244, 244, 246)",
+    "sel": "aside#side > div.side-foot > button#sideGw > span"
+   },
+   {
+    "text": "打开脱敏后，密钥、密码、令牌这些值在离开这台电脑前会换成占位符，回复里再换回来。打开「脱敏个人信息」后，邮箱和手机号也会",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 12.5,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "body.window.web > main#view-masking > section#maskCard > p"
+   },
+   {
+    "text": "也可以在这里调整：",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 11.5,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "main#view-masking > section#maskCard > span.msk-also > span"
+   },
+   {
+    "text": "小鹊带你走一遍一条请求：密码在离开前换成编码，回信到了再在你的电脑上换回来",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 11.5,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "section#maskDemo > button#mdRow > span.md-words > span.md-sub"
+   },
+   {
+    "text": "0:27",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 11.5,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "main#view-masking > section#maskDemo > button#mdRow > span.md-len"
+   },
+   {
+    "text": "按值",
+    "cr": 3.25,
+    "need": 4.5,
+    "size": 12,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(241, 241, 244)",
+    "sel": "section#maskList > div.msk-bar > div.segs > button.opt"
+   },
+   {
+    "text": "实时",
+    "cr": 3.33,
+    "need": 4.5,
+    "size": 11.5,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(244, 244, 246)",
+    "sel": "section#maskList > div.msk-bar > span.msk-live > span"
+   },
+   {
+    "text": "还没有脱敏过任何内容",
+    "cr": 3.33,
+    "need": 4.5,
+    "size": 12.5,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(244, 244, 246)",
+    "sel": "body.window.web > main#view-masking > section#maskList > div.msk-none"
+   },
+   {
+    "text": "记录只存在这台电脑上，保留 30 天，不含原值",
+    "cr": 3.33,
+    "need": 4.5,
+    "size": 11.5,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(244, 244, 246)",
+    "sel": "main#view-masking > section#maskList > div.msk-foot > span"
+   }
+  ],
+  "disabled": [],
+  "docW": 1440,
+  "vw": 1440
+ },
+ {
+  "surface": "admin",
+  "page": "gateway",
+  "scheme": "light",
+  "failures": [
+   {
+    "text": "网关 127.0.0.1:3425",
+    "cr": 3.33,
+    "need": 4.5,
+    "size": 11.5,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(244, 244, 246)",
+    "sel": "aside#side > div.side-foot > button#sideGw > span"
+   },
+   {
+    "text": "运行中",
+    "cr": 3.62,
+    "need": 4.5,
+    "size": 11,
+    "weight": 500,
+    "fg": "rgb(24, 154, 88)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "div#gateway > div.who > div.name > span.state"
+   },
+   {
+    "text": "0 个模型 · 尚无 Agent 经由此路由 · 五种 API，一个地址",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 11.5,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "div.list.gwcard > div#gateway > div.who > div.sub"
+   },
+   {
+    "text": "局域网",
+    "cr": 3.25,
+    "need": 4.5,
+    "size": 12,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(241, 241, 244)",
+    "sel": "div#gatewayLan > div.row.gw-share > div.segs > button.opt"
+   },
+   {
+    "text": "本机",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 11.5,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "div#gatewayLan > div.gw-urls > div.gw-url > span.gw-url-label"
+   },
+   {
+    "text": "网关密钥给其他电脑、连到这台电脑的隧道（如 Cloudflare Tunnel）和网页用：打开「局域网共享」，或在设置里",
+    "cr": 1.77,
+    "need": 4.5,
+    "size": 11,
+    "weight": 400,
+    "fg": "rgb(185, 185, 194)",
+    "bg": "rgb(244, 244, 246)",
+    "sel": "html.navlamp > body.window.web > main#view-gateway > p#gatewayKeysOff"
+   },
+   {
+    "text": "接入",
+    "cr": 3.33,
+    "need": 4.5,
+    "size": 11,
+    "weight": 600,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(244, 244, 246)",
+    "sel": "main#view-gateway > div.row-head > button#foldConnect > span.label"
+   },
+   {
+    "text": "模型",
+    "cr": 3.33,
+    "need": 4.5,
+    "size": 11,
+    "weight": 600,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(244, 244, 246)",
+    "sel": "main#view-gateway > div.row-head > button#foldModels > span.label"
+   },
+   {
+    "text": "添加供应商，或登录 Codex / Copilot；其模型会列在这里，供所有 Agent 使用。",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 13,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "body.window.web > main#view-gateway > div#gwModels > div.empty-state"
+   },
+   {
+    "text": "最近调用",
+    "cr": 3.33,
+    "need": 4.5,
+    "size": 11,
+    "weight": 600,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(244, 244, 246)",
+    "sel": "body.window.web > main#view-gateway > div.row-head > span.label"
+   },
+   {
+    "text": "还没有请求。让 Agent 使用某个模型，或运行上面的示例；调用会实时显示在这里。",
+    "cr": 3.66,
+    "need": 4.5,
+    "size": 11.5,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(255, 255, 255)",
+    "sel": "body.window.web > main#view-gateway > div#activity > div.none"
+   },
+   {
+    "text": "设置",
+    "cr": 3.33,
+    "need": 4.5,
+    "size": 11,
+    "weight": 600,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(244, 244, 246)",
+    "sel": "body.window.web > main#view-gateway > div#gwOwnHead > span.label"
+   }
+  ],
+  "disabled": [],
+  "docW": 1440,
+  "vw": 1440
+ },
+ {
+  "surface": "admin",
+  "page": "settings",
+  "scheme": "light",
+  "failures": [
+   {
+    "text": "网关 127.0.0.1:3425",
+    "cr": 3.33,
+    "need": 4.5,
+    "size": 11.5,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(244, 244, 246)",
+    "sel": "aside#side > div.side-foot.with-sub > button#sideGw > span"
+   },
+   {
+    "text": "浅色",
+    "cr": 3.25,
+    "need": 4.5,
+    "size": 12,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(241, 241, 244)",
+    "sel": "div.row.pref > div#themeSegs > div.segs > button.opt"
+   },
+   {
+    "text": "深色",
+    "cr": 3.25,
+    "need": 4.5,
+    "size": 12,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(241, 241, 244)",
+    "sel": "div.row.pref > div#themeSegs > div.segs > button.opt"
+   },
+   {
+    "text": "开启",
+    "cr": 3.25,
+    "need": 4.5,
+    "size": 12,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(241, 241, 244)",
+    "sel": "div#colorblindRow > div#colorblindSegs > div.segs > button.opt"
+   },
+   {
+    "text": "开启",
+    "cr": 3.25,
+    "need": 4.5,
+    "size": 12,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(241, 241, 244)",
+    "sel": "div#reduceMotionRow > div#reduceMotionSegs > div.segs > button.opt"
+   },
+   {
+    "text": "关闭",
+    "cr": 3.25,
+    "need": 4.5,
+    "size": 12,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(241, 241, 244)",
+    "sel": "div#birdRow > div#birdSegs > div.segs > button.opt"
+   },
+   {
+    "text": "关闭",
+    "cr": 3.25,
+    "need": 4.5,
+    "size": 12,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(241, 241, 244)",
+    "sel": "div.row.pref > div#plainNamesSegs > div.segs.suffix-segs > button.opt"
+   },
+   {
+    "text": "自定义名称不带供应商",
+    "cr": 3.25,
+    "need": 4.5,
+    "size": 12,
+    "weight": 400,
+    "fg": "rgb(133, 133, 141)",
+    "bg": "rgb(241, 241, 244)",
+    "sel": "div.row.pref > div#plainNamesSegs > div.segs.suffix-segs > button.opt"
+   }
+  ],
+  "disabled": [],
+  "docW": 1440,
+  "vw": 1440
+ },
+ {
+  "surface": "portal",
+  "page": "home",
+  "scheme": "light",
+  "failures": [],
+  "disabled": [],
+  "docW": 1440,
+  "vw": 1440
+ },
+ {
+  "surface": "portal",
+  "page": "console",
+  "scheme": "light",
+  "failures": [],
+  "disabled": [],
+  "docW": 1440,
+  "vw": 1440
+ },
+ {
+  "surface": "portal",
+  "page": "models",
+  "scheme": "light",
+  "failures": [],
+  "disabled": [],
+  "docW": 1440,
+  "vw": 1440
+ },
+ {
+  "surface": "portal",
+  "page": "admin-models",
+  "scheme": "light",
+  "failures": [],
+  "disabled": [],
+  "docW": 1440,
+  "vw": 1440
+ },
+ {
+  "surface": "admin",
+  "page": "providers",
+  "scheme": "dark",
+  "failures": [],
+  "disabled": [],
+  "docW": 1440,
+  "vw": 1440
+ },
+ {
+  "surface": "admin",
+  "page": "routing",
+  "scheme": "dark",
+  "failures": [],
+  "disabled": [],
+  "docW": 1440,
+  "vw": 1440
+ },
+ {
+  "surface": "admin",
+  "page": "usage",
+  "scheme": "dark",
+  "failures": [],
+  "disabled": [],
+  "docW": 1440,
+  "vw": 1440
+ },
+ {
+  "surface": "admin",
+  "page": "plugins",
+  "scheme": "dark",
+  "failures": [
+   {
+    "text": "414",
+    "cr": 4.33,
+    "need": 4.5,
+    "size": 10.5,
+    "weight": 400,
+    "fg": "rgb(144, 144, 154)",
+    "bg": "rgb(45, 45, 51)",
+    "sel": "div.pm-bar > div.segs.pm-kinds > button.opt > em"
+   },
+   {
+    "text": "58",
+    "cr": 4.33,
+    "need": 4.5,
+    "size": 10.5,
+    "weight": 400,
+    "fg": "rgb(144, 144, 154)",
+    "bg": "rgb(45, 45, 51)",
+    "sel": "div.pm-bar > div.segs.pm-kinds > button.opt > em"
+   },
+   {
+    "text": "94",
+    "cr": 4.33,
+    "need": 4.5,
+    "size": 10.5,
+    "weight": 400,
+    "fg": "rgb(144, 144, 154)",
+    "bg": "rgb(45, 45, 51)",
+    "sel": "div.pm-bar > div.segs.pm-kinds > button.opt > em"
+   },
+   {
+    "text": "8",
+    "cr": 4.33,
+    "need": 4.5,
+    "size": 10.5,
+    "weight": 400,
+    "fg": "rgb(144, 144, 154)",
+    "bg": "rgb(45, 45, 51)",
+    "sel": "div.pm-bar > div.segs.pm-kinds > button.opt > em"
+   },
+   {
+    "text": "78",
+    "cr": 4.33,
+    "need": 4.5,
+    "size": 10.5,
+    "weight": 400,
+    "fg": "rgb(144, 144, 154)",
+    "bg": "rgb(45, 45, 51)",
+    "sel": "div.pm-bar > div.segs.pm-kinds > button.opt > em"
+   }
+  ],
+  "disabled": [],
+  "docW": 1440,
+  "vw": 1440
+ },
+ {
+  "surface": "admin",
+  "page": "masking",
+  "scheme": "dark",
+  "failures": [],
+  "disabled": [],
+  "docW": 1440,
+  "vw": 1440
+ },
+ {
+  "surface": "admin",
+  "page": "gateway",
+  "scheme": "dark",
+  "failures": [],
+  "disabled": [],
+  "docW": 1440,
+  "vw": 1440
+ },
+ {
+  "surface": "admin",
+  "page": "settings",
+  "scheme": "dark",
+  "failures": [],
+  "disabled": [],
+  "docW": 1440,
+  "vw": 1440
+ },
+ {
+  "surface": "portal",
+  "page": "home",
+  "scheme": "dark",
+  "failures": [],
+  "disabled": [],
+  "docW": 1440,
+  "vw": 1440
+ },
+ {
+  "surface": "portal",
+  "page": "console",
+  "scheme": "dark",
+  "failures": [],
+  "disabled": [],
+  "docW": 1440,
+  "vw": 1440
+ },
+ {
+  "surface": "portal",
+  "page": "models",
+  "scheme": "dark",
+  "failures": [],
+  "disabled": [],
+  "docW": 1440,
+  "vw": 1440
+ },
+ {
+  "surface": "portal",
+  "page": "admin-models",
+  "scheme": "dark",
+  "failures": [],
+  "disabled": [],
+  "docW": 1440,
+  "vw": 1440
+ }
+]

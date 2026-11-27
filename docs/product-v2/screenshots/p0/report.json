@@ -1,0 +1,3421 @@
+[
+  {
+    "name": "portal-home",
+    "width": 320,
+    "scheme": "light",
+    "vw": 320,
+    "docScrollW": 320,
+    "overflowPage": false,
+    "smallTargets": [],
+    "smallTargetCount": 0,
+    "switchHit": {
+      "above": false,
+      "below": false,
+      "left": false,
+      "right": false
+    },
+    "fieldSizes": [],
+    "beyond": [
+      {
+        "tag": "code",
+        "cls": "",
+        "right": 580
+      }
+    ],
+    "logCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "usageCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "statCols": "repeat(2, minmax(0px, 1fr))",
+    "logDisplay": null,
+    "logHeadDisplay": null,
+    "errors": []
+  },
+  {
+    "name": "portal-console",
+    "width": 320,
+    "scheme": "light",
+    "vw": 320,
+    "docScrollW": 320,
+    "overflowPage": false,
+    "smallTargets": [],
+    "smallTargetCount": 0,
+    "switchHit": {
+      "above": true,
+      "below": true,
+      "left": true,
+      "right": true
+    },
+    "fieldSizes": [
+      {
+        "id": "logModel",
+        "cls": "",
+        "size": "16px"
+      },
+      {
+        "id": "logState",
+        "cls": "",
+        "size": "16px"
+      }
+    ],
+    "beyond": [],
+    "logCard": {
+      "scrollW": 286,
+      "clientW": 286
+    },
+    "usageCard": {
+      "scrollW": 286,
+      "clientW": 286
+    },
+    "statCols": "118px 118px",
+    "logDisplay": "block",
+    "logHeadDisplay": "none",
+    "errors": []
+  },
+  {
+    "name": "portal-models",
+    "width": 320,
+    "scheme": "light",
+    "vw": 320,
+    "docScrollW": 320,
+    "overflowPage": false,
+    "smallTargets": [],
+    "smallTargetCount": 0,
+    "switchHit": {
+      "above": false,
+      "below": false,
+      "left": false,
+      "right": false
+    },
+    "fieldSizes": [
+      {
+        "id": "modelSearch",
+        "cls": "",
+        "size": "16px"
+      },
+      {
+        "id": "modelProvider",
+        "cls": "toolbar-select",
+        "size": "16px"
+      }
+    ],
+    "beyond": [],
+    "logCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "usageCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "statCols": "repeat(2, minmax(0px, 1fr))",
+    "logDisplay": null,
+    "logHeadDisplay": null,
+    "errors": []
+  },
+  {
+    "name": "portal-admin-models",
+    "width": 320,
+    "scheme": "light",
+    "vw": 320,
+    "docScrollW": 320,
+    "overflowPage": false,
+    "smallTargets": [],
+    "smallTargetCount": 0,
+    "switchHit": {
+      "above": false,
+      "below": false,
+      "left": false,
+      "right": false
+    },
+    "fieldSizes": [
+      {
+        "id": "adminModelSearch",
+        "cls": "",
+        "size": "16px"
+      }
+    ],
+    "beyond": [],
+    "logCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "usageCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "statCols": "repeat(2, minmax(0px, 1fr))",
+    "logDisplay": null,
+    "logHeadDisplay": null,
+    "errors": []
+  },
+  {
+    "name": "portal-login",
+    "width": 320,
+    "scheme": "light",
+    "vw": 320,
+    "docScrollW": 320,
+    "overflowPage": false,
+    "smallTargets": [],
+    "smallTargetCount": 0,
+    "switchHit": {
+      "above": false,
+      "below": false,
+      "left": false,
+      "right": false
+    },
+    "fieldSizes": [
+      {
+        "id": "",
+        "cls": "",
+        "size": "16px"
+      },
+      {
+        "id": "",
+        "cls": "",
+        "size": "16px"
+      }
+    ],
+    "beyond": [],
+    "logCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "usageCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "statCols": "repeat(2, minmax(0px, 1fr))",
+    "logDisplay": null,
+    "logHeadDisplay": null,
+    "errors": []
+  },
+  {
+    "name": "portal-register",
+    "width": 320,
+    "scheme": "light",
+    "vw": 320,
+    "docScrollW": 320,
+    "overflowPage": false,
+    "smallTargets": [],
+    "smallTargetCount": 0,
+    "switchHit": {
+      "above": false,
+      "below": false,
+      "left": false,
+      "right": false
+    },
+    "fieldSizes": [
+      {
+        "id": "",
+        "cls": "",
+        "size": "16px"
+      },
+      {
+        "id": "",
+        "cls": "",
+        "size": "16px"
+      },
+      {
+        "id": "",
+        "cls": "",
+        "size": "16px"
+      },
+      {
+        "id": "",
+        "cls": "",
+        "size": "16px"
+      }
+    ],
+    "beyond": [],
+    "logCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "usageCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "statCols": "repeat(2, minmax(0px, 1fr))",
+    "logDisplay": null,
+    "logHeadDisplay": null,
+    "errors": []
+  },
+  {
+    "name": "portal-home",
+    "width": 375,
+    "scheme": "light",
+    "vw": 375,
+    "docScrollW": 375,
+    "overflowPage": false,
+    "smallTargets": [],
+    "smallTargetCount": 0,
+    "switchHit": {
+      "above": false,
+      "below": false,
+      "left": false,
+      "right": false
+    },
+    "fieldSizes": [],
+    "beyond": [
+      {
+        "tag": "code",
+        "cls": "",
+        "right": 580
+      }
+    ],
+    "logCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "usageCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "statCols": "repeat(2, minmax(0px, 1fr))",
+    "logDisplay": null,
+    "logHeadDisplay": null,
+    "errors": []
+  },
+  {
+    "name": "portal-console",
+    "width": 375,
+    "scheme": "light",
+    "vw": 375,
+    "docScrollW": 375,
+    "overflowPage": false,
+    "smallTargets": [],
+    "smallTargetCount": 0,
+    "switchHit": {
+      "above": true,
+      "below": true,
+      "left": true,
+      "right": true
+    },
+    "fieldSizes": [
+      {
+        "id": "logModel",
+        "cls": "",
+        "size": "16px"
+      },
+      {
+        "id": "logState",
+        "cls": "",
+        "size": "16px"
+      }
+    ],
+    "beyond": [],
+    "logCard": {
+      "scrollW": 341,
+      "clientW": 341
+    },
+    "usageCard": {
+      "scrollW": 341,
+      "clientW": 341
+    },
+    "statCols": "145.5px 145.5px",
+    "logDisplay": "block",
+    "logHeadDisplay": "none",
+    "errors": []
+  },
+  {
+    "name": "portal-models",
+    "width": 375,
+    "scheme": "light",
+    "vw": 375,
+    "docScrollW": 375,
+    "overflowPage": false,
+    "smallTargets": [],
+    "smallTargetCount": 0,
+    "switchHit": {
+      "above": false,
+      "below": false,
+      "left": false,
+      "right": false
+    },
+    "fieldSizes": [
+      {
+        "id": "modelSearch",
+        "cls": "",
+        "size": "16px"
+      },
+      {
+        "id": "modelProvider",
+        "cls": "toolbar-select",
+        "size": "16px"
+      }
+    ],
+    "beyond": [],
+    "logCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "usageCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "statCols": "repeat(2, minmax(0px, 1fr))",
+    "logDisplay": null,
+    "logHeadDisplay": null,
+    "errors": []
+  },
+  {
+    "name": "portal-admin-models",
+    "width": 375,
+    "scheme": "light",
+    "vw": 375,
+    "docScrollW": 375,
+    "overflowPage": false,
+    "smallTargets": [],
+    "smallTargetCount": 0,
+    "switchHit": {
+      "above": false,
+      "below": false,
+      "left": false,
+      "right": false
+    },
+    "fieldSizes": [
+      {
+        "id": "adminModelSearch",
+        "cls": "",
+        "size": "16px"
+      }
+    ],
+    "beyond": [],
+    "logCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "usageCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "statCols": "repeat(2, minmax(0px, 1fr))",
+    "logDisplay": null,
+    "logHeadDisplay": null,
+    "errors": []
+  },
+  {
+    "name": "portal-login",
+    "width": 375,
+    "scheme": "light",
+    "vw": 375,
+    "docScrollW": 375,
+    "overflowPage": false,
+    "smallTargets": [],
+    "smallTargetCount": 0,
+    "switchHit": {
+      "above": false,
+      "below": false,
+      "left": false,
+      "right": false
+    },
+    "fieldSizes": [
+      {
+        "id": "",
+        "cls": "",
+        "size": "16px"
+      },
+      {
+        "id": "",
+        "cls": "",
+        "size": "16px"
+      }
+    ],
+    "beyond": [],
+    "logCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "usageCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "statCols": "repeat(2, minmax(0px, 1fr))",
+    "logDisplay": null,
+    "logHeadDisplay": null,
+    "errors": []
+  },
+  {
+    "name": "portal-register",
+    "width": 375,
+    "scheme": "light",
+    "vw": 375,
+    "docScrollW": 375,
+    "overflowPage": false,
+    "smallTargets": [],
+    "smallTargetCount": 0,
+    "switchHit": {
+      "above": false,
+      "below": false,
+      "left": false,
+      "right": false
+    },
+    "fieldSizes": [
+      {
+        "id": "",
+        "cls": "",
+        "size": "16px"
+      },
+      {
+        "id": "",
+        "cls": "",
+        "size": "16px"
+      },
+      {
+        "id": "",
+        "cls": "",
+        "size": "16px"
+      },
+      {
+        "id": "",
+        "cls": "",
+        "size": "16px"
+      }
+    ],
+    "beyond": [],
+    "logCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "usageCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "statCols": "repeat(2, minmax(0px, 1fr))",
+    "logDisplay": null,
+    "logHeadDisplay": null,
+    "errors": []
+  },
+  {
+    "name": "portal-home",
+    "width": 390,
+    "scheme": "light",
+    "vw": 390,
+    "docScrollW": 390,
+    "overflowPage": false,
+    "smallTargets": [],
+    "smallTargetCount": 0,
+    "switchHit": {
+      "above": false,
+      "below": false,
+      "left": false,
+      "right": false
+    },
+    "fieldSizes": [],
+    "beyond": [
+      {
+        "tag": "code",
+        "cls": "",
+        "right": 580
+      }
+    ],
+    "logCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "usageCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "statCols": "repeat(2, minmax(0px, 1fr))",
+    "logDisplay": null,
+    "logHeadDisplay": null,
+    "errors": []
+  },
+  {
+    "name": "portal-console",
+    "width": 390,
+    "scheme": "light",
+    "vw": 390,
+    "docScrollW": 390,
+    "overflowPage": false,
+    "smallTargets": [],
+    "smallTargetCount": 0,
+    "switchHit": {
+      "above": true,
+      "below": true,
+      "left": true,
+      "right": true
+    },
+    "fieldSizes": [
+      {
+        "id": "logModel",
+        "cls": "",
+        "size": "16px"
+      },
+      {
+        "id": "logState",
+        "cls": "",
+        "size": "16px"
+      }
+    ],
+    "beyond": [],
+    "logCard": {
+      "scrollW": 356,
+      "clientW": 356
+    },
+    "usageCard": {
+      "scrollW": 356,
+      "clientW": 356
+    },
+    "statCols": "153px 153px",
+    "logDisplay": "block",
+    "logHeadDisplay": "none",
+    "errors": []
+  },
+  {
+    "name": "portal-models",
+    "width": 390,
+    "scheme": "light",
+    "vw": 390,
+    "docScrollW": 390,
+    "overflowPage": false,
+    "smallTargets": [],
+    "smallTargetCount": 0,
+    "switchHit": {
+      "above": false,
+      "below": false,
+      "left": false,
+      "right": false
+    },
+    "fieldSizes": [
+      {
+        "id": "modelSearch",
+        "cls": "",
+        "size": "16px"
+      },
+      {
+        "id": "modelProvider",
+        "cls": "toolbar-select",
+        "size": "16px"
+      }
+    ],
+    "beyond": [],
+    "logCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "usageCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "statCols": "repeat(2, minmax(0px, 1fr))",
+    "logDisplay": null,
+    "logHeadDisplay": null,
+    "errors": []
+  },
+  {
+    "name": "portal-admin-models",
+    "width": 390,
+    "scheme": "light",
+    "vw": 390,
+    "docScrollW": 390,
+    "overflowPage": false,
+    "smallTargets": [],
+    "smallTargetCount": 0,
+    "switchHit": {
+      "above": false,
+      "below": false,
+      "left": false,
+      "right": false
+    },
+    "fieldSizes": [
+      {
+        "id": "adminModelSearch",
+        "cls": "",
+        "size": "16px"
+      }
+    ],
+    "beyond": [],
+    "logCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "usageCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "statCols": "repeat(2, minmax(0px, 1fr))",
+    "logDisplay": null,
+    "logHeadDisplay": null,
+    "errors": []
+  },
+  {
+    "name": "portal-login",
+    "width": 390,
+    "scheme": "light",
+    "vw": 390,
+    "docScrollW": 390,
+    "overflowPage": false,
+    "smallTargets": [],
+    "smallTargetCount": 0,
+    "switchHit": {
+      "above": false,
+      "below": false,
+      "left": false,
+      "right": false
+    },
+    "fieldSizes": [
+      {
+        "id": "",
+        "cls": "",
+        "size": "16px"
+      },
+      {
+        "id": "",
+        "cls": "",
+        "size": "16px"
+      }
+    ],
+    "beyond": [],
+    "logCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "usageCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "statCols": "repeat(2, minmax(0px, 1fr))",
+    "logDisplay": null,
+    "logHeadDisplay": null,
+    "errors": []
+  },
+  {
+    "name": "portal-register",
+    "width": 390,
+    "scheme": "light",
+    "vw": 390,
+    "docScrollW": 390,
+    "overflowPage": false,
+    "smallTargets": [],
+    "smallTargetCount": 0,
+    "switchHit": {
+      "above": false,
+      "below": false,
+      "left": false,
+      "right": false
+    },
+    "fieldSizes": [
+      {
+        "id": "",
+        "cls": "",
+        "size": "16px"
+      },
+      {
+        "id": "",
+        "cls": "",
+        "size": "16px"
+      },
+      {
+        "id": "",
+        "cls": "",
+        "size": "16px"
+      },
+      {
+        "id": "",
+        "cls": "",
+        "size": "16px"
+      }
+    ],
+    "beyond": [],
+    "logCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "usageCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "statCols": "repeat(2, minmax(0px, 1fr))",
+    "logDisplay": null,
+    "logHeadDisplay": null,
+    "errors": []
+  },
+  {
+    "name": "portal-home",
+    "width": 390,
+    "scheme": "dark",
+    "vw": 390,
+    "docScrollW": 390,
+    "overflowPage": false,
+    "smallTargets": [],
+    "smallTargetCount": 0,
+    "switchHit": {
+      "above": false,
+      "below": false,
+      "left": false,
+      "right": false
+    },
+    "fieldSizes": [],
+    "beyond": [
+      {
+        "tag": "code",
+        "cls": "",
+        "right": 580
+      }
+    ],
+    "logCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "usageCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "statCols": "repeat(2, minmax(0px, 1fr))",
+    "logDisplay": null,
+    "logHeadDisplay": null,
+    "errors": []
+  },
+  {
+    "name": "portal-console",
+    "width": 390,
+    "scheme": "dark",
+    "vw": 390,
+    "docScrollW": 390,
+    "overflowPage": false,
+    "smallTargets": [],
+    "smallTargetCount": 0,
+    "switchHit": {
+      "above": true,
+      "below": true,
+      "left": true,
+      "right": true
+    },
+    "fieldSizes": [
+      {
+        "id": "logModel",
+        "cls": "",
+        "size": "16px"
+      },
+      {
+        "id": "logState",
+        "cls": "",
+        "size": "16px"
+      }
+    ],
+    "beyond": [],
+    "logCard": {
+      "scrollW": 356,
+      "clientW": 356
+    },
+    "usageCard": {
+      "scrollW": 356,
+      "clientW": 356
+    },
+    "statCols": "153px 153px",
+    "logDisplay": "block",
+    "logHeadDisplay": "none",
+    "errors": []
+  },
+  {
+    "name": "portal-models",
+    "width": 390,
+    "scheme": "dark",
+    "vw": 390,
+    "docScrollW": 390,
+    "overflowPage": false,
+    "smallTargets": [],
+    "smallTargetCount": 0,
+    "switchHit": {
+      "above": false,
+      "below": false,
+      "left": false,
+      "right": false
+    },
+    "fieldSizes": [
+      {
+        "id": "modelSearch",
+        "cls": "",
+        "size": "16px"
+      },
+      {
+        "id": "modelProvider",
+        "cls": "toolbar-select",
+        "size": "16px"
+      }
+    ],
+    "beyond": [],
+    "logCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "usageCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "statCols": "repeat(2, minmax(0px, 1fr))",
+    "logDisplay": null,
+    "logHeadDisplay": null,
+    "errors": []
+  },
+  {
+    "name": "portal-admin-models",
+    "width": 390,
+    "scheme": "dark",
+    "vw": 390,
+    "docScrollW": 390,
+    "overflowPage": false,
+    "smallTargets": [],
+    "smallTargetCount": 0,
+    "switchHit": {
+      "above": false,
+      "below": false,
+      "left": false,
+      "right": false
+    },
+    "fieldSizes": [
+      {
+        "id": "adminModelSearch",
+        "cls": "",
+        "size": "16px"
+      }
+    ],
+    "beyond": [],
+    "logCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "usageCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "statCols": "repeat(2, minmax(0px, 1fr))",
+    "logDisplay": null,
+    "logHeadDisplay": null,
+    "errors": []
+  },
+  {
+    "name": "portal-login",
+    "width": 390,
+    "scheme": "dark",
+    "vw": 390,
+    "docScrollW": 390,
+    "overflowPage": false,
+    "smallTargets": [],
+    "smallTargetCount": 0,
+    "switchHit": {
+      "above": false,
+      "below": false,
+      "left": false,
+      "right": false
+    },
+    "fieldSizes": [
+      {
+        "id": "",
+        "cls": "",
+        "size": "16px"
+      },
+      {
+        "id": "",
+        "cls": "",
+        "size": "16px"
+      }
+    ],
+    "beyond": [],
+    "logCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "usageCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "statCols": "repeat(2, minmax(0px, 1fr))",
+    "logDisplay": null,
+    "logHeadDisplay": null,
+    "errors": []
+  },
+  {
+    "name": "portal-register",
+    "width": 390,
+    "scheme": "dark",
+    "vw": 390,
+    "docScrollW": 390,
+    "overflowPage": false,
+    "smallTargets": [],
+    "smallTargetCount": 0,
+    "switchHit": {
+      "above": false,
+      "below": false,
+      "left": false,
+      "right": false
+    },
+    "fieldSizes": [
+      {
+        "id": "",
+        "cls": "",
+        "size": "16px"
+      },
+      {
+        "id": "",
+        "cls": "",
+        "size": "16px"
+      },
+      {
+        "id": "",
+        "cls": "",
+        "size": "16px"
+      },
+      {
+        "id": "",
+        "cls": "",
+        "size": "16px"
+      }
+    ],
+    "beyond": [],
+    "logCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "usageCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "statCols": "repeat(2, minmax(0px, 1fr))",
+    "logDisplay": null,
+    "logHeadDisplay": null,
+    "errors": []
+  },
+  {
+    "name": "portal-home",
+    "width": 768,
+    "scheme": "light",
+    "vw": 768,
+    "docScrollW": 768,
+    "overflowPage": false,
+    "smallTargets": [
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "brand",
+        "text": "M\n      Magpie\n ",
+        "w": 201,
+        "h": 30
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "首页",
+        "w": 52,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "模型广场",
+        "w": 80,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "控制台",
+        "w": 66,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "who",
+        "text": "审计账号",
+        "w": 52,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "btn ghost",
+        "text": "退出",
+        "w": 60,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "首页",
+        "w": 26,
+        "h": 21
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "模型广场",
+        "w": 52,
+        "h": 21
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "控制台",
+        "w": 39,
+        "h": 21
+      }
+    ],
+    "smallTargetCount": 9,
+    "switchHit": {
+      "above": false,
+      "below": false,
+      "left": false,
+      "right": false
+    },
+    "fieldSizes": [],
+    "beyond": [],
+    "logCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "usageCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "statCols": "repeat(6, minmax(0px, 1fr))",
+    "logDisplay": null,
+    "logHeadDisplay": null,
+    "errors": []
+  },
+  {
+    "name": "portal-console",
+    "width": 768,
+    "scheme": "light",
+    "vw": 768,
+    "docScrollW": 768,
+    "overflowPage": false,
+    "smallTargets": [
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "brand",
+        "text": "M\n      Magpie\n ",
+        "w": 201,
+        "h": 30
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "首页",
+        "w": 52,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "模型广场",
+        "w": 80,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "控制台",
+        "w": 66,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "who",
+        "text": "审计账号",
+        "w": 52,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "btn ghost",
+        "text": "退出",
+        "w": 60,
+        "h": 38
+      },
+      {
+        "tag": "button",
+        "id": "keyNew",
+        "cls": "btn primary",
+        "text": "创建 API Key",
+        "w": 117,
+        "h": 38
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "chip",
+        "text": "今天",
+        "w": 52,
+        "h": 34
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "chip on",
+        "text": "近 7 天",
+        "w": 66,
+        "h": 34
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "chip",
+        "text": "近 30 天",
+        "w": 74,
+        "h": 34
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "chip",
+        "text": "全部",
+        "w": 52,
+        "h": 34
+      },
+      {
+        "tag": "select",
+        "id": "logModel",
+        "cls": "",
+        "text": "全部模型",
+        "w": 96,
+        "h": 34
+      }
+    ],
+    "smallTargetCount": 21,
+    "switchHit": {
+      "above": false,
+      "below": false,
+      "left": true,
+      "right": true
+    },
+    "fieldSizes": [
+      {
+        "id": "logModel",
+        "cls": "",
+        "size": "13.3333px"
+      },
+      {
+        "id": "logState",
+        "cls": "",
+        "size": "13.3333px"
+      }
+    ],
+    "beyond": [],
+    "logCard": {
+      "scrollW": 722,
+      "clientW": 722
+    },
+    "usageCard": {
+      "scrollW": 722,
+      "clientW": 722
+    },
+    "statCols": "105.328px 105.328px 105.344px 105.328px 105.328px 105.344px",
+    "logDisplay": "block",
+    "logHeadDisplay": "none",
+    "errors": []
+  },
+  {
+    "name": "portal-models",
+    "width": 768,
+    "scheme": "light",
+    "vw": 768,
+    "docScrollW": 768,
+    "overflowPage": false,
+    "smallTargets": [
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "brand",
+        "text": "M\n      Magpie\n ",
+        "w": 201,
+        "h": 30
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "首页",
+        "w": 52,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "模型广场",
+        "w": 80,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "控制台",
+        "w": 66,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "who",
+        "text": "审计账号",
+        "w": 52,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "btn ghost",
+        "text": "退出",
+        "w": 60,
+        "h": 38
+      },
+      {
+        "tag": "input",
+        "id": "modelSearch",
+        "cls": "",
+        "text": "",
+        "w": 289,
+        "h": 42
+      },
+      {
+        "tag": "select",
+        "id": "modelProvider",
+        "cls": "toolbar-select",
+        "text": "全部提供商",
+        "w": 111,
+        "h": 42
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "chip on",
+        "text": "全部",
+        "w": 52,
+        "h": 34
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "chip",
+        "text": "OpenAI",
+        "w": 72,
+        "h": 34
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "chip",
+        "text": "Anthropic",
+        "w": 87,
+        "h": 34
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "chip",
+        "text": "Gemini",
+        "w": 70,
+        "h": 34
+      }
+    ],
+    "smallTargetCount": 16,
+    "switchHit": {
+      "above": false,
+      "below": false,
+      "left": false,
+      "right": false
+    },
+    "fieldSizes": [
+      {
+        "id": "modelSearch",
+        "cls": "",
+        "size": "15px"
+      },
+      {
+        "id": "modelProvider",
+        "cls": "toolbar-select",
+        "size": "13.3333px"
+      }
+    ],
+    "beyond": [],
+    "logCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "usageCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "statCols": "repeat(6, minmax(0px, 1fr))",
+    "logDisplay": null,
+    "logHeadDisplay": null,
+    "errors": []
+  },
+  {
+    "name": "portal-admin-models",
+    "width": 768,
+    "scheme": "light",
+    "vw": 768,
+    "docScrollW": 768,
+    "overflowPage": false,
+    "smallTargets": [
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "brand",
+        "text": "M\n      Magpie\n ",
+        "w": 201,
+        "h": 30
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "首页",
+        "w": 52,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "模型广场",
+        "w": 80,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "控制台",
+        "w": 66,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "who",
+        "text": "审计账号",
+        "w": 52,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "btn ghost",
+        "text": "退出",
+        "w": 60,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "btn ghost",
+        "text": "返回控制台",
+        "w": 102,
+        "h": 38
+      },
+      {
+        "tag": "input",
+        "id": "adminModelSearch",
+        "cls": "",
+        "text": "",
+        "w": 460,
+        "h": 42
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "chip on",
+        "text": "全部",
+        "w": 52,
+        "h": 34
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "chip",
+        "text": "已开放",
+        "w": 65,
+        "h": 34
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "chip",
+        "text": "未开放",
+        "w": 65,
+        "h": 34
+      },
+      {
+        "tag": "button",
+        "id": "adminModelsRefresh",
+        "cls": "btn ghost sm",
+        "text": "刷新",
+        "w": 46,
+        "h": 30
+      }
+    ],
+    "smallTargetCount": 16,
+    "switchHit": {
+      "above": false,
+      "below": false,
+      "left": false,
+      "right": false
+    },
+    "fieldSizes": [
+      {
+        "id": "adminModelSearch",
+        "cls": "",
+        "size": "15px"
+      }
+    ],
+    "beyond": [],
+    "logCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "usageCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "statCols": "repeat(6, minmax(0px, 1fr))",
+    "logDisplay": null,
+    "logHeadDisplay": null,
+    "errors": []
+  },
+  {
+    "name": "portal-login",
+    "width": 768,
+    "scheme": "light",
+    "vw": 768,
+    "docScrollW": 768,
+    "overflowPage": false,
+    "smallTargets": [
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "brand",
+        "text": "M\n      Magpie\n ",
+        "w": 201,
+        "h": 30
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "首页",
+        "w": 52,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "模型广场",
+        "w": 80,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "控制台",
+        "w": 66,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "btn ghost",
+        "text": "登录",
+        "w": 60,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "btn primary",
+        "text": "注册",
+        "w": 60,
+        "h": 38
+      },
+      {
+        "tag": "input",
+        "id": "",
+        "cls": "",
+        "text": "",
+        "w": 378,
+        "h": 42
+      },
+      {
+        "tag": "input",
+        "id": "",
+        "cls": "",
+        "text": "",
+        "w": 378,
+        "h": 42
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "btn primary wide",
+        "text": "登录",
+        "w": 378,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "首页",
+        "w": 26,
+        "h": 21
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "模型广场",
+        "w": 52,
+        "h": 21
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "控制台",
+        "w": 39,
+        "h": 21
+      }
+    ],
+    "smallTargetCount": 12,
+    "switchHit": {
+      "above": false,
+      "below": false,
+      "left": false,
+      "right": false
+    },
+    "fieldSizes": [
+      {
+        "id": "",
+        "cls": "",
+        "size": "15px"
+      },
+      {
+        "id": "",
+        "cls": "",
+        "size": "15px"
+      }
+    ],
+    "beyond": [],
+    "logCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "usageCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "statCols": "repeat(6, minmax(0px, 1fr))",
+    "logDisplay": null,
+    "logHeadDisplay": null,
+    "errors": []
+  },
+  {
+    "name": "portal-register",
+    "width": 768,
+    "scheme": "light",
+    "vw": 768,
+    "docScrollW": 768,
+    "overflowPage": false,
+    "smallTargets": [
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "brand",
+        "text": "M\n      Magpie\n ",
+        "w": 201,
+        "h": 30
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "首页",
+        "w": 52,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "模型广场",
+        "w": 80,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "控制台",
+        "w": 66,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "btn ghost",
+        "text": "登录",
+        "w": 60,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "btn primary",
+        "text": "注册",
+        "w": 60,
+        "h": 38
+      },
+      {
+        "tag": "input",
+        "id": "",
+        "cls": "",
+        "text": "",
+        "w": 378,
+        "h": 42
+      },
+      {
+        "tag": "input",
+        "id": "",
+        "cls": "",
+        "text": "",
+        "w": 378,
+        "h": 42
+      },
+      {
+        "tag": "input",
+        "id": "",
+        "cls": "",
+        "text": "",
+        "w": 378,
+        "h": 42
+      },
+      {
+        "tag": "input",
+        "id": "",
+        "cls": "",
+        "text": "",
+        "w": 378,
+        "h": 42
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "btn primary wide",
+        "text": "创建账号",
+        "w": 378,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "首页",
+        "w": 26,
+        "h": 21
+      }
+    ],
+    "smallTargetCount": 14,
+    "switchHit": {
+      "above": false,
+      "below": false,
+      "left": false,
+      "right": false
+    },
+    "fieldSizes": [
+      {
+        "id": "",
+        "cls": "",
+        "size": "15px"
+      },
+      {
+        "id": "",
+        "cls": "",
+        "size": "15px"
+      },
+      {
+        "id": "",
+        "cls": "",
+        "size": "15px"
+      },
+      {
+        "id": "",
+        "cls": "",
+        "size": "15px"
+      }
+    ],
+    "beyond": [],
+    "logCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "usageCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "statCols": "repeat(6, minmax(0px, 1fr))",
+    "logDisplay": null,
+    "logHeadDisplay": null,
+    "errors": []
+  },
+  {
+    "name": "portal-home",
+    "width": 1440,
+    "scheme": "light",
+    "vw": 1440,
+    "docScrollW": 1440,
+    "overflowPage": false,
+    "smallTargets": [
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "brand",
+        "text": "M\n      Magpie\n ",
+        "w": 201,
+        "h": 30
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "首页",
+        "w": 52,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "模型广场",
+        "w": 80,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "控制台",
+        "w": 66,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "who",
+        "text": "审计账号",
+        "w": 52,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "btn ghost",
+        "text": "退出",
+        "w": 60,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "首页",
+        "w": 26,
+        "h": 21
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "模型广场",
+        "w": 52,
+        "h": 21
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "控制台",
+        "w": 39,
+        "h": 21
+      }
+    ],
+    "smallTargetCount": 9,
+    "switchHit": {
+      "above": false,
+      "below": false,
+      "left": false,
+      "right": false
+    },
+    "fieldSizes": [],
+    "beyond": [],
+    "logCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "usageCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "statCols": "repeat(6, minmax(0px, 1fr))",
+    "logDisplay": null,
+    "logHeadDisplay": null,
+    "errors": []
+  },
+  {
+    "name": "portal-console",
+    "width": 1440,
+    "scheme": "light",
+    "vw": 1440,
+    "docScrollW": 1440,
+    "overflowPage": false,
+    "smallTargets": [
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "brand",
+        "text": "M\n      Magpie\n ",
+        "w": 201,
+        "h": 30
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "首页",
+        "w": 52,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "模型广场",
+        "w": 80,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "控制台",
+        "w": 66,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "who",
+        "text": "审计账号",
+        "w": 52,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "btn ghost",
+        "text": "退出",
+        "w": 60,
+        "h": 38
+      },
+      {
+        "tag": "button",
+        "id": "keyNew",
+        "cls": "btn primary",
+        "text": "创建 API Key",
+        "w": 117,
+        "h": 38
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "chip",
+        "text": "今天",
+        "w": 52,
+        "h": 34
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "chip on",
+        "text": "近 7 天",
+        "w": 66,
+        "h": 34
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "chip",
+        "text": "近 30 天",
+        "w": 74,
+        "h": 34
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "chip",
+        "text": "全部",
+        "w": 52,
+        "h": 34
+      },
+      {
+        "tag": "select",
+        "id": "logModel",
+        "cls": "",
+        "text": "全部模型",
+        "w": 96,
+        "h": 34
+      }
+    ],
+    "smallTargetCount": 21,
+    "switchHit": {
+      "above": false,
+      "below": false,
+      "left": true,
+      "right": true
+    },
+    "fieldSizes": [
+      {
+        "id": "logModel",
+        "cls": "",
+        "size": "13.3333px"
+      },
+      {
+        "id": "logState",
+        "cls": "",
+        "size": "13.3333px"
+      }
+    ],
+    "beyond": [],
+    "logCard": {
+      "scrollW": 1114,
+      "clientW": 1114
+    },
+    "usageCard": {
+      "scrollW": 1114,
+      "clientW": 1114
+    },
+    "statCols": "170.656px 170.672px 170.672px 170.656px 170.672px 170.672px",
+    "logDisplay": "grid",
+    "logHeadDisplay": "grid",
+    "errors": []
+  },
+  {
+    "name": "portal-models",
+    "width": 1440,
+    "scheme": "light",
+    "vw": 1440,
+    "docScrollW": 1440,
+    "overflowPage": false,
+    "smallTargets": [
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "brand",
+        "text": "M\n      Magpie\n ",
+        "w": 201,
+        "h": 30
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "首页",
+        "w": 52,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "模型广场",
+        "w": 80,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "控制台",
+        "w": 66,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "who",
+        "text": "审计账号",
+        "w": 52,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "btn ghost",
+        "text": "退出",
+        "w": 60,
+        "h": 38
+      },
+      {
+        "tag": "input",
+        "id": "modelSearch",
+        "cls": "",
+        "text": "",
+        "w": 681,
+        "h": 42
+      },
+      {
+        "tag": "select",
+        "id": "modelProvider",
+        "cls": "toolbar-select",
+        "text": "全部提供商",
+        "w": 111,
+        "h": 42
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "chip on",
+        "text": "全部",
+        "w": 52,
+        "h": 34
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "chip",
+        "text": "OpenAI",
+        "w": 72,
+        "h": 34
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "chip",
+        "text": "Anthropic",
+        "w": 87,
+        "h": 34
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "chip",
+        "text": "Gemini",
+        "w": 70,
+        "h": 34
+      }
+    ],
+    "smallTargetCount": 16,
+    "switchHit": {
+      "above": false,
+      "below": false,
+      "left": false,
+      "right": false
+    },
+    "fieldSizes": [
+      {
+        "id": "modelSearch",
+        "cls": "",
+        "size": "15px"
+      },
+      {
+        "id": "modelProvider",
+        "cls": "toolbar-select",
+        "size": "13.3333px"
+      }
+    ],
+    "beyond": [],
+    "logCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "usageCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "statCols": "repeat(6, minmax(0px, 1fr))",
+    "logDisplay": null,
+    "logHeadDisplay": null,
+    "errors": []
+  },
+  {
+    "name": "portal-admin-models",
+    "width": 1440,
+    "scheme": "light",
+    "vw": 1440,
+    "docScrollW": 1440,
+    "overflowPage": false,
+    "smallTargets": [
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "brand",
+        "text": "M\n      Magpie\n ",
+        "w": 201,
+        "h": 30
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "首页",
+        "w": 52,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "模型广场",
+        "w": 80,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "控制台",
+        "w": 66,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "who",
+        "text": "审计账号",
+        "w": 52,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "btn ghost",
+        "text": "退出",
+        "w": 60,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "btn ghost",
+        "text": "返回控制台",
+        "w": 102,
+        "h": 38
+      },
+      {
+        "tag": "input",
+        "id": "adminModelSearch",
+        "cls": "",
+        "text": "",
+        "w": 852,
+        "h": 42
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "chip on",
+        "text": "全部",
+        "w": 52,
+        "h": 34
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "chip",
+        "text": "已开放",
+        "w": 65,
+        "h": 34
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "chip",
+        "text": "未开放",
+        "w": 65,
+        "h": 34
+      },
+      {
+        "tag": "button",
+        "id": "adminModelsRefresh",
+        "cls": "btn ghost sm",
+        "text": "刷新",
+        "w": 46,
+        "h": 30
+      }
+    ],
+    "smallTargetCount": 16,
+    "switchHit": {
+      "above": false,
+      "below": false,
+      "left": false,
+      "right": false
+    },
+    "fieldSizes": [
+      {
+        "id": "adminModelSearch",
+        "cls": "",
+        "size": "15px"
+      }
+    ],
+    "beyond": [],
+    "logCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "usageCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "statCols": "repeat(6, minmax(0px, 1fr))",
+    "logDisplay": null,
+    "logHeadDisplay": null,
+    "errors": []
+  },
+  {
+    "name": "portal-login",
+    "width": 1440,
+    "scheme": "light",
+    "vw": 1440,
+    "docScrollW": 1440,
+    "overflowPage": false,
+    "smallTargets": [
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "brand",
+        "text": "M\n      Magpie\n ",
+        "w": 201,
+        "h": 30
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "首页",
+        "w": 52,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "模型广场",
+        "w": 80,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "控制台",
+        "w": 66,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "btn ghost",
+        "text": "登录",
+        "w": 60,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "btn primary",
+        "text": "注册",
+        "w": 60,
+        "h": 38
+      },
+      {
+        "tag": "input",
+        "id": "",
+        "cls": "",
+        "text": "",
+        "w": 378,
+        "h": 42
+      },
+      {
+        "tag": "input",
+        "id": "",
+        "cls": "",
+        "text": "",
+        "w": 378,
+        "h": 42
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "btn primary wide",
+        "text": "登录",
+        "w": 378,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "首页",
+        "w": 26,
+        "h": 21
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "模型广场",
+        "w": 52,
+        "h": 21
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "控制台",
+        "w": 39,
+        "h": 21
+      }
+    ],
+    "smallTargetCount": 12,
+    "switchHit": {
+      "above": false,
+      "below": false,
+      "left": false,
+      "right": false
+    },
+    "fieldSizes": [
+      {
+        "id": "",
+        "cls": "",
+        "size": "15px"
+      },
+      {
+        "id": "",
+        "cls": "",
+        "size": "15px"
+      }
+    ],
+    "beyond": [],
+    "logCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "usageCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "statCols": "repeat(6, minmax(0px, 1fr))",
+    "logDisplay": null,
+    "logHeadDisplay": null,
+    "errors": []
+  },
+  {
+    "name": "portal-register",
+    "width": 1440,
+    "scheme": "light",
+    "vw": 1440,
+    "docScrollW": 1440,
+    "overflowPage": false,
+    "smallTargets": [
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "brand",
+        "text": "M\n      Magpie\n ",
+        "w": 201,
+        "h": 30
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "首页",
+        "w": 52,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "模型广场",
+        "w": 80,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "控制台",
+        "w": 66,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "btn ghost",
+        "text": "登录",
+        "w": 60,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "btn primary",
+        "text": "注册",
+        "w": 60,
+        "h": 38
+      },
+      {
+        "tag": "input",
+        "id": "",
+        "cls": "",
+        "text": "",
+        "w": 378,
+        "h": 42
+      },
+      {
+        "tag": "input",
+        "id": "",
+        "cls": "",
+        "text": "",
+        "w": 378,
+        "h": 42
+      },
+      {
+        "tag": "input",
+        "id": "",
+        "cls": "",
+        "text": "",
+        "w": 378,
+        "h": 42
+      },
+      {
+        "tag": "input",
+        "id": "",
+        "cls": "",
+        "text": "",
+        "w": 378,
+        "h": 42
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "btn primary wide",
+        "text": "创建账号",
+        "w": 378,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "首页",
+        "w": 26,
+        "h": 21
+      }
+    ],
+    "smallTargetCount": 14,
+    "switchHit": {
+      "above": false,
+      "below": false,
+      "left": false,
+      "right": false
+    },
+    "fieldSizes": [
+      {
+        "id": "",
+        "cls": "",
+        "size": "15px"
+      },
+      {
+        "id": "",
+        "cls": "",
+        "size": "15px"
+      },
+      {
+        "id": "",
+        "cls": "",
+        "size": "15px"
+      },
+      {
+        "id": "",
+        "cls": "",
+        "size": "15px"
+      }
+    ],
+    "beyond": [],
+    "logCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "usageCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "statCols": "repeat(6, minmax(0px, 1fr))",
+    "logDisplay": null,
+    "logHeadDisplay": null,
+    "errors": []
+  },
+  {
+    "name": "portal-home",
+    "width": 1440,
+    "scheme": "dark",
+    "vw": 1440,
+    "docScrollW": 1440,
+    "overflowPage": false,
+    "smallTargets": [
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "brand",
+        "text": "M\n      Magpie\n ",
+        "w": 201,
+        "h": 30
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "首页",
+        "w": 52,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "模型广场",
+        "w": 80,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "控制台",
+        "w": 66,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "who",
+        "text": "审计账号",
+        "w": 52,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "btn ghost",
+        "text": "退出",
+        "w": 60,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "首页",
+        "w": 26,
+        "h": 21
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "模型广场",
+        "w": 52,
+        "h": 21
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "控制台",
+        "w": 39,
+        "h": 21
+      }
+    ],
+    "smallTargetCount": 9,
+    "switchHit": {
+      "above": false,
+      "below": false,
+      "left": false,
+      "right": false
+    },
+    "fieldSizes": [],
+    "beyond": [],
+    "logCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "usageCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "statCols": "repeat(6, minmax(0px, 1fr))",
+    "logDisplay": null,
+    "logHeadDisplay": null,
+    "errors": []
+  },
+  {
+    "name": "portal-console",
+    "width": 1440,
+    "scheme": "dark",
+    "vw": 1440,
+    "docScrollW": 1440,
+    "overflowPage": false,
+    "smallTargets": [
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "brand",
+        "text": "M\n      Magpie\n ",
+        "w": 201,
+        "h": 30
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "首页",
+        "w": 52,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "模型广场",
+        "w": 80,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "控制台",
+        "w": 66,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "who",
+        "text": "审计账号",
+        "w": 52,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "btn ghost",
+        "text": "退出",
+        "w": 60,
+        "h": 38
+      },
+      {
+        "tag": "button",
+        "id": "keyNew",
+        "cls": "btn primary",
+        "text": "创建 API Key",
+        "w": 117,
+        "h": 38
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "chip",
+        "text": "今天",
+        "w": 52,
+        "h": 34
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "chip on",
+        "text": "近 7 天",
+        "w": 66,
+        "h": 34
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "chip",
+        "text": "近 30 天",
+        "w": 74,
+        "h": 34
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "chip",
+        "text": "全部",
+        "w": 52,
+        "h": 34
+      },
+      {
+        "tag": "select",
+        "id": "logModel",
+        "cls": "",
+        "text": "全部模型",
+        "w": 96,
+        "h": 34
+      }
+    ],
+    "smallTargetCount": 21,
+    "switchHit": {
+      "above": false,
+      "below": false,
+      "left": true,
+      "right": true
+    },
+    "fieldSizes": [
+      {
+        "id": "logModel",
+        "cls": "",
+        "size": "13.3333px"
+      },
+      {
+        "id": "logState",
+        "cls": "",
+        "size": "13.3333px"
+      }
+    ],
+    "beyond": [],
+    "logCard": {
+      "scrollW": 1114,
+      "clientW": 1114
+    },
+    "usageCard": {
+      "scrollW": 1114,
+      "clientW": 1114
+    },
+    "statCols": "170.656px 170.672px 170.672px 170.656px 170.672px 170.672px",
+    "logDisplay": "grid",
+    "logHeadDisplay": "grid",
+    "errors": []
+  },
+  {
+    "name": "portal-models",
+    "width": 1440,
+    "scheme": "dark",
+    "vw": 1440,
+    "docScrollW": 1440,
+    "overflowPage": false,
+    "smallTargets": [
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "brand",
+        "text": "M\n      Magpie\n ",
+        "w": 201,
+        "h": 30
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "首页",
+        "w": 52,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "模型广场",
+        "w": 80,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "控制台",
+        "w": 66,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "who",
+        "text": "审计账号",
+        "w": 52,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "btn ghost",
+        "text": "退出",
+        "w": 60,
+        "h": 38
+      },
+      {
+        "tag": "input",
+        "id": "modelSearch",
+        "cls": "",
+        "text": "",
+        "w": 681,
+        "h": 42
+      },
+      {
+        "tag": "select",
+        "id": "modelProvider",
+        "cls": "toolbar-select",
+        "text": "全部提供商",
+        "w": 111,
+        "h": 42
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "chip on",
+        "text": "全部",
+        "w": 52,
+        "h": 34
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "chip",
+        "text": "OpenAI",
+        "w": 72,
+        "h": 34
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "chip",
+        "text": "Anthropic",
+        "w": 87,
+        "h": 34
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "chip",
+        "text": "Gemini",
+        "w": 70,
+        "h": 34
+      }
+    ],
+    "smallTargetCount": 16,
+    "switchHit": {
+      "above": false,
+      "below": false,
+      "left": false,
+      "right": false
+    },
+    "fieldSizes": [
+      {
+        "id": "modelSearch",
+        "cls": "",
+        "size": "15px"
+      },
+      {
+        "id": "modelProvider",
+        "cls": "toolbar-select",
+        "size": "13.3333px"
+      }
+    ],
+    "beyond": [],
+    "logCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "usageCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "statCols": "repeat(6, minmax(0px, 1fr))",
+    "logDisplay": null,
+    "logHeadDisplay": null,
+    "errors": []
+  },
+  {
+    "name": "portal-admin-models",
+    "width": 1440,
+    "scheme": "dark",
+    "vw": 1440,
+    "docScrollW": 1440,
+    "overflowPage": false,
+    "smallTargets": [
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "brand",
+        "text": "M\n      Magpie\n ",
+        "w": 201,
+        "h": 30
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "首页",
+        "w": 52,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "模型广场",
+        "w": 80,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "控制台",
+        "w": 66,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "who",
+        "text": "审计账号",
+        "w": 52,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "btn ghost",
+        "text": "退出",
+        "w": 60,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "btn ghost",
+        "text": "返回控制台",
+        "w": 102,
+        "h": 38
+      },
+      {
+        "tag": "input",
+        "id": "adminModelSearch",
+        "cls": "",
+        "text": "",
+        "w": 852,
+        "h": 42
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "chip on",
+        "text": "全部",
+        "w": 52,
+        "h": 34
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "chip",
+        "text": "已开放",
+        "w": 65,
+        "h": 34
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "chip",
+        "text": "未开放",
+        "w": 65,
+        "h": 34
+      },
+      {
+        "tag": "button",
+        "id": "adminModelsRefresh",
+        "cls": "btn ghost sm",
+        "text": "刷新",
+        "w": 46,
+        "h": 30
+      }
+    ],
+    "smallTargetCount": 16,
+    "switchHit": {
+      "above": false,
+      "below": false,
+      "left": false,
+      "right": false
+    },
+    "fieldSizes": [
+      {
+        "id": "adminModelSearch",
+        "cls": "",
+        "size": "15px"
+      }
+    ],
+    "beyond": [],
+    "logCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "usageCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "statCols": "repeat(6, minmax(0px, 1fr))",
+    "logDisplay": null,
+    "logHeadDisplay": null,
+    "errors": []
+  },
+  {
+    "name": "portal-login",
+    "width": 1440,
+    "scheme": "dark",
+    "vw": 1440,
+    "docScrollW": 1440,
+    "overflowPage": false,
+    "smallTargets": [
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "brand",
+        "text": "M\n      Magpie\n ",
+        "w": 201,
+        "h": 30
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "首页",
+        "w": 52,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "模型广场",
+        "w": 80,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "控制台",
+        "w": 66,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "btn ghost",
+        "text": "登录",
+        "w": 60,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "btn primary",
+        "text": "注册",
+        "w": 60,
+        "h": 38
+      },
+      {
+        "tag": "input",
+        "id": "",
+        "cls": "",
+        "text": "",
+        "w": 378,
+        "h": 42
+      },
+      {
+        "tag": "input",
+        "id": "",
+        "cls": "",
+        "text": "",
+        "w": 378,
+        "h": 42
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "btn primary wide",
+        "text": "登录",
+        "w": 378,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "首页",
+        "w": 26,
+        "h": 21
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "模型广场",
+        "w": 52,
+        "h": 21
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "控制台",
+        "w": 39,
+        "h": 21
+      }
+    ],
+    "smallTargetCount": 12,
+    "switchHit": {
+      "above": false,
+      "below": false,
+      "left": false,
+      "right": false
+    },
+    "fieldSizes": [
+      {
+        "id": "",
+        "cls": "",
+        "size": "15px"
+      },
+      {
+        "id": "",
+        "cls": "",
+        "size": "15px"
+      }
+    ],
+    "beyond": [],
+    "logCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "usageCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "statCols": "repeat(6, minmax(0px, 1fr))",
+    "logDisplay": null,
+    "logHeadDisplay": null,
+    "errors": []
+  },
+  {
+    "name": "portal-register",
+    "width": 1440,
+    "scheme": "dark",
+    "vw": 1440,
+    "docScrollW": 1440,
+    "overflowPage": false,
+    "smallTargets": [
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "brand",
+        "text": "M\n      Magpie\n ",
+        "w": 201,
+        "h": 30
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "首页",
+        "w": 52,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "模型广场",
+        "w": 80,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "控制台",
+        "w": 66,
+        "h": 36
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "btn ghost",
+        "text": "登录",
+        "w": 60,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "btn primary",
+        "text": "注册",
+        "w": 60,
+        "h": 38
+      },
+      {
+        "tag": "input",
+        "id": "",
+        "cls": "",
+        "text": "",
+        "w": 378,
+        "h": 42
+      },
+      {
+        "tag": "input",
+        "id": "",
+        "cls": "",
+        "text": "",
+        "w": 378,
+        "h": 42
+      },
+      {
+        "tag": "input",
+        "id": "",
+        "cls": "",
+        "text": "",
+        "w": 378,
+        "h": 42
+      },
+      {
+        "tag": "input",
+        "id": "",
+        "cls": "",
+        "text": "",
+        "w": 378,
+        "h": 42
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "cls": "btn primary wide",
+        "text": "创建账号",
+        "w": 378,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "首页",
+        "w": 26,
+        "h": 21
+      }
+    ],
+    "smallTargetCount": 14,
+    "switchHit": {
+      "above": false,
+      "below": false,
+      "left": false,
+      "right": false
+    },
+    "fieldSizes": [
+      {
+        "id": "",
+        "cls": "",
+        "size": "15px"
+      },
+      {
+        "id": "",
+        "cls": "",
+        "size": "15px"
+      },
+      {
+        "id": "",
+        "cls": "",
+        "size": "15px"
+      },
+      {
+        "id": "",
+        "cls": "",
+        "size": "15px"
+      }
+    ],
+    "beyond": [],
+    "logCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "usageCard": {
+      "scrollW": 0,
+      "clientW": 0
+    },
+    "statCols": "repeat(6, minmax(0px, 1fr))",
+    "logDisplay": null,
+    "logHeadDisplay": null,
+    "errors": []
+  },
+  {
+    "name": "portal-console-touch",
+    "width": 768,
+    "scheme": "light",
+    "vw": 768,
+    "docScrollW": 768,
+    "overflowPage": false,
+    "smallTargets": [],
+    "smallTargetCount": 0,
+    "switchHit": {
+      "above": true,
+      "below": true,
+      "left": true,
+      "right": true
+    },
+    "fieldSizes": [
+      {
+        "id": "logModel",
+        "cls": "",
+        "size": "16px"
+      },
+      {
+        "id": "logState",
+        "cls": "",
+        "size": "16px"
+      }
+    ],
+    "beyond": [],
+    "logCard": {
+      "scrollW": 722,
+      "clientW": 722
+    },
+    "usageCard": {
+      "scrollW": 722,
+      "clientW": 722
+    },
+    "statCols": "336px 336px",
+    "logDisplay": "block",
+    "logHeadDisplay": "none",
+    "errors": []
+  }
+]

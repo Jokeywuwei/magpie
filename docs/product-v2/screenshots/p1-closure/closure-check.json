@@ -1,0 +1,414 @@
+{
+ "languageSwitch": {
+  "before": {
+   "url": "/portal/?x=1&y=2",
+   "lang": "zh-CN",
+   "cookie": "minirelay_lang=zh"
+  },
+  "after": {
+   "url": "/portal/?x=1&y=2",
+   "lang": "en",
+   "cookie": "minirelay_lang=en"
+  },
+  "typedFieldAfterSwitch": "",
+  "settingsUnchanged": true
+ },
+ "layout": [
+  {
+   "surface": "admin",
+   "lang": "zh",
+   "width": 390,
+   "page": "providers",
+   "overflow": false,
+   "docW": 390,
+   "errors": 0
+  },
+  {
+   "surface": "admin",
+   "lang": "zh",
+   "width": 390,
+   "page": "routing",
+   "overflow": false,
+   "docW": 390,
+   "errors": 0
+  },
+  {
+   "surface": "admin",
+   "lang": "zh",
+   "width": 390,
+   "page": "usage",
+   "overflow": false,
+   "docW": 390,
+   "errors": 0
+  },
+  {
+   "surface": "admin",
+   "lang": "zh",
+   "width": 390,
+   "page": "settings",
+   "overflow": false,
+   "docW": 390,
+   "errors": 0
+  },
+  {
+   "surface": "admin",
+   "lang": "zh",
+   "width": 1440,
+   "page": "providers",
+   "overflow": false,
+   "docW": 1440,
+   "errors": 0
+  },
+  {
+   "surface": "admin",
+   "lang": "zh",
+   "width": 1440,
+   "page": "routing",
+   "overflow": false,
+   "docW": 1440,
+   "errors": 0
+  },
+  {
+   "surface": "admin",
+   "lang": "zh",
+   "width": 1440,
+   "page": "usage",
+   "overflow": false,
+   "docW": 1440,
+   "errors": 0
+  },
+  {
+   "surface": "admin",
+   "lang": "zh",
+   "width": 1440,
+   "page": "plugins",
+   "overflow": false,
+   "docW": 1440,
+   "errors": 0
+  },
+  {
+   "surface": "admin",
+   "lang": "zh",
+   "width": 1440,
+   "page": "settings",
+   "overflow": false,
+   "docW": 1440,
+   "errors": 0
+  },
+  {
+   "surface": "portal",
+   "lang": "zh",
+   "width": 390,
+   "page": "home",
+   "overflow": false,
+   "docW": 390,
+   "errors": 0
+  },
+  {
+   "surface": "portal",
+   "lang": "zh",
+   "width": 390,
+   "page": "console",
+   "overflow": false,
+   "docW": 390,
+   "errors": 0
+  },
+  {
+   "surface": "portal",
+   "lang": "zh",
+   "width": 390,
+   "page": "models",
+   "overflow": false,
+   "docW": 390,
+   "errors": 0
+  },
+  {
+   "surface": "portal",
+   "lang": "zh",
+   "width": 390,
+   "page": "admin-models",
+   "overflow": false,
+   "docW": 390,
+   "errors": 0
+  },
+  {
+   "surface": "admin",
+   "lang": "en",
+   "width": 390,
+   "page": "providers",
+   "overflow": false,
+   "docW": 390,
+   "errors": 0
+  },
+  {
+   "surface": "admin",
+   "lang": "en",
+   "width": 390,
+   "page": "routing",
+   "overflow": false,
+   "docW": 390,
+   "errors": 0
+  },
+  {
+   "surface": "admin",
+   "lang": "en",
+   "width": 390,
+   "page": "usage",
+   "overflow": false,
+   "docW": 390,
+   "errors": 0
+  },
+  {
+   "surface": "admin",
+   "lang": "en",
+   "width": 390,
+   "page": "settings",
+   "overflow": false,
+   "docW": 390,
+   "errors": 0
+  },
+  {
+   "surface": "admin",
+   "lang": "en",
+   "width": 1440,
+   "page": "providers",
+   "overflow": false,
+   "docW": 1440,
+   "errors": 0
+  },
+  {
+   "surface": "admin",
+   "lang": "en",
+   "width": 1440,
+   "page": "routing",
+   "overflow": false,
+   "docW": 1440,
+   "errors": 0
+  },
+  {
+   "surface": "admin",
+   "lang": "en",
+   "width": 1440,
+   "page": "usage",
+   "overflow": false,
+   "docW": 1440,
+   "errors": 0
+  },
+  {
+   "surface": "admin",
+   "lang": "en",
+   "width": 1440,
+   "page": "plugins",
+   "overflow": false,
+   "docW": 1440,
+   "errors": 0
+  },
+  {
+   "surface": "admin",
+   "lang": "en",
+   "width": 1440,
+   "page": "settings",
+   "overflow": false,
+   "docW": 1440,
+   "errors": 0
+  },
+  {
+   "surface": "portal",
+   "lang": "en",
+   "width": 390,
+   "page": "home",
+   "overflow": false,
+   "docW": 390,
+   "errors": 0
+  },
+  {
+   "surface": "portal",
+   "lang": "en",
+   "width": 390,
+   "page": "console",
+   "overflow": false,
+   "docW": 390,
+   "errors": 0
+  },
+  {
+   "surface": "portal",
+   "lang": "en",
+   "width": 390,
+   "page": "models",
+   "overflow": false,
+   "docW": 390,
+   "errors": 0
+  },
+  {
+   "surface": "portal",
+   "lang": "en",
+   "width": 390,
+   "page": "admin-models",
+   "overflow": false,
+   "docW": 390,
+   "errors": 0
+  },
+  {
+   "surface": "admin",
+   "lang": "de",
+   "width": 390,
+   "page": "providers",
+   "overflow": false,
+   "docW": 390,
+   "errors": 0
+  },
+  {
+   "surface": "admin",
+   "lang": "de",
+   "width": 390,
+   "page": "routing",
+   "overflow": false,
+   "docW": 390,
+   "errors": 0
+  },
+  {
+   "surface": "admin",
+   "lang": "de",
+   "width": 390,
+   "page": "usage",
+   "overflow": false,
+   "docW": 390,
+   "errors": 0
+  },
+  {
+   "surface": "admin",
+   "lang": "de",
+   "width": 390,
+   "page": "settings",
+   "overflow": false,
+   "docW": 390,
+   "errors": 0
+  },
+  {
+   "surface": "admin",
+   "lang": "de",
+   "width": 1440,
+   "page": "providers",
+   "overflow": false,
+   "docW": 1440,
+   "errors": 0
+  },
+  {
+   "surface": "admin",
+   "lang": "de",
+   "width": 1440,
+   "page": "routing",
+   "overflow": false,
+   "docW": 1440,
+   "errors": 0
+  },
+  {
+   "surface": "admin",
+   "lang": "de",
+   "width": 1440,
+   "page": "usage",
+   "overflow": false,
+   "docW": 1440,
+   "errors": 0
+  },
+  {
+   "surface": "admin",
+   "lang": "de",
+   "width": 1440,
+   "page": "plugins",
+   "overflow": false,
+   "docW": 1440,
+   "errors": 0
+  },
+  {
+   "surface": "admin",
+   "lang": "de",
+   "width": 1440,
+   "page": "settings",
+   "overflow": false,
+   "docW": 1440,
+   "errors": 0
+  },
+  {
+   "surface": "admin",
+   "lang": "ja",
+   "width": 390,
+   "page": "providers",
+   "overflow": false,
+   "docW": 390,
+   "errors": 0
+  },
+  {
+   "surface": "admin",
+   "lang": "ja",
+   "width": 390,
+   "page": "routing",
+   "overflow": false,
+   "docW": 390,
+   "errors": 0
+  },
+  {
+   "surface": "admin",
+   "lang": "ja",
+   "width": 390,
+   "page": "usage",
+   "overflow": false,
+   "docW": 390,
+   "errors": 0
+  },
+  {
+   "surface": "admin",
+   "lang": "ja",
+   "width": 390,
+   "page": "settings",
+   "overflow": false,
+   "docW": 390,
+   "errors": 0
+  },
+  {
+   "surface": "admin",
+   "lang": "ja",
+   "width": 1440,
+   "page": "providers",
+   "overflow": false,
+   "docW": 1440,
+   "errors": 0
+  },
+  {
+   "surface": "admin",
+   "lang": "ja",
+   "width": 1440,
+   "page": "routing",
+   "overflow": false,
+   "docW": 1440,
+   "errors": 0
+  },
+  {
+   "surface": "admin",
+   "lang": "ja",
+   "width": 1440,
+   "page": "usage",
+   "overflow": false,
+   "docW": 1440,
+   "errors": 0
+  },
+  {
+   "surface": "admin",
+   "lang": "ja",
+   "width": 1440,
+   "page": "plugins",
+   "overflow": false,
+   "docW": 1440,
+   "errors": 0
+  },
+  {
+   "surface": "admin",
+   "lang": "ja",
+   "width": 1440,
+   "page": "settings",
+   "overflow": false,
+   "docW": 1440,
+   "errors": 0
+  }
+ ]
+}

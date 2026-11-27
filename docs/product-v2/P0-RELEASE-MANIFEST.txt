@@ -1,0 +1,196 @@
+MiniRelay P0 release baseline manifest
+======================================
+
+Recorded: 2026-11-24
+Repository: /root/magpie-original
+Branch: remove-partners
+HEAD: e41adc1513bb1e9fe953e7dd8c35dc40e23bf60e
+git describe: v0.1.4574-1-ge41adc151-dirty
+git status --porcelain: 89 lines
+Tracked modifications: 50 files, 1380 insertions(+), 692 deletions(-)
+Staged: 0
+
+This is the source inventory of the only tree that has the platform
+features (accounts, portal, user keys, model access). A build from HEAD
+does not have them. Do not publish a build from this dirty tree.
+
+[1] Tracked files modified from HEAD (50)
+------------------------------------------
+internal/access/access.go
+internal/access/issue.go
+internal/access/models.go
+internal/backup/backup.go
+internal/cli/backup_cmd.go
+internal/cli/main.go
+internal/cli/settings_parity_test.go
+internal/gateway/image_mcp_models.go
+internal/gateway/key_models.go
+internal/gateway/lan.go
+internal/gateway/search_native.go
+internal/gateway/search_queue_test.go
+internal/gateway/usage_api.go
+internal/gateway/usage_ingest.go
+internal/gui/api.go
+internal/gui/appearance.go
+internal/gui/assets/app.css
+internal/gui/assets/app.js
+internal/gui/assets/i18n.js
+internal/gui/assets/instancename.js
+internal/gui/assets/kernel.js
+internal/gui/assets/manifest.json
+internal/gui/assets/plugins.css
+internal/gui/assets/plugins.js
+internal/gui/assets/plugins/routing/client.js
+internal/gui/assets/plugins/usage/client.js
+internal/gui/assets/plugins/usage/page.js
+internal/gui/assets/provlinks.js
+internal/gui/assets/start.js
+internal/gui/assets_revalidate_test.go
+internal/gui/builtins.go
+internal/gui/core_budget_test.go
+internal/gui/instance_name_test.go
+internal/gui/page_memory.go
+internal/gui/page_memory_test.go
+internal/gui/providers.go
+internal/gui/settings_keep_test.go
+internal/gui/web.go
+internal/gui/web_app_test.go
+internal/gui/web_compress_test.go
+internal/gui/web_lazycat_test.go
+internal/gui/web_test.go
+internal/provider/presets.go
+internal/stats/stats_test.go
+internal/usage/ledger.go
+internal/usage/log_disk.go
+internal/usage/request_page.go
+internal/usage/usage.go
+plugins/library/library.go
+plugins/sessions/sessions.go
+
+[2] Untracked source files (48; excludes docs/ and .mimosa/)
+-------------------------------------------------------------
+internal/access/modelgrant_test.go
+internal/access/p0_userkey_test.go
+internal/access/userkeys.go
+internal/access/userkeys_test.go
+internal/backup/platform_failure_test.go
+internal/backup/platform.go
+internal/backup/platform_test.go
+internal/cli/user_cli.go
+internal/cli/user_cli_test.go
+internal/gateway/modelaccess_gateway_test.go
+internal/gateway/p0_isolation_test.go
+internal/gateway/userkey_gateway_test.go
+internal/gui/admin_session_test.go
+internal/gui/assets/index-web.html
+internal/gui/assets/portal/admin-models.js
+internal/gui/assets/portal/bird.svg
+internal/gui/assets/portal/i18n.js
+internal/gui/assets/portal/index.html
+internal/gui/assets/portal/models.js
+internal/gui/assets/portal/portal.css
+internal/gui/assets/portal/portal.js
+internal/gui/assets/portal/usage.js
+internal/gui/auth.go
+internal/gui/auth_test.go
+internal/gui/i18n_parity_test.go
+internal/gui/loginlimit.go
+internal/gui/loginlimit_test.go
+internal/gui/modelaccess.go
+internal/gui/modelaccess_test.go
+internal/gui/p0_userkeys_test.go
+internal/gui/portal.go
+internal/gui/portal_i18n_test.go
+internal/gui/portal_test.go
+internal/gui/userkeys.go
+internal/gui/userkeys_test.go
+internal/gui/userusage.go
+internal/gui/userusage_test.go
+internal/gui/web_relay_test.go
+internal/identity/identity.go
+internal/identity/identity_test.go
+internal/identity/registration.go
+internal/identity/registration_test.go
+internal/identity/session.go
+internal/modelaccess/modelaccess.go
+internal/modelaccess/modelaccess_test.go
+internal/usage/scratch_linger_test.go
+internal/usage/user_usage.go
+internal/usage/user_usage_test.go
+
+[3] Intentionally excluded from a release build
+-----------------------------------------------
+.mimosa/                        10,101 tool-state files; never publish
+internal/usage/.mimosa/          tool state inside the tree
+docs/product-v2/                 160 files: reports, audit screenshots
+docs/product-v2/screenshots/     audit evidence, never in the image
+magpie                          prebuilt binary at the repo root
+dist/, build/, site/, .git/     already in .dockerignore
+magpie.app/                     already in .dockerignore
+
+[4] Platform-critical groups
+----------------------------
+Accounts/sessions:
+  internal/identity/{identity.go,session.go,registration.go}
+  internal/gui/{auth.go,loginlimit.go}
+  internal/gui/web.go
+  internal/cli/{main.go,user_cli.go}
+
+User keys / owner isolation:
+  internal/access/{userkeys.go,access.go,issue.go,models.go}
+  internal/gui/{userkeys.go,userusage.go}
+  internal/usage/{user_usage.go,ledger.go,usage.go}
+
+Model access:
+  internal/modelaccess/modelaccess.go
+  internal/gui/modelaccess.go
+  internal/gateway/{key_models.go,lan.go,usage_api.go,usage_ingest.go}
+
+Portal:
+  internal/gui/{portal.go,portal_i18n_test.go}
+  internal/gui/assets/index-web.html
+  internal/gui/assets/portal/*
+
+Backup platform state:
+  internal/backup/{backup.go,platform.go}
+  internal/cli/backup_cmd.go
+
+[5] HEAD vs worktree
+--------------------
+HEAD build (git archive HEAD):
+  - no internal/identity
+  - no internal/modelaccess
+  - no internal/gui/portal.go
+  - no internal/gui/assets/portal
+  - magpie --help has no "magpie user" command
+Worktree build:
+  - all of the above present
+  - magpie --help has "magpie user [list|add|passwd|role|disable|enable|remove]"
+  - current build used for testing: /tmp/minirelay-p0-bin
+    (version p0-remediation; not a release version)
+
+[6] Release procedure (not executed)
+------------------------------------
+1. Review and commit exactly the tracked modifications and untracked
+   source files in [1] and [2] on a release commit; exclude [3].
+2. Add to .dockerignore: .mimosa, **/.mimosa, docs, magpie, dist, build,
+   site, .git, .github, *.md. Keep internal/ (go:embed needs its assets).
+3. Build only from the clean tag:
+     make cli VERSION="$(git describe --tags --always --dirty)"
+     # or
+     docker build --build-arg VERSION="$VERSION" -t minirelay:$VERSION .
+   Refuse the build if `git status --porcelain` is non-empty.
+4. Pin the toolchain image to golang:1.26.8-alpine (the Dockerfile today
+   says golang:1.26-alpine) and record:
+   - commit SHA, tag, tree hash
+   - Go version (go.mod says 1.26.8)
+   - binary SHA-256 and image digest
+   - SBOM / build attestation
+5. Smoke the image: /portal/ 200, registration closed, `magpie user add`
+   creates the first admin, a user key calls /v1/models and a model.
+6. The image CMD is "serve" (gateway only). A portal deployment must
+   override it with `web --addr 0.0.0.0:3430 --no-open`.
+7. Never tag or publish a build whose `git describe` contains -dirty.
+
+Current tree is NOT a release baseline: 50 tracked files are modified,
+48 source files are untracked, and the version string is -dirty.

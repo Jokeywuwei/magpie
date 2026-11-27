@@ -1,0 +1,190 @@
+{
+ "themes": [
+  {
+   "case": "light-default",
+   "os": "light",
+   "settings": {
+    "theme": "light",
+    "accent": "",
+    "colorblind": false,
+    "reduceMotion": false
+   },
+   "htmlTheme": "light",
+   "colorblind": null,
+   "motion": null,
+   "lang": "zh-CN",
+   "bg": "rgb(244, 244, 246)",
+   "accent": "#4f46e5",
+   "c1": "#4f46e5",
+   "scheme": "light only",
+   "transition": "0.15s, 0.15s, 0.15s, 0.12s"
+  },
+  {
+   "case": "light-teal",
+   "os": "light",
+   "settings": {
+    "theme": "light",
+    "accent": "#0d9488",
+    "colorblind": false,
+    "reduceMotion": false
+   },
+   "htmlTheme": "light",
+   "colorblind": null,
+   "motion": null,
+   "lang": "zh-CN",
+   "bg": "rgb(240, 246, 248)",
+   "accent": "#0b7c72",
+   "c1": "#4f46e5",
+   "scheme": "light only",
+   "transition": "0.15s, 0.15s, 0.15s, 0.12s"
+  },
+  {
+   "case": "dark-pink",
+   "os": "light",
+   "settings": {
+    "theme": "dark",
+    "accent": "#db2777",
+    "colorblind": false,
+    "reduceMotion": false
+   },
+   "htmlTheme": "dark",
+   "colorblind": null,
+   "motion": null,
+   "lang": "zh-CN",
+   "bg": "rgb(33, 19, 29)",
+   "accent": "#e35795",
+   "c1": "#a5b4fc",
+   "scheme": "dark",
+   "transition": "0.15s, 0.15s, 0.15s, 0.12s"
+  },
+  {
+   "case": "system-os-light",
+   "os": "light",
+   "settings": {
+    "theme": "system",
+    "accent": "",
+    "colorblind": false,
+    "reduceMotion": false
+   },
+   "htmlTheme": null,
+   "colorblind": null,
+   "motion": null,
+   "lang": "zh-CN",
+   "bg": "rgb(244, 244, 246)",
+   "accent": "#4f46e5",
+   "c1": "#4f46e5",
+   "scheme": "light dark",
+   "transition": "0.15s, 0.15s, 0.15s, 0.12s"
+  },
+  {
+   "case": "system-os-dark",
+   "os": "dark",
+   "settings": {
+    "theme": "system",
+    "accent": "",
+    "colorblind": false,
+    "reduceMotion": false
+   },
+   "htmlTheme": null,
+   "colorblind": null,
+   "motion": null,
+   "lang": "zh-CN",
+   "bg": "rgb(26, 26, 30)",
+   "accent": "#a5b4fc",
+   "c1": "#a5b4fc",
+   "scheme": "light dark",
+   "transition": "0.15s, 0.15s, 0.15s, 0.12s"
+  },
+  {
+   "case": "light-on-dark-os",
+   "os": "dark",
+   "settings": {
+    "theme": "light",
+    "accent": "",
+    "colorblind": false,
+    "reduceMotion": false
+   },
+   "htmlTheme": "light",
+   "colorblind": null,
+   "motion": null,
+   "lang": "zh-CN",
+   "bg": "rgb(244, 244, 246)",
+   "accent": "#4f46e5",
+   "c1": "#4f46e5",
+   "scheme": "light only",
+   "transition": "0.15s, 0.15s, 0.15s, 0.12s"
+  },
+  {
+   "case": "dark-on-light-os",
+   "os": "light",
+   "settings": {
+    "theme": "dark",
+    "accent": "",
+    "colorblind": false,
+    "reduceMotion": false
+   },
+   "htmlTheme": "dark",
+   "colorblind": null,
+   "motion": null,
+   "lang": "zh-CN",
+   "bg": "rgb(26, 26, 30)",
+   "accent": "#a5b4fc",
+   "c1": "#a5b4fc",
+   "scheme": "dark",
+   "transition": "0.15s, 0.15s, 0.15s, 0.12s"
+  },
+  {
+   "case": "a11y",
+   "os": "light",
+   "settings": {
+    "theme": "light",
+    "accent": "",
+    "colorblind": true,
+    "reduceMotion": true
+   },
+   "htmlTheme": "light",
+   "colorblind": "1",
+   "motion": "reduce",
+   "lang": "zh-CN",
+   "bg": "rgb(244, 244, 246)",
+   "accent": "#4f46e5",
+   "c1": "#0072b2",
+   "scheme": "light only",
+   "transition": "0s"
+  }
+ ],
+ "language": {
+  "before": {
+   "url": "http://127.0.0.1:3440/portal/?x=1&y=2",
+   "lang": "zh-CN"
+  },
+  "after": {
+   "url": "http://127.0.0.1:3440/portal/?x=1&y=2",
+   "lang": "en",
+   "cookie": "en",
+   "settingsLang": "system",
+   "cjk": [
+    "中文"
+   ]
+  },
+  "cjk-home": [
+   "中文"
+  ],
+  "cjk-console": [
+   "中文"
+  ],
+  "cjk-models": [
+   "中文"
+  ],
+  "cjk-admin-models": [
+   "中文"
+  ]
+ },
+ "privacy": {
+  "lookBytes": 1520,
+  "lookHasWallpaper": false,
+  "pageReferencesAppearanceAPI": false,
+  "lookHasAccent": true
+ },
+ "errors": []
+}

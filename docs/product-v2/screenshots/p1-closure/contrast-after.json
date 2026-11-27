@@ -1,0 +1,200 @@
+[
+ {
+  "surface": "admin",
+  "page": "providers",
+  "scheme": "light",
+  "failures": [],
+  "disabled": [],
+  "docW": 1440,
+  "vw": 1440
+ },
+ {
+  "surface": "admin",
+  "page": "routing",
+  "scheme": "light",
+  "failures": [],
+  "disabled": [],
+  "docW": 1440,
+  "vw": 1440
+ },
+ {
+  "surface": "admin",
+  "page": "usage",
+  "scheme": "light",
+  "failures": [],
+  "disabled": [],
+  "docW": 1440,
+  "vw": 1440
+ },
+ {
+  "surface": "admin",
+  "page": "plugins",
+  "scheme": "light",
+  "failures": [],
+  "disabled": [],
+  "docW": 1440,
+  "vw": 1440
+ },
+ {
+  "surface": "admin",
+  "page": "masking",
+  "scheme": "light",
+  "failures": [],
+  "disabled": [],
+  "docW": 1440,
+  "vw": 1440
+ },
+ {
+  "surface": "admin",
+  "page": "gateway",
+  "scheme": "light",
+  "failures": [],
+  "disabled": [],
+  "docW": 1440,
+  "vw": 1440
+ },
+ {
+  "surface": "admin",
+  "page": "settings",
+  "scheme": "light",
+  "failures": [],
+  "disabled": [],
+  "docW": 1440,
+  "vw": 1440
+ },
+ {
+  "surface": "portal",
+  "page": "home",
+  "scheme": "light",
+  "failures": [],
+  "disabled": [],
+  "docW": 1440,
+  "vw": 1440
+ },
+ {
+  "surface": "portal",
+  "page": "console",
+  "scheme": "light",
+  "failures": [],
+  "disabled": [],
+  "docW": 1440,
+  "vw": 1440
+ },
+ {
+  "surface": "portal",
+  "page": "models",
+  "scheme": "light",
+  "failures": [],
+  "disabled": [],
+  "docW": 1440,
+  "vw": 1440
+ },
+ {
+  "surface": "portal",
+  "page": "admin-models",
+  "scheme": "light",
+  "failures": [],
+  "disabled": [],
+  "docW": 1440,
+  "vw": 1440
+ },
+ {
+  "surface": "admin",
+  "page": "providers",
+  "scheme": "dark",
+  "failures": [],
+  "disabled": [],
+  "docW": 1440,
+  "vw": 1440
+ },
+ {
+  "surface": "admin",
+  "page": "routing",
+  "scheme": "dark",
+  "failures": [],
+  "disabled": [],
+  "docW": 1440,
+  "vw": 1440
+ },
+ {
+  "surface": "admin",
+  "page": "usage",
+  "scheme": "dark",
+  "failures": [],
+  "disabled": [],
+  "docW": 1440,
+  "vw": 1440
+ },
+ {
+  "surface": "admin",
+  "page": "plugins",
+  "scheme": "dark",
+  "failures": [],
+  "disabled": [],
+  "docW": 1440,
+  "vw": 1440
+ },
+ {
+  "surface": "admin",
+  "page": "masking",
+  "scheme": "dark",
+  "failures": [],
+  "disabled": [],
+  "docW": 1440,
+  "vw": 1440
+ },
+ {
+  "surface": "admin",
+  "page": "gateway",
+  "scheme": "dark",
+  "failures": [],
+  "disabled": [],
+  "docW": 1440,
+  "vw": 1440
+ },
+ {
+  "surface": "admin",
+  "page": "settings",
+  "scheme": "dark",
+  "failures": [],
+  "disabled": [],
+  "docW": 1440,
+  "vw": 1440
+ },
+ {
+  "surface": "portal",
+  "page": "home",
+  "scheme": "dark",
+  "failures": [],
+  "disabled": [],
+  "docW": 1440,
+  "vw": 1440
+ },
+ {
+  "surface": "portal",
+  "page": "console",
+  "scheme": "dark",
+  "failures": [],
+  "disabled": [],
+  "docW": 1440,
+  "vw": 1440
+ },
+ {
+  "surface": "portal",
+  "page": "models",
+  "scheme": "dark",
+  "failures": [],
+  "disabled": [],
+  "docW": 1440,
+  "vw": 1440
+ },
+ {
+  "surface": "portal",
+  "page": "admin-models",
+  "scheme": "dark",
+  "failures": [],
+  "disabled": [],
+  "docW": 1440,
+  "vw": 1440
+ }
+]

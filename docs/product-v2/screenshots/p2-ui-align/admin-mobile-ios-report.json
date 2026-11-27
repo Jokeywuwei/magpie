@@ -1,0 +1,440 @@
+{
+ "admin-390-mouse": {
+  "handle": {
+   "visual": {
+    "w": 28,
+    "h": 28
+   },
+   "after": {
+    "inset": "-10px",
+    "content": "\"\""
+   },
+   "rowH": 79,
+   "hitAt20": true
+  },
+  "tabs": [
+   44,
+   44,
+   44,
+   44,
+   44,
+   44,
+   44,
+   0,
+   44
+  ],
+  "tabHeights": [
+   44,
+   0
+  ],
+  "docW": 390,
+  "small": [
+   {
+    "tag": "button",
+    "cls": "opt on",
+    "text": "跟随系统",
+    "h": 28
+   },
+   {
+    "tag": "button",
+    "cls": "opt",
+    "text": "浅色",
+    "h": 28
+   },
+   {
+    "tag": "button",
+    "cls": "opt",
+    "text": "深色",
+    "h": 28
+   },
+   {
+    "tag": "button",
+    "cls": "swatch on",
+    "text": "",
+    "h": 18
+   },
+   {
+    "tag": "button",
+    "cls": "swatch",
+    "text": "",
+    "h": 18
+   },
+   {
+    "tag": "button",
+    "cls": "swatch",
+    "text": "",
+    "h": 18
+   },
+   {
+    "tag": "button",
+    "cls": "swatch",
+    "text": "",
+    "h": 18
+   },
+   {
+    "tag": "button",
+    "cls": "swatch",
+    "text": "",
+    "h": 18
+   },
+   {
+    "tag": "button",
+    "cls": "swatch",
+    "text": "",
+    "h": 18
+   },
+   {
+    "tag": "button",
+    "cls": "swatch",
+    "text": "",
+    "h": 18
+   },
+   {
+    "tag": "button",
+    "cls": "opt on",
+    "text": "关闭",
+    "h": 28
+   },
+   {
+    "tag": "button",
+    "cls": "opt",
+    "text": "开启",
+    "h": 28
+   }
+  ],
+  "listRadius": {
+   "w": 0,
+   "h": 0,
+   "radius": "12px",
+   "font": "14px"
+  },
+  "searchRadius": {
+   "w": 354,
+   "h": 44,
+   "radius": "8px",
+   "font": "16px"
+  }
+ },
+ "admin-390-touch": {
+  "handle": {
+   "visual": {
+    "w": 28,
+    "h": 28
+   },
+   "after": {
+    "inset": "-10px",
+    "content": "\"\""
+   },
+   "rowH": 79,
+   "hitAt20": true
+  },
+  "tabs": [
+   44,
+   44,
+   44,
+   44,
+   44,
+   44,
+   44,
+   0,
+   44
+  ],
+  "tabHeights": [
+   44,
+   0
+  ],
+  "docW": 390,
+  "small": [
+   {
+    "tag": "button",
+    "cls": "opt on",
+    "text": "跟随系统",
+    "h": 28
+   },
+   {
+    "tag": "button",
+    "cls": "opt",
+    "text": "浅色",
+    "h": 28
+   },
+   {
+    "tag": "button",
+    "cls": "opt",
+    "text": "深色",
+    "h": 28
+   },
+   {
+    "tag": "button",
+    "cls": "swatch on",
+    "text": "",
+    "h": 18
+   },
+   {
+    "tag": "button",
+    "cls": "swatch",
+    "text": "",
+    "h": 18
+   },
+   {
+    "tag": "button",
+    "cls": "swatch",
+    "text": "",
+    "h": 18
+   },
+   {
+    "tag": "button",
+    "cls": "swatch",
+    "text": "",
+    "h": 18
+   },
+   {
+    "tag": "button",
+    "cls": "swatch",
+    "text": "",
+    "h": 18
+   },
+   {
+    "tag": "button",
+    "cls": "swatch",
+    "text": "",
+    "h": 18
+   },
+   {
+    "tag": "button",
+    "cls": "swatch",
+    "text": "",
+    "h": 18
+   },
+   {
+    "tag": "button",
+    "cls": "opt on",
+    "text": "关闭",
+    "h": 28
+   },
+   {
+    "tag": "button",
+    "cls": "opt",
+    "text": "开启",
+    "h": 28
+   }
+  ],
+  "listRadius": {
+   "w": 0,
+   "h": 0,
+   "radius": "12px",
+   "font": "14px"
+  },
+  "searchRadius": {
+   "w": 354,
+   "h": 44,
+   "radius": "8px",
+   "font": "16px"
+  }
+ },
+ "admin-768-touch": {
+  "handle": {
+   "visual": {
+    "w": 28,
+    "h": 28
+   },
+   "after": {
+    "inset": "-10px",
+    "content": "\"\""
+   },
+   "rowH": 79,
+   "hitAt20": true
+  },
+  "tabs": [
+   44,
+   44,
+   44,
+   44,
+   44,
+   44,
+   44,
+   0,
+   44
+  ],
+  "tabHeights": [
+   44,
+   0
+  ],
+  "docW": 768,
+  "small": [
+   {
+    "tag": "button",
+    "cls": "opt on",
+    "text": "跟随系统",
+    "h": 28
+   },
+   {
+    "tag": "button",
+    "cls": "opt",
+    "text": "浅色",
+    "h": 28
+   },
+   {
+    "tag": "button",
+    "cls": "opt",
+    "text": "深色",
+    "h": 28
+   },
+   {
+    "tag": "button",
+    "cls": "swatch on",
+    "text": "",
+    "h": 18
+   },
+   {
+    "tag": "button",
+    "cls": "swatch",
+    "text": "",
+    "h": 18
+   },
+   {
+    "tag": "button",
+    "cls": "swatch",
+    "text": "",
+    "h": 18
+   },
+   {
+    "tag": "button",
+    "cls": "swatch",
+    "text": "",
+    "h": 18
+   },
+   {
+    "tag": "button",
+    "cls": "swatch",
+    "text": "",
+    "h": 18
+   },
+   {
+    "tag": "button",
+    "cls": "swatch",
+    "text": "",
+    "h": 18
+   },
+   {
+    "tag": "button",
+    "cls": "swatch",
+    "text": "",
+    "h": 18
+   },
+   {
+    "tag": "button",
+    "cls": "opt on",
+    "text": "关闭",
+    "h": 28
+   },
+   {
+    "tag": "button",
+    "cls": "opt",
+    "text": "开启",
+    "h": 28
+   }
+  ],
+  "listRadius": {
+   "w": 0,
+   "h": 0,
+   "radius": "12px",
+   "font": "14px"
+  },
+  "searchRadius": {
+   "w": 732,
+   "h": 44,
+   "radius": "8px",
+   "font": "16px"
+  }
+ },
+ "ios": {
+  "home": {
+   "docW": 390,
+   "vw": 390,
+   "small": 1,
+   "smallSample": [
+    {
+     "h": 42,
+     "t": "跳到主要内容"
+    }
+   ],
+   "fields": []
+  },
+  "login": {
+   "docW": 390,
+   "vw": 390,
+   "small": 2,
+   "smallSample": [
+    {
+     "h": 42,
+     "t": "跳到主要内容"
+    },
+    {
+     "h": 22,
+     "t": ""
+    }
+   ],
+   "fields": [
+    "16px"
+   ]
+  },
+  "console": {
+   "docW": 390,
+   "vw": 390,
+   "small": 2,
+   "smallSample": [
+    {
+     "h": 42,
+     "t": "跳到主要内容"
+    },
+    {
+     "h": 22,
+     "t": ""
+    }
+   ],
+   "fields": [
+    "16px"
+   ]
+  },
+  "models": {
+   "docW": 390,
+   "vw": 390,
+   "small": 1,
+   "smallSample": [
+    {
+     "h": 42,
+     "t": "跳到主要内容"
+    }
+   ],
+   "fields": [
+    "16px"
+   ]
+  },
+  "admin-models": {
+   "docW": 390,
+   "vw": 390,
+   "small": 4,
+   "smallSample": [
+    {
+     "h": 42,
+     "t": "跳到主要内容"
+    },
+    {
+     "h": 22,
+     "t": ""
+    },
+    {
+     "h": 22,
+     "t": ""
+    },
+    {
+     "h": 22,
+     "t": ""
+    }
+   ],
+   "fields": [
+    "16px"
+   ]
+  }
+ }
+}

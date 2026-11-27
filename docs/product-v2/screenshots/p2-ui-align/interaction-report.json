@@ -1,0 +1,157 @@
+{
+ "glow": [
+  {
+   "text": "进入控制台",
+   "inHero": true,
+   "shadow": "glow"
+  }
+ ],
+ "consolePrimary": [
+  {
+   "text": "创建 API Key",
+   "shadow": "none"
+  },
+  {
+   "text": "模型开放管理",
+   "shadow": "none"
+  }
+ ],
+ "emptyChart": {
+  "h": 21,
+  "text": "这个时间范围内还没有请求。"
+ },
+ "focusBrand": "solid 2px 2px",
+ "focusSearch": {
+  "w": 627,
+  "h": 42,
+  "radius": "8px",
+  "shadow": "color(srgb 0.309804 0.27451 0.898039 / 0.22) 0px 0px 0px 3px",
+  "outline": "none 3px rgb(28, 28, 33) 2px",
+  "bg": "rgb(255, 255, 255)",
+  "fs": "15px",
+  "fw": "400"
+ },
+ "focusSelect": {
+  "w": 161,
+  "h": 42,
+  "radius": "8px",
+  "shadow": "color(srgb 0.309804 0.27451 0.898039 / 0.22) 0px 0px 0px 3px",
+  "outline": "none 3px rgb(28, 28, 33) 2px",
+  "bg": "rgb(255, 255, 255)",
+  "fs": "15px",
+  "fw": "400"
+ },
+ "dialog": {
+  "box": {
+   "w": 600,
+   "h": 516,
+   "radius": "14px",
+   "shadow": "none",
+   "outline": "none 3px rgb(28, 28, 33) 0px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "fs": "15px",
+   "fw": "400"
+  },
+  "head": {
+   "w": 598,
+   "h": 74,
+   "radius": "0px",
+   "shadow": "none",
+   "outline": "none 3px rgb(28, 28, 33) 0px",
+   "bg": "rgb(255, 255, 255)",
+   "fs": "15px",
+   "fw": "400"
+  },
+  "backdrop": {
+   "bg": "rgba(0, 0, 0, 0.28)",
+   "filter": "blur(8px) saturate(1.1)"
+  },
+  "focused": "detailClose"
+ },
+ "dialogClosed": true,
+ "dialogFocusReturn": "model-card",
+ "footer": {
+  "bottom": 900,
+  "viewport": 900,
+  "docH": 900
+ },
+ "keyCreated": {
+  "secretShown": true,
+  "text": "这是完整密钥，只显示这一次关闭或刷新后不再显示，请现在复制保存。\n        \n        ",
+  "listHas": true
+ },
+ "loginError": {
+  "hidden": false,
+  "text": "邮箱或密码不正确。",
+  "url": "/portal/login"
+ },
+ "admin-light": {
+  "tk": "#63636b",
+  "portalLinkFocus": "solid 2px 2px rgb(79, 70, 229)",
+  "input": {
+   "w": 0,
+   "h": 0,
+   "radius": "8px",
+   "shadow": "none",
+   "outline": "none 3px rgb(28, 28, 33) 0px",
+   "bg": "rgb(255, 255, 255)",
+   "fs": "12.5px",
+   "fw": "400"
+  },
+  "seg": {
+   "w": 0,
+   "h": 0,
+   "radius": "6px",
+   "shadow": "none",
+   "outline": "none 3px rgb(28, 28, 33) 0px",
+   "bg": "rgb(241, 241, 244)",
+   "fs": "11px",
+   "fw": "600"
+  },
+  "panel": null
+ },
+ "admin-dark": {
+  "tk": "#9c9ca6",
+  "portalLinkFocus": "solid 2px 2px rgb(165, 180, 252)",
+  "input": {
+   "w": 0,
+   "h": 0,
+   "radius": "8px",
+   "shadow": "none",
+   "outline": "none 3px rgb(237, 237, 241) 0px",
+   "bg": "rgb(35, 35, 39)",
+   "fs": "12.5px",
+   "fw": "400"
+  },
+  "seg": {
+   "w": 0,
+   "h": 0,
+   "radius": "6px",
+   "shadow": "none",
+   "outline": "none 3px rgb(237, 237, 241) 0px",
+   "bg": "rgb(45, 45, 51)",
+   "fs": "11px",
+   "fw": "600"
+  },
+  "panel": null
+ },
+ "adminForcedDarkTk": "#9c9ca6",
+ "en320": {
+  "docW": 320,
+  "vw": 320,
+  "small": [
+   44,
+   44,
+   44,
+   44,
+   44,
+   44,
+   44,
+   44,
+   44,
+   44,
+   44,
+   44
+  ]
+ }
+}

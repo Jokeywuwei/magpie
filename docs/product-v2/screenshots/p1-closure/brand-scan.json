@@ -1,0 +1,658 @@
+[
+ {
+  "lang": "zh",
+  "page": "plugins",
+  "text": "把 Aider（aider.chat）加到 magpie 的 Agent 页：给它选 magpie 的模型，关掉即恢复它原来的配置。",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "zh",
+  "page": "plugins",
+  "text": "把 Type4Me（macOS 语音输入）加到 magpie 的 Agent 页：给它的 LLM 后处理选 magpie 的模型，下一次语音输入即生效。",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "zh",
+  "page": "plugins",
+  "text": "把 Antigravity CLI（agy）加到 magpie 的 Agent 页：选一个 magpie 的模型，终端里的 agy 就从 magpie 的网关启动。接替内置的 agy，保留它原有的设置。",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "zh",
+  "page": "plugins",
+  "text": "连接 Magpie Agent 与本地 ComfyUI 模型的桥接层，通过 Magpie 工具 MCP 入口提供原生工作流、模型资源和生成图片。",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "zh",
+  "page": "plugins",
+  "text": "按供应商 -> 账号 -> 模型展示用量，包含每个账号的调用、错误和费用；补充 Usage Glance 的 usage:summary 所没有的账号层，数据来自 Magpie 本地用量 API。",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "zh",
+  "page": "plugins",
+  "text": "把终端里的 Agent CLI 搬进 magpie 窗口，直接对话使用。会在本机 127.0.0.1 跑一个后台服务，打开页面才启动，随 magpie 退出；令牌只交给自己的页面。首次安装约 46 MB；不自带 Claude Code，要用请自己装 `claude` CLI。",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "zh-TW",
+  "page": "plugins",
+  "text": "magpie-our-free-model",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "zh-TW",
+  "page": "plugins",
+  "text": "magpie-gemini-web",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "zh-TW",
+  "page": "plugins",
+  "text": "magpie-aws-quick",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "zh-TW",
+  "page": "plugins",
+  "text": "Our Free Model 的 Magpie 适配插件：整合免费模型池、EAC 授权与多账号渠道，支持自动服务管理及免登录的 Cloudflare 临时远程控制台。｜Magpie integration for Our Free Model with free model po",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "zh-TW",
+  "page": "plugins",
+  "text": "把 Aider（aider.chat）加到 magpie 的 Agent 页：给它选 magpie 的模型，关掉即恢复它原来的配置。",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "zh-TW",
+  "page": "plugins",
+  "text": "把 Type4Me（macOS 语音输入）加到 magpie 的 Agent 页：给它的 LLM 后处理选 magpie 的模型，下一次语音输入即生效。",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "zh-TW",
+  "page": "plugins",
+  "text": "magpie-agent-cursor-bridge",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "zh-TW",
+  "page": "plugins",
+  "text": "Cursor protocol bridge backed by Magpie for Windows and macOS",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "zh-TW",
+  "page": "plugins",
+  "text": "连接 Magpie Agent 与本地 ComfyUI 模型的桥接层，通过 Magpie 工具 MCP 入口提供原生工作流、模型资源和生成图片。",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "zh-TW",
+  "page": "plugins",
+  "text": "magpie-purge",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "zh-TW",
+  "page": "plugins",
+  "text": "magpie-purge：把本地 purge 目录做成 magpie 的页面插件与网关钩子——清点、校验、去重、回滚，按模式改写 system 段。内置 9 位专家技能包。上游 ZiChuanLan/agent-purge。",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "zh-TW",
+  "page": "plugins",
+  "text": "magpie-agent-office",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "zh-TW",
+  "page": "plugins",
+  "text": "我的 Agent 在干嘛：实时展示 Claude Code、Codex、DeepSeek Harness、Gemini CLI 等 Agent 的工作状态，3D/2D 太空站办公室、悬浮窗与列表。Live agent activity dashboard for magpie.",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "zh-TW",
+  "page": "plugins",
+  "text": "magpie-fingerprint",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "zh-TW",
+  "page": "plugins",
+  "text": "Model fingerprint diagnostics inside Magpie, powered by lm-detector",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "zh-TW",
+  "page": "plugins",
+  "text": "作者自己打了 magpie-plugin 標籤的倉庫，未經審閱，安裝前請先看程式碼",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "zh-TW",
+  "page": "masking",
+  "text": "作者自己打了 magpie-plugin 標籤的倉庫，未經審閱，安裝前請先看程式碼",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "zh-TW",
+  "page": "gateway",
+  "text": "作者自己打了 magpie-plugin 標籤的倉庫，未經審閱，安裝前請先看程式碼",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "zh-TW",
+  "page": "settings",
+  "text": "作者自己打了 magpie-plugin 標籤的倉庫，未經審閱，安裝前請先看程式碼",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "ja",
+  "page": "plugins",
+  "text": "magpie-our-free-model",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "ja",
+  "page": "plugins",
+  "text": "magpie-gemini-web",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "ja",
+  "page": "plugins",
+  "text": "magpie-aws-quick",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "ja",
+  "page": "plugins",
+  "text": "Our Free Model 的 Magpie 适配插件：整合免费模型池、EAC 授权与多账号渠道，支持自动服务管理及免登录的 Cloudflare 临时远程控制台。｜Magpie integration for Our Free Model with free model po",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "ja",
+  "page": "plugins",
+  "text": "Aider (aider.chat) on magpie's Agents page: pick one of magpie's models for it, and switch it off to put its config back.",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "ja",
+  "page": "plugins",
+  "text": "Type4Me (macOS voice input) on magpie's Agents page: pick one of magpie's models for its LLM post-processing, used from the next dictation.",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "ja",
+  "page": "plugins",
+  "text": "magpie-agent-cursor-bridge",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "ja",
+  "page": "plugins",
+  "text": "Cursor protocol bridge backed by Magpie for Windows and macOS",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "ja",
+  "page": "plugins",
+  "text": "A bridge between Magpie agents and locally hosted ComfyUI models, exposing native workflows, model resources and generated images through Ma",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "ja",
+  "page": "plugins",
+  "text": "magpie-purge",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "ja",
+  "page": "plugins",
+  "text": "magpie-purge：把本地 purge 目录做成 magpie 的页面插件与网关钩子——清点、校验、去重、回滚，按模式改写 system 段。内置 9 位专家技能包。上游 ZiChuanLan/agent-purge。",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "ja",
+  "page": "plugins",
+  "text": "magpie-agent-office",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "ja",
+  "page": "plugins",
+  "text": "我的 Agent 在干嘛：实时展示 Claude Code、Codex、DeepSeek Harness、Gemini CLI 等 Agent 的工作状态，3D/2D 太空站办公室、悬浮窗与列表。Live agent activity dashboard for magpie.",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "ja",
+  "page": "plugins",
+  "text": "magpie-fingerprint",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "ja",
+  "page": "plugins",
+  "text": "Model fingerprint diagnostics inside Magpie, powered by lm-detector",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "ja",
+  "page": "plugins",
+  "text": "作者自身が magpie-plugin タグを付けたリポジトリ。レビューされていないので、インストール前にコードを確認してください",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "ja",
+  "page": "masking",
+  "text": "作者自身が magpie-plugin タグを付けたリポジトリ。レビューされていないので、インストール前にコードを確認してください",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "ja",
+  "page": "gateway",
+  "text": "作者自身が magpie-plugin タグを付けたリポジトリ。レビューされていないので、インストール前にコードを確認してください",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "ja",
+  "page": "settings",
+  "text": "作者自身が magpie-plugin タグを付けたリポジトリ。レビューされていないので、インストール前にコードを確認してください",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "de",
+  "page": "plugins",
+  "text": "magpie-our-free-model",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "de",
+  "page": "plugins",
+  "text": "magpie-gemini-web",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "de",
+  "page": "plugins",
+  "text": "magpie-aws-quick",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "de",
+  "page": "plugins",
+  "text": "Our Free Model 的 Magpie 适配插件：整合免费模型池、EAC 授权与多账号渠道，支持自动服务管理及免登录的 Cloudflare 临时远程控制台。｜Magpie integration for Our Free Model with free model po",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "de",
+  "page": "plugins",
+  "text": "Aider (aider.chat) on magpie's Agents page: pick one of magpie's models for it, and switch it off to put its config back.",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "de",
+  "page": "plugins",
+  "text": "Type4Me (macOS voice input) on magpie's Agents page: pick one of magpie's models for its LLM post-processing, used from the next dictation.",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "de",
+  "page": "plugins",
+  "text": "magpie-agent-cursor-bridge",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "de",
+  "page": "plugins",
+  "text": "Cursor protocol bridge backed by Magpie for Windows and macOS",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "de",
+  "page": "plugins",
+  "text": "A bridge between Magpie agents and locally hosted ComfyUI models, exposing native workflows, model resources and generated images through Ma",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "de",
+  "page": "plugins",
+  "text": "magpie-purge",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "de",
+  "page": "plugins",
+  "text": "magpie-purge：把本地 purge 目录做成 magpie 的页面插件与网关钩子——清点、校验、去重、回滚，按模式改写 system 段。内置 9 位专家技能包。上游 ZiChuanLan/agent-purge。",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "de",
+  "page": "plugins",
+  "text": "magpie-agent-office",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "de",
+  "page": "plugins",
+  "text": "我的 Agent 在干嘛：实时展示 Claude Code、Codex、DeepSeek Harness、Gemini CLI 等 Agent 的工作状态，3D/2D 太空站办公室、悬浮窗与列表。Live agent activity dashboard for magpie.",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "de",
+  "page": "plugins",
+  "text": "magpie-fingerprint",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "de",
+  "page": "plugins",
+  "text": "Model fingerprint diagnostics inside Magpie, powered by lm-detector",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "de",
+  "page": "plugins",
+  "text": "Repositories, die ihre Autoren mit magpie-plugin getaggt haben – ungeprüft; lies den Code, bevor du eines installierst",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "de",
+  "page": "masking",
+  "text": "Repositories, die ihre Autoren mit magpie-plugin getaggt haben – ungeprüft; lies den Code, bevor du eines installierst",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "de",
+  "page": "gateway",
+  "text": "Repositories, die ihre Autoren mit magpie-plugin getaggt haben – ungeprüft; lies den Code, bevor du eines installierst",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "de",
+  "page": "settings",
+  "text": "Repositories, die ihre Autoren mit magpie-plugin getaggt haben – ungeprüft; lies den Code, bevor du eines installierst",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "en",
+  "page": "plugins",
+  "text": "magpie-our-free-model",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "en",
+  "page": "plugins",
+  "text": "magpie-gemini-web",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "en",
+  "page": "plugins",
+  "text": "magpie-aws-quick",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "en",
+  "page": "plugins",
+  "text": "Our Free Model 的 Magpie 适配插件：整合免费模型池、EAC 授权与多账号渠道，支持自动服务管理及免登录的 Cloudflare 临时远程控制台。｜Magpie integration for Our Free Model with free model po",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "en",
+  "page": "plugins",
+  "text": "Aider (aider.chat) on magpie's Agents page: pick one of magpie's models for it, and switch it off to put its config back.",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "en",
+  "page": "plugins",
+  "text": "Type4Me (macOS voice input) on magpie's Agents page: pick one of magpie's models for its LLM post-processing, used from the next dictation.",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "en",
+  "page": "plugins",
+  "text": "magpie-agent-cursor-bridge",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "en",
+  "page": "plugins",
+  "text": "Cursor protocol bridge backed by Magpie for Windows and macOS",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "en",
+  "page": "plugins",
+  "text": "A bridge between Magpie agents and locally hosted ComfyUI models, exposing native workflows, model resources and generated images through Ma",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "en",
+  "page": "plugins",
+  "text": "magpie-purge",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "en",
+  "page": "plugins",
+  "text": "magpie-purge：把本地 purge 目录做成 magpie 的页面插件与网关钩子——清点、校验、去重、回滚，按模式改写 system 段。内置 9 位专家技能包。上游 ZiChuanLan/agent-purge。",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "en",
+  "page": "plugins",
+  "text": "magpie-agent-office",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "en",
+  "page": "plugins",
+  "text": "我的 Agent 在干嘛：实时展示 Claude Code、Codex、DeepSeek Harness、Gemini CLI 等 Agent 的工作状态，3D/2D 太空站办公室、悬浮窗与列表。Live agent activity dashboard for magpie.",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "en",
+  "page": "plugins",
+  "text": "magpie-fingerprint",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "en",
+  "page": "plugins",
+  "text": "Model fingerprint diagnostics inside Magpie, powered by lm-detector",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "en",
+  "page": "plugins",
+  "text": "repositories their authors tagged magpie-plugin — nobody has reviewed them; read the code before you install one",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "en",
+  "page": "masking",
+  "text": "repositories their authors tagged magpie-plugin — nobody has reviewed them; read the code before you install one",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "en",
+  "page": "gateway",
+  "text": "repositories their authors tagged magpie-plugin — nobody has reviewed them; read the code before you install one",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ },
+ {
+  "lang": "en",
+  "page": "settings",
+  "text": "repositories their authors tagged magpie-plugin — nobody has reviewed them; read the code before you install one",
+  "brand": true,
+  "terms": false,
+  "kept": 0
+ }
+]

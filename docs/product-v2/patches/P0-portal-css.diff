@@ -1,0 +1,88 @@
+# P0 portal.css diff (pre-P0 vs after)
+# before: portal.css 697 lines / 32390 bytes (extracted from the pre-P0 build)
+# after:  portal.css 755 lines / 35430 bytes
+
+--- /tmp/portal-before-p0.css	2026-11-23 09:44:35.724399313 -0500
++++ internal/gui/assets/portal/portal.css	2026-11-23 09:38:03.952640075 -0500
+@@ -416,7 +416,7 @@
+ .log-filters select:focus { border-color: var(--accent); outline: none; }
+ .log-list { margin-top: 14px; }
+ .log-row {
+-  display: grid; grid-template-columns: 136px minmax(130px, 1.2fr) minmax(110px, 1fr) 74px 152px 62px;
++  display: grid; grid-template-columns: 136px minmax(130px, 1.2fr) minmax(110px, 1fr) 74px 200px 62px;
+   gap: 10px; align-items: center; padding: 10px 0;
+   border-bottom: 1px solid var(--line); font-size: 13px;
+ }
+@@ -426,8 +426,8 @@
+ .log-model b { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+ .log-model span { color: var(--faint); font-size: 11px; }
+ .log-key { color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+-.log-tokens { font-family: var(--mono); font-size: 12px; color: var(--fg-2); white-space: nowrap; }
+-.log-ms { color: var(--faint); font-size: 12px; text-align: right; white-space: nowrap; }
++.log-tokens { font-family: var(--mono); font-size: 12px; color: var(--fg-2); white-space: nowrap; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
++.log-ms { color: var(--faint); font-size: 12px; text-align: right; white-space: nowrap; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+ .log-status { justify-self: start; }
+ .tag.ok { background: #ecfdf3; color: var(--ok); }
+ .tag.fail { background: #fef3f2; color: #b42318; }
+@@ -695,3 +695,61 @@
+   .modal-card { padding: 16px; }
+   .key-create-actions { padding-top: 0; width: 100%; }
+ }
++
++/* ---------- small screens: usage, request log and touch (P0) ---------- */
++/* The request log's six fixed columns need 714px of card, which a tablet
++   under 900px does not have; one request becomes a short block, each field
++   named by the data-label usage.js already writes (addCell), so no markup
++   or script changes. */
++@media (max-width: 900px) {
++  .logs-head { flex-direction: column; align-items: stretch; gap: 10px; }
++  .log-row { display: block; padding: 12px 0; }
++  .log-row.head { display: none; }
++  .log-row > * { display: block; }
++  .log-row > * + * { margin-top: 4px; }
++  .log-row > [data-label]:not(.log-status)::before {
++    content: attr(data-label) "：";
++    margin-right: 6px;
++    color: var(--muted);
++    font-size: 11.5px;
++    font-weight: 600;
++  }
++  .log-model { overflow-wrap: anywhere; }
++  .log-model b { display: inline; white-space: normal; overflow-wrap: anywhere; }
++  .log-model span { display: inline; margin-left: 6px; }
++  .log-status { display: inline-flex; width: fit-content; margin-top: 8px; }
++  /* a long token count wraps instead of widening the card */
++  .log-tokens { white-space: normal; overflow-wrap: anywhere; }
++  .log-ms { text-align: left; }
++}
++
++/* The stat grid is six fixed columns, which at 390px leaves 44px a tile and
++   breaks 「输入 Token」 one character a line. Two columns, as magpie's own
++   .stats does (app.css:4886). A coarse pointer counts as small too: magpie's
++   page uses the same pair (app.css:389). */
++@media (max-width: 760px), (pointer: coarse) and (max-width: 1024px) {
++  .usage-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
++
++  /* The card head keeps the range chips beside the copy until the copy takes
++   the width they need; stacked, the chips get the full row instead of the
++   118px column that folded them into three lines. */
++  .usage-head { flex-direction: column; align-items: stretch; gap: 10px; }
++  .usage-head .segs { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 2px; }
++  .usage-head .segs .chip { flex: none; }
++  .log-err { margin-top: 6px; }
++
++  /* 16px keeps iOS from zooming the page when a field takes focus; 44px is
++   a finger, the same sizes magpie's own web page uses (app.css:4901-4903). */
++  input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),
++  textarea, select { font-size: 16px; min-height: 44px; }
++
++  /* the rest of the targets a thumb has to hit (a small button included) */
++  .btn, .btn.sm, .chip { min-height: 44px; }
++  .log-filters select, #logRefresh, #logPrev, #logNext, .toolbar-select { min-height: 44px; }
++  /* the header's and the footer's links are navigation, not running text */
++  .brand, .nav a, .account .who, .footer a { display: inline-flex; align-items: center; min-height: 44px; }
++
++  /* a switch keeps its 38x22 look, with a 44px target around it */
++  .am-toggle { position: relative; }
++  .am-toggle::before { content: ""; position: absolute; inset: -11px -3px; }
++}

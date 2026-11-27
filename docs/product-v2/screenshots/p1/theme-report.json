@@ -1,0 +1,75 @@
+{
+ "rows": [
+  {
+   "state": "light-default",
+   "theme": "light",
+   "accent": "#4f46e5",
+   "scheme": "light only",
+   "bg": "rgb(244, 244, 246)",
+   "look": true,
+   "title": "MiniRelay · AI 模型中转平台",
+   "lang": "zh-CN",
+   "cssHasAccent": false,
+   "cssHasWallpaper": false,
+   "cspErrors": []
+  },
+  {
+   "state": "light-teal",
+   "theme": "light",
+   "accent": "#0b7c72",
+   "scheme": "light only",
+   "bg": "rgb(240, 246, 248)",
+   "look": true,
+   "title": "MiniRelay · AI 模型中转平台",
+   "lang": "zh-CN",
+   "cssHasAccent": true,
+   "cssHasWallpaper": false,
+   "cspErrors": []
+  },
+  {
+   "state": "dark-pink",
+   "theme": "dark",
+   "accent": "#e35795",
+   "scheme": "dark",
+   "bg": "rgb(33, 19, 29)",
+   "look": true,
+   "title": "MiniRelay · AI 模型中转平台",
+   "lang": "zh-CN",
+   "cssHasAccent": true,
+   "cssHasWallpaper": false,
+   "cspErrors": []
+  },
+  {
+   "state": "system",
+   "theme": null,
+   "accent": "#4f46e5",
+   "scheme": "light dark",
+   "bg": "rgb(244, 244, 246)",
+   "look": true,
+   "title": "MiniRelay · AI 模型中转平台",
+   "lang": "zh-CN",
+   "cssHasAccent": false,
+   "cssHasWallpaper": false,
+   "cspErrors": []
+  },
+  {
+   "state": "system",
+   "theme": null,
+   "accent": "#a5b4fc",
+   "scheme": "light dark",
+   "bg": "rgb(26, 26, 30)",
+   "look": true,
+   "title": "MiniRelay · AI 模型中转平台",
+   "lang": "zh-CN",
+   "cssHasAccent": false,
+   "cssHasWallpaper": false,
+   "cspErrors": []
+  }
+ ],
+ "privacy": {
+  "adminHasWallpaper": true,
+  "portalHasWallpaper": false,
+  "portalHasFont": false,
+  "portalBytes": 0
+ }
+}
