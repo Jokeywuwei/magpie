@@ -8,6 +8,7 @@ import (
 	"errors"
 	"fmt"
 	"html"
+	"io/fs"
 	"log"
 	"net"
 	"net/http"
@@ -22,6 +23,7 @@ import (
 	"github.com/klauspost/compress/gzhttp"
 
 	"github.com/yetone/magpie/internal/gateway"
+	"github.com/yetone/magpie/internal/identity"
 	"github.com/yetone/magpie/internal/plugin"
 	"github.com/yetone/magpie/internal/proc"
 	"github.com/yetone/magpie/internal/update"
@@ -35,6 +37,22 @@ import (
 // webHost is the Windows a browser tab stands for.
 type webHost struct{ quit func() }
 
+// webStaticFS is the window's files with the Web relay's own page in place
+// of index.html: index-web.html has no Agents view and loads none of the
+// Sessions or Library scripts. The app's own window, and its page served to
+// a browser, keep the full one.
+func webStaticFS() fs.FS { return webPageFS{staticFS()} }
+
+// webPageFS serves "index.html" from "index-web.html", everything else as
+// the full tree has it.
+type webPageFS struct{ fs.FS }
+
+func (f webPageFS) Open(name string) (fs.File, error) {
+	if name == "index.html" {
+		return f.FS.Open("index-web.html")
+	}
+	return f.FS.Open(name)
+}
 func (webHost) HidePanel()                       {}
 func (webHost) ShowMain(string)                  {}
 func (h webHost) Quit()                          { h.quit() }
@@ -264,7 +282,7 @@ func webGuard(cookie, key string, keep time.Duration, box boxSignIn, next http.H
 		// other services share on other ports, and a browser keeps a
 		// limited number of cookies for one host, all ports together;
 		// past it Chrome drops the low and medium ones first (#2033)
-		rw.Header().Add("Set-Cookie", (&http.Cookie{Name: cookie, Value: key, Path: "/", HttpOnly: true, SameSite: http.SameSiteLaxMode, MaxAge: int(keep / time.Second)}).String()+"; Priority=High")
+		rw.Header().Add("Set-Cookie", (&http.Cookie{Name: cookie, Value: key, Path: "/", HttpOnly: true, SameSite: http.SameSiteLaxMode, MaxAge: int(keep / time.Second), Secure: secureRequest(r)}).String()+"; Priority=High")
 		http.Redirect(rw, r, back, http.StatusSeeOther)
 	}
 	return http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
@@ -368,9 +386,9 @@ func webTurnedAway(rw http.ResponseWriter, r *http.Request, back, why string) {
 	rw.Header().Set("Content-Type", "text/html; charset=utf-8")
 	rw.Header().Set("Cache-Control", "no-store")
 	rw.WriteHeader(http.StatusUnauthorized)
-	fmt.Fprintf(rw, `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><title>magpie web</title>
+	fmt.Fprintf(rw, `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><title>MiniRelay</title>
 <style>body{font:15px/1.5 system-ui,sans-serif;max-width:32em;margin:12vh auto;padding:0 16px;color:#222;background:#fafafa}@media(prefers-color-scheme:dark){body{color:#ddd;background:#1c1c1e}}input,button{font:inherit;padding:.4em .6em}input{width:100%%;box-sizing:border-box;margin:.5em 0}</style></head>
-<body><h1>magpie web</h1><p>%s</p><p>Paste the key (MAGPIE_WEB_KEY, or the k= in the link magpie web printed when it started):</p>
+<body><h1>MiniRelay</h1><p>%s</p><p>Paste the key (MAGPIE_WEB_KEY, or the k= in the link magpie web printed when it started):</p>
 <form method="post" action="%s"><input type="hidden" name="back" value="%s"><input type="password" name="key" autocomplete="current-password" autofocus required><button type="submit">Sign in</button></form></body></html>`,
 		html.EscapeString(why), webSignInPath, html.EscapeString(back))
 }
@@ -425,9 +443,84 @@ func closesWhenDraining(h http.Handler) http.Handler {
 }
 
 // webHandler is what `magpie web` on port serves: the page and its API
-// behind the key, or box's sign-in, compressed for the browser.
+// behind the key, or box's sign-in, compressed for the browser. The
+// platform's own account routes (publicAPI) and the user portal (publicPage)
+// are served without the page key: a user signs in with an account, not
+// with the admin's link, and each route checks the account and role itself.
+//
+// An administrator's platform session is a second way into the page: with
+// one, the whole management page and its API are served without the page
+// key, and a browser opening / without either is sent to the portal's
+// sign-in. The old page key stays a way in, unchanged, for the clients and
+// bookmarks that have it; a user's session, and a request with no session,
+// opens none of the management page or API by itself.
 func webHandler(port, key string, keep time.Duration, box boxSignIn, page http.Handler) http.Handler {
-	return webCompressed(webGuard("magpie_web_"+port, key, keep, box, webOwnPage(page)))
+	cookie := "magpie_web_" + port
+	page = webOwnPage(page)
+	guarded := webCompressed(webGuard(cookie, key, keep, box, page))
+	public := webCompressed(page)
+	return http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
+		path := r.URL.Path
+		if publicAPI(path) || publicPage(path) {
+			public.ServeHTTP(rw, r)
+			return
+		}
+		// the page key, a link's k, the home screen's few files, a plugin's
+		// own token and the key form itself take the old way in; nothing
+		// here reads a session, so a page-key browser is exactly as before
+		hasK := r.URL.Query().Has("k")
+		kOK := hasK && subtle.ConstantTimeCompare([]byte(r.URL.Query().Get("k")), []byte(key)) == 1
+		if webPageKeyOK(r, cookie, key) || kOK || webAppFiles[path] ||
+			strings.HasPrefix(path, pluginPagePrefix) || path == webSignInPath {
+			guarded.ServeHTTP(rw, r)
+			return
+		}
+		if u, ok := sessionUser(r); ok {
+			if u.Role == identity.RoleAdmin {
+				public.ServeHTTP(rw, r)
+				return
+			}
+			// a box's sign-in is its own admin credential; while it is on,
+			// let it decide for a platform user too (a box administrator
+			// may also have a user account here)
+			if box == nil {
+				webAdminOnly(rw, r)
+				return
+			}
+		} else if box == nil && !hasK && (r.Method == http.MethodGet || r.Method == http.MethodHead) && path == "/" {
+			next := r.URL.RequestURI()
+			http.Redirect(rw, r, "/portal/login?next="+url.QueryEscape(next), http.StatusFound)
+			return
+		}
+		guarded.ServeHTTP(rw, r)
+	})
+}
+
+// webPageKeyOK says a page-key cookie this request carries is this page's:
+// the compatibility way in, checked before any account session so a page
+// that had the key keeps exactly what it had.
+func webPageKeyOK(r *http.Request, cookie, key string) bool {
+	for _, c := range r.CookiesNamed(cookie) {
+		if subtle.ConstantTimeCompare([]byte(c.Value), []byte(key)) == 1 {
+			return true
+		}
+	}
+	return false
+}
+
+// webAdminOnly is a signed-in user asking for a management resource
+// without the page key: JSON for an API, a small page for a browser. It
+// names no management data.
+func webAdminOnly(rw http.ResponseWriter, r *http.Request) {
+	if strings.HasPrefix(r.URL.Path, "/api/") {
+		authFail(rw, http.StatusForbidden, "an admin only")
+		return
+	}
+	rw.Header().Set("Content-Type", "text/html; charset=utf-8")
+	rw.Header().Set("Cache-Control", "no-store")
+	rw.WriteHeader(http.StatusForbidden)
+	fmt.Fprint(rw, `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><title>MiniRelay</title></head>
+<body style="font:15px/1.5 system-ui,sans-serif;max-width:30em;margin:12vh auto;padding:0 16px"><h1>需要管理员权限</h1><p>这个页面只对平台管理员开放。</p><p><a href="/portal/console">返回控制台</a> · <a href="/portal/login?next=/">用管理员账号登录</a></p></body></html>`)
 }
 
 // webOwnPage turns away a request for /api that another page sent with

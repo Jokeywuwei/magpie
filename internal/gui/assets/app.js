@@ -33,6 +33,9 @@ if (mode === "panel" && !document.body.classList.contains("linux")) $("header.to
 // `magpie web`: the page in a browser tab, with no window of the app's
 // around it — it opens links itself, and what is the desktop's is left out
 const web = !!window.bootPrefs?.web;
+// relay: `magpie web`'s own page, the model relay alone. The app's page
+// served to a browser is web but not relay, and keeps its own product.
+const relay = !!window.bootPrefs?.relay;
 // the version that served this page, for servedAnew
 const pageVersion = window.bootPrefs?.version || "";
 // magpie web seen from another computer: localhost is the viewer's (curtinp118)
@@ -43,6 +46,13 @@ const remotePage = web && !/^(localhost|127(\.\d+){3}|\[::1\]|::1)$/i.test(locat
 // and settings, until Settings › General turns it off.
 let gatewayMode = web && !!window.bootPrefs?.gateway;
 const GATEWAY_HIDES = ["agents"];
+// The product entries the Web relay no longer serves: local agent
+// management, the agents' sessions and the Library. They have no page, no
+// nav button and no address — show() sends every ask for one to Providers.
+// The Go packages stay: the gateway's session affinity, the MCP hub and the
+// credentials' sign-in paths still use them. The app's own window, and its
+// page served to a browser, keep all three.
+const PRODUCT_HIDES = relay ? ["agents", "sessions", "library"] : [];
 // Plugins › Built-in (builtins.go, Lxxyx): the window's parts switched off,
 // by id. data-feature="<id>" leaves by a style while off; its tab leaves the
 // nav (navHides), a link opens Agents (show), Settings skips its rows.
@@ -80,7 +90,7 @@ if (window.bootPrefs) setLocale(window.bootPrefs.lang);
 let state = { agents: [], profiles: [], catalog: "", settings: {} };
 let prefs = null; // the settings page: theme, lang, version, dir, gateway
 let providers = null; // { providers, presets, gateway }
-let view = "agents";
+let view = relay ? "providers" : "agents";
 let backTo = null, jumpNext = false; // Back (jumpFrom)
 let showAllAgents = false; // the agents no one has set anything on, folded away
 // under them, the ones hidden by hand: a fold of their own, shut until asked
@@ -460,6 +470,8 @@ function directSaid(a, opt) {
 // reload keeps the rows it has until the new ones are in.
 function renderAgentsLoading() {
   const page = $("#view-agents");
+  // the Web relay's page has no Agents view: nothing to draw
+  if (!page) return;
   page.classList.add("loading");
   page.setAttribute("aria-busy", "true");
   const list = $("#agents");
@@ -482,6 +494,8 @@ function renderAgentsLoading() {
 
 let agentArranging = false, agentRenderPending = false;
 function renderAgents() {
+  // the Web relay's page has no Agents view: nothing to draw
+  if (!$("#view-agents")) return;
   renderCodexMemories(); // the Codex sheet's row is the same field
   renderCodexSubagentModel(); // and this one
   if (agentArranging) { agentRenderPending = true; return; }
@@ -2613,7 +2627,8 @@ function paintCLI(id) {
 
 let cliLoading = null;
 async function loadCLIs(again = 0) {
-  if (mode === "panel" || cliLoading) return;
+  // the Web relay has no Agent page: its CLIs and installs are not read
+  if (relay || mode === "panel" || cliLoading) return;
   cliLoading = (async () => {
     let r;
     try { r = await api("agents/cli"); } catch { return; } // it just isn't shown
@@ -2763,7 +2778,8 @@ const VIA = { script: "Installer", powershell: "PowerShell", brew: "Homebrew", n
 let pluginAgents = []; // the names of the agents a suggested plugin adds, not installed
 
 async function loadInstalls() {
-  if (mode === "panel") return;
+  // the Web relay has no Agent page: its install list is not read
+  if (relay || mode === "panel") return;
   // the plugins' agents come from the market, which may be fetched: the
   // commands aren't held for them
   api("plugins/agents").then((r) => { pluginAgents = Array.isArray(r) ? r : []; paintInstalls(); }, () => {});
@@ -5964,8 +5980,13 @@ const saveCurrent = $("#save");
 const saveField = () => $(".profiles > .chip-input");
 const closeSave = (input) => {
   input.remove();
-  if (!saveField()) { saveCurrent.textContent = t("＋ Save current"); $(".profiles").classList.remove("naming"); }
+  if (!saveField()) {
+    if (saveCurrent) saveCurrent.textContent = t("＋ Save current");
+    $(".profiles")?.classList.remove("naming");
+  }
 };
+// the Web relay has no Agents view, so no Profiles button: nothing to wire
+if (saveCurrent) {
 saveCurrent.onmousedown = (e) => { if (saveField()) e.preventDefault(); }; // the field keeps focus
 saveCurrent.onclick = () => {
   const open = saveField();
@@ -5987,6 +6008,7 @@ saveCurrent.onclick = () => {
   saveCurrent.textContent = t("Save");
   input.focus(NO_SCROLL);
 };
+}
 
 // ---------- providers view ----------
 //
@@ -19599,7 +19621,7 @@ function applyPrefs(s, rate) {
   // MAGPIE_NAME; starballl on X), as boot.js did for the first paint; the
   // app's windows keep theirs
   const named = s.name || s.nameEnv;
-  if (web) document.title = named ? named + " · magpie" : "magpie";
+  if (web) document.title = named ? named + " · MiniRelay" : "MiniRelay";
   // accounts hidden while personal data is masked, until chosen otherwise
   window.hideAccounts?.follow(!!s.redactPersonal);
   // this browser's choice from before it was a setting, carried over once
@@ -19864,8 +19886,9 @@ function setSetTab(tab, remember) {
     $("#setPage-" + id).hidden = !on;
   }
   setShown = tab;
-  // each agent's row is read only where it is shown
-  if (view === "settings" && tab === "privacy" && !setQuery) loadSessionReads();
+  // each agent's row is read only where it is shown; the Web relay has no
+  // Agents page, so nothing reads its agents' session history
+  if (!relay && view === "settings" && tab === "privacy" && !setQuery) loadSessionReads();
   $("#setTabs").setAttribute("aria-label", t("Settings"));
   $("#setQ").setAttribute("aria-label", t("Find a setting"));
   if (view === "settings") syncURL();
@@ -19993,6 +20016,22 @@ function renderCLI(r) {
 // Settings' Download source (#893): a GitHub mirror before github.com, as
 // `magpie update mirror` writes; the feed and SHA-256 stay usemagpie.ai's
 let mirrorEditing = false, mirrorDraft = "", mirrorErr = "";
+function renderGatewayMode(s) {
+  $("#gatewayModeRow").hidden = !web;
+  if (!web) return;
+  $("#gatewayModeSegs").replaceChildren(segs([["auto", t("Automatic")], ["on", t("On")], ["off", t("Off")]], s.gatewayMode || "auto", (v) =>
+    writingPrefs(api("settings/gateway-mode", { mode: v === "auto" ? "" : v })).then((ns) => {
+      prefs = ns;
+      setGatewayMode(!!ns.gatewayOn);
+      renderSettings();
+    }).catch(settingsErr)));
+  const now = s.gatewayMode ? "" : {
+    flag: t("Now on: magpie web was started with --gateway"),
+    "no-agents": t("Now on: no agents on this computer"),
+  }[s.gatewayWhy] || t("Now off: agents found on this computer");
+  $("#gatewayModeSub").textContent = [t("Only what a gateway for other computers needs: no Agents page, nor this computer's agents' settings or sessions"), now].filter(Boolean).join(" · ");
+}
+
 function renderSettings() {
   const s = prefs;
   const keep = prefsKeep(s);
@@ -20001,7 +20040,9 @@ function renderSettings() {
   $("#themeSegs").replaceChildren(segs(THEMES.map(([id, name]) => [id, t(name)]), s.theme, (theme) => savePrefs({ ...keep, theme })));
   window.drawLook ? drawLook(s, keep) : import("./appearance.js").then(() => drawLook(s, keep), () => {});
   renderLangPick(s, keep);
-  renderGatewayMode(s);
+  // the Web relay has no page set left for Gateway mode to trim; the app's
+  // own window still has Agents, Sessions and the Library
+  if (!relay) renderGatewayMode(s);
   // Network and sharing's Advanced: what this magpie is called
   window.instanceName ? instanceName(s, keep) : import("./instancename.js").then(() => instanceName(s, keep), () => {});
   window.renderNavPages ? renderNavPages() : import("./navpages.js").then(() => renderNavPages(), () => {});
@@ -20043,7 +20084,7 @@ function renderSettings() {
   $("#wslAgentsRow").hidden = !s.wsl;
   $("#wslAgentsSegs").replaceChildren(segs([["off", t("Off")], ["on", t("On")]], s.noWSLAgents ? "off" : "on",
     (v) => savePrefs({ ...keep, noWSLAgents: v === "off" })));
-  renderSessionTerminal(s, keep);
+  if (!relay) renderSessionTerminal(s, keep);
   renderBarIcon();
   // what it does in its tooltip (#2120), and where the Mac lists it
   $("#loginRow .who").title = t(document.body.classList.contains("mac")
@@ -20101,7 +20142,7 @@ function renderSettings() {
   renderDisabledModels(s);
   renderRedact(s, keep);
   renderDiscovery(s, keep);
-  renderSessionReads(s);
+  if (!relay) renderSessionReads(s);
   renderOTel(s, keep);
   renderPort(s);
   renderBareIds(s);
@@ -20253,21 +20294,6 @@ function renderSettings() {
   setSetTab(setTab);
 }
 
-function renderGatewayMode(s) {
-  $("#gatewayModeRow").hidden = !web;
-  if (!web) return;
-  $("#gatewayModeSegs").replaceChildren(segs([["auto", t("Automatic")], ["on", t("On")], ["off", t("Off")]], s.gatewayMode || "auto", (v) =>
-    writingPrefs(api("settings/gateway-mode", { mode: v === "auto" ? "" : v })).then((ns) => {
-      prefs = ns;
-      setGatewayMode(!!ns.gatewayOn);
-      renderSettings();
-    }).catch(settingsErr)));
-  const now = s.gatewayMode ? "" : {
-    flag: t("Now on: magpie web was started with --gateway"),
-    "no-agents": t("Now on: no agents on this computer"),
-  }[s.gatewayWhy] || t("Now off: agents found on this computer");
-  $("#gatewayModeSub").textContent = [t("Only what a gateway for other computers needs: no Agents page, nor this computer's agents' settings or sessions"), now].filter(Boolean).join(" · ");
-}
 
 // renderLangPick: Settings' language, one menu button showing the language
 // picked (1ooogle on X), the app's own menu rather than six segments.
@@ -21324,8 +21350,10 @@ function renderAgentPrefs() {
   renderCodexSubagentModel();
 }
 
-// renderAgentPrefLinks: Settings' search finding the settings an agent's sheet holds
+// renderAgentPrefLinks: Settings' search finding the settings an agent's sheet holds.
+// The relay has no Agents page, so there is nowhere for these to open.
 function renderAgentPrefLinks() {
+  if (PRODUCT_HIDES.includes("agents")) return;
   const box = $("#agentPrefLinks");
   box.replaceChildren();
   homeAgentPrefRows();
@@ -21547,7 +21575,8 @@ function renderImages(s, keep) {
 // libWay: a row's way to give agents magpie's own server name in the
 // Library, or to turn it on; none in gateway mode (#2091, matrix0487)
 function libWay(name, label, cls) {
-  if (gatewayMode) return [];
+  // no Library page in the relay: a provider's row no longer offers it
+  if (gatewayMode || PRODUCT_HIDES.includes("library")) return [];
   const libOff = featuresOff.has("library");
   const go = el("button", "link " + cls, libOff ? t("Turn on the Library") : label);
   go.type = "button";
@@ -23211,6 +23240,9 @@ async function show(v) {
   jumpNext = false;
   // a built-in page a plugin's page replaces (magpie.page.replaces) opens that
   v = magpie.replacing?.(v) || v;
+  // a page the relay no longer serves opens Providers: its old address and
+  // every link that still names it land there, not on a blank page
+  if (PRODUCT_HIDES.includes(v)) v = "providers";
   if (gatewayMode && GATEWAY_HIDES.includes(v)) v = "providers";
   v = offView(v);
   if (v !== view) {
@@ -23251,7 +23283,11 @@ async function show(v) {
   $("#prefs").classList.toggle("on", v === "settings");
   if (v === "settings") $("#prefs").setAttribute("aria-current", "page"); else $("#prefs").removeAttribute("aria-current");
   navSubs();
-  for (const id of ["agents", "providers", "plugins", "settings", ...magpie.pages()]) $("#view-" + id).hidden = v !== id;
+  for (const id of ["agents", "providers", "plugins", "settings", "model-access", ...magpie.pages()]) {
+    // the Web relay's page has no Agents view
+    const box = $("#view-" + id);
+    if (box) box.hidden = v !== id;
+  }
   // back to where the reader was in it, and again once it has what it loads
   const back = () => backAfterLoad($("#view-" + v));
   requestAnimationFrame(back);
@@ -23267,6 +23303,7 @@ async function show(v) {
   if ((rtView(v) || v === "providers" && !featuresOff.has("usage")) && (!quotas || Date.now() - quotasAt > 60e3)) loadQuotas();
   if (v === "settings") (settingsLoad = loadSettings()).then(back, statusErr);
   if (v === "plugins") window.loadPlugins?.()?.then(back);
+  if (v === "model-access") window.loadModelAccess?.();
   syncTitle();
   syncURL();
   return true;
@@ -23309,7 +23346,9 @@ function offView(v) {
   const gone = (x) => featureHides($(`#nav button[data-view="${x}"]`));
   if (!gone(v)) return v;
   if (v === "groups" && !gone("routing")) return "routing";
-  return gatewayMode || gone("agents") ? "providers" : "agents";
+  // the Web relay's first page is Providers: Agents is no longer a product
+  // entry there; the app's own window keeps it
+  return relay ? "providers" : "agents";
 }
 // a list the sidebar keeps: the pages hidden (navpages.js), the lists folded (navicons.js navFold)
 const navList = (k) => { try { return JSON.parse(localStorage.getItem("magpie.nav" + k) || "[]"); } catch { return []; } };
@@ -23446,7 +23485,7 @@ function jumpFrom(to) {
   jumpNext = true;
 }
 function pageName(v) {
-  return magpie.page(v)?.title ?? ({ agents: "Agents", providers: "Providers", plugins: "Plugins", settings: "Settings" })[v];
+  return magpie.page(v)?.title ?? ({ agents: "Agents", providers: "Providers", plugins: "Plugins", settings: "Settings", "model-access": "Model access" })[v];
 }
 function renderBack() {
   const b = $("#navBack"), on = !!backTo && backTo.view !== view;
@@ -24195,7 +24234,11 @@ if (mode === "window") {
   let queued = false;
   const again = () => { if (queued) return; queued = true; requestAnimationFrame(() => { queued = false; navSubs(); }); };
   const mo = new MutationObserver(() => { again(); if (document.body.classList.contains("side-nav")) tools(); });
-  for (const v of Object.keys(NAV_SUBS)) mo.observe($("#view-" + v), { childList: true, subtree: true, attributes: true, attributeFilter: ["class", "hidden"] });
+  for (const v of Object.keys(NAV_SUBS)) {
+    // the Web relay has no Library view; the app's window has all of them
+    const page = $("#view-" + v);
+    if (page) mo.observe(page, { childList: true, subtree: true, attributes: true, attributeFilter: ["class", "hidden"] });
+  }
   // a page whose head is only its tools (Library, Plugins, Settings) has them
   // in the title bar beside the sidebar (app.css): between where the reader
   // is and the window's own buttons, so no row of its own stands empty
@@ -24640,3 +24683,112 @@ if (mode === "window" && params.get("import")) {
 }
 if (mode === "window" && params.get("ask") === "quit") { params.delete("ask"); history.replaceState(null, "", "?" + params); askQuit(); }
 if (mode === "window" && params.get("view") === "providers" && params.get("edit")) editing = params.get("edit");
+
+// ---- magpie web: one page title, the page's tools and the portal's Dock ----
+// A browser page has no title bar and no sidebar: the page's name is its
+// first line, its tools sit beside it, and the Dock at the foot is the way
+// between pages. The Dock only stands in for the controls that already run
+// the page — #nav's buttons and #prefs keep the view state, and a Dock
+// click calls their own click — so routing, permissions and state machines
+// stay exactly where they were. The desktop window and the tray panel keep
+// their header, sidebar and drag controls (body.web is the browser alone).
+if (mode === "window" && document.body.classList.contains("web") && !document.body.classList.contains("panel")) (() => {
+  const head = document.getElementById("workspaceHead");
+  const dock = document.getElementById("adminDock");
+  const nav = document.getElementById("nav");
+  const prefs = document.getElementById("prefs");
+  const portal = document.getElementById("portalLink");
+  const actions = document.getElementById("workspaceActions");
+  const title = document.getElementById("workspaceTitle");
+  const pageTitle = document.getElementById("pageTitle");
+  if (!head || !dock || !nav || !prefs || !portal || !actions || !title) return;
+
+  // the page's own tools come out of the hidden header, their handlers with them
+  for (const node of [document.querySelector(".update-wrap"), document.getElementById("sync"), document.getElementById("find")]) {
+    if (node) actions.append(node);
+  }
+
+  // #nav stays the state of record; it is out of sight and out of Tab's reach
+  nav.setAttribute("aria-hidden", "true");
+  for (const b of nav.querySelectorAll("button")) b.tabIndex = -1;
+
+  const labelOf = (b, sel) => (b.querySelector(sel)?.textContent || b.getAttribute("aria-label") || b.textContent || "").trim();
+  const sources = [];
+  // the pages in the order the sidebar has them; plugin pages have no Dock
+  // entry of their own, so only #nav's data-view buttons are read here
+  for (const b of nav.querySelectorAll(":scope > button[data-view]")) {
+    sources.push({
+      key: "view:" + b.dataset.view,
+      source: b,
+      label: () => labelOf(b, ":scope > span"),
+      icon: b.querySelector(".nav-ic"),
+    });
+  }
+  sources.push({
+    key: "settings",
+    source: prefs,
+    label: () => labelOf(prefs, ".side-l"),
+    icon: prefs.querySelector("svg"),
+  });
+  sources.push({
+    key: "portal",
+    source: portal,
+    href: portal.getAttribute("href") || "/portal/",
+    label: () => labelOf(portal, "span"),
+    icon: portal.querySelector("svg"),
+  });
+
+  const entries = sources.map((s) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "dock-item";
+    b.setAttribute("aria-label", s.label());
+    const holder = document.createElement("span");
+    holder.className = "dock-ic";
+    holder.setAttribute("aria-hidden", "true");
+    const icon = s.icon?.cloneNode(true);
+    if (icon) holder.append(icon);
+    const tip = document.createElement("span");
+    tip.className = "dock-tip";
+    tip.textContent = s.label();
+    b.append(holder, tip);
+    b.addEventListener("click", () => {
+      if (s.href) { window.location.assign(s.href); return; }
+      s.source.click();
+    });
+    dock.append(b);
+    return { ...s, button: b, tip };
+  });
+  dock.hidden = false;
+
+  // The chosen page is #nav's or #prefs's own class, so this only reads it.
+  // The same observer keeps the labels in step with a language change.
+  const sync = () => {
+    for (const b of nav.querySelectorAll("button")) b.tabIndex = -1;
+    const prefsOn = prefs.classList.contains("on") || prefs.getAttribute("aria-current") === "page";
+    for (const e of entries) {
+      const on = e.key === "settings" ? prefsOn
+        : e.key === "portal" ? false
+        : !prefsOn && e.source.classList.contains("on");
+      e.button.classList.toggle("on", on);
+      if (on) e.button.setAttribute("aria-current", "page"); else e.button.removeAttribute("aria-current");
+      const label = e.label();
+      if (label && e.button.getAttribute("aria-label") !== label) {
+        e.button.setAttribute("aria-label", label);
+        e.tip.textContent = label;
+      }
+    }
+    const fromNav = prefsOn ? null : nav.querySelector("button[data-view].on > span")?.textContent;
+    const name = (fromNav || pageTitle?.textContent || "").trim();
+    if (name && title.textContent !== name) title.textContent = name;
+  };
+  const watch = new MutationObserver(sync);
+  const inNav = { subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ["class", "hidden", "data-replaced"] };
+  watch.observe(nav, inNav);
+  watch.observe(prefs, inNav);
+  watch.observe(portal, { subtree: true, childList: true, characterData: true, attributes: true });
+  if (pageTitle) watch.observe(pageTitle, { subtree: true, childList: true, characterData: true, attributes: true });
+  sync();
+})();
+
+// ---- the browser admin's model access ------------------------------------

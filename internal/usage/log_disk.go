@@ -22,10 +22,10 @@ import (
 // start reads the blocks from it and parses only the lines after them, as
 // a parse continues the snapshot before it.
 
-const logDiskMagic = "magpie-log-v2\n"
+const logDiskMagic = "magpie-log-v3\n"
 
 func logDiskPath() string {
-	return filepath.Join(filepath.Dir(sessions.CachePath()), "log-v1.bin")
+	return filepath.Join(filepath.Dir(sessions.CachePath()), "log-v2.bin")
 }
 
 // logFull is a snapshot as it was where its full blocks end: how many,

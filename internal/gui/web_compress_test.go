@@ -44,14 +44,17 @@ func TestWebCompresses(t *testing.T) {
 	}
 	// what Chrome and Safari send over plain http
 	const browser = "gzip, deflate"
+	// the page magpie web serves is index-web.html (no Agents view, no
+	// Sessions or Library scripts), not the app's index.html
+	web := webStaticFS()
 	for _, f := range []string{"i18n.js", "app.js", "plugins/routing/client.js", "app.css", "index.html"} {
-		want, err := fs.ReadFile(staticFS(), f)
+		want, err := fs.ReadFile(web, f)
 		if err != nil {
 			t.Fatal(err)
 		}
 		path := "/" + f
 		if f == "index.html" {
-			path, want = "/", versionedPage(want)
+			path, want = "/", versionedPageIn(web, "web:", want)
 		}
 		rec := get(path, browser, "")
 		if rec.Code != http.StatusOK || rec.Header().Get("Content-Encoding") != "gzip" {

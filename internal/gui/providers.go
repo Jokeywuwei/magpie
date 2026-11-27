@@ -521,7 +521,7 @@ type providerJSON struct {
 	// ListError is why a plugin's account has only the plugin's defaults
 	// (provider.ListError): the editor says so under its models
 	ListError string             `json:"listError,omitempty"`
-	Agents    []providerAgent    `json:"agents"` // detected agents, current ones flagged
+	Agents    []providerAgent    `json:"agents"`            // detected agents, current ones flagged
 	KeyList   []provider.KeyInfo `json:"keyList"`           // its keys, in the order requests try them
 	Account   *accountJSON       `json:"account,omitempty"` // a signed-in agent, see provider.Account
 	// Move is where a built-in subscription stands with the community

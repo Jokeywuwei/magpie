@@ -41,8 +41,8 @@ type PresetDef struct {
 	NoKey     bool     `json:"noKey,omitempty"`   // local servers: a key is optional
 	KeyHint   string   `json:"keyHint,omitempty"` // the key field's placeholder, when it says more than NoKey's
 	Note      string   `json:"note,omitempty"`    // one line under the name
-	Short     string   `json:"short,omitempty"`     // the add sheet's name for it, when Name is long
-	Regions   []Region `json:"regions,omitempty"`   // base-URL choices (a relay's regional endpoints, a vendor's plans)
+	Short     string   `json:"short,omitempty"`   // the add sheet's name for it, when Name is long
+	Regions   []Region `json:"regions,omitempty"` // base-URL choices (a relay's regional endpoints, a vendor's plans)
 	// RegionLabel names what the Regions choose between, "Region" if unset.
 	RegionLabel string `json:"regionLabel,omitempty"`
 	// SplitAccounts is set on a partner whose regions are China's and
@@ -562,7 +562,7 @@ var presets = []PresetDef{
 	{ID: AzurePreset, Name: "Azure OpenAI", Icon: "azure-color", Kind: KindVendor, Catalog: "azure, openai", Hosts: true,
 		Note:         "your resource's endpoint and key",
 		Endpoint:     "https://<resource>.openai.azure.com",
-		EndpointHint: "Your resource's endpoint, from Keys and Endpoint in the Azure portal. Once added, magpie asks the resource for its deployments with this key, over its v1 API; the deployments' names are the model ids.",
+		EndpointHint: "Your resource's endpoint, from Keys and Endpoint in the Azure portal. Once added, MiniRelay asks the resource for its deployments with this key, over its v1 API; the deployments' names are the model ids.",
 		Website:      "https://ai.azure.com", KeysURL: "https://portal.azure.com/#view/Microsoft_Azure_ProjectOxford/CognitiveServicesHub/~/OpenAI"},
 	// Ollama's own hosted models: the local server's API, at ollama.com with
 	// a key. Its decision models (Clef), served at /v1/systemone, are the
@@ -803,11 +803,11 @@ var presets = []PresetDef{
 	// another computer's magpie, shared on its network (remote_magpie.go):
 	// its providers, routing groups and usage stay there, each request
 	// goes on in the API the agent spoke
-	{ID: RemoteMagpiePreset, Name: "Remote magpie", Icon: "magpie", Kind: KindRemote,
-		Note:           "another computer's magpie, shared on its network",
+	{ID: RemoteMagpiePreset, Name: "Remote MiniRelay", Icon: "magpie", Kind: KindRemote,
+		Note:           "another computer's MiniRelay, shared on its network",
 		Endpoint:       "http://192.168.1.20:3425",
-		EndpointHint:   "The address and API key the other computer's magpie shows in Settings › Network and sharing, under Share on local network. Its models and routing groups are listed here; each request goes on in the API the agent spoke.",
-		EndpointNeeded: "The other magpie's address is needed"},
+		EndpointHint:   "The address and API key the other computer's MiniRelay shows in Settings › Network and sharing, under Share on local network. Its models and routing groups are listed here; each request goes on in the API the agent spoke.",
+		EndpointNeeded: "The other MiniRelay's address is needed"},
 }
 
 func bedrockChat(region string) string {

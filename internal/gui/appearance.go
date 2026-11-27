@@ -52,10 +52,10 @@ func lookKey(s settings.Settings) string {
 	return s.Accent + "," + w
 }
 
-// lookCSS is the stylesheet that draws s's accent and wallpaper, "" for
-// magpie's own look. It never applies under Omarchy, whose theme is the
-// look there.
-func lookCSS(s settings.Settings) string {
+// accentCSS is lookCSS's accent half: the colours a page of this product may
+// take. It never names a wallpaper, so a page served to everyone (the user
+// portal) can carry it without showing the owner's picture.
+func accentCSS(s settings.Settings) string {
 	var b strings.Builder
 	if c, ok := parseHex(s.Accent); ok {
 		light := accentVars(c, false) + ";" + tintVars(c, lightSurfaces, false)
@@ -71,6 +71,13 @@ func lookCSS(s settings.Settings) string {
 		fmt.Fprintf(&b, "@media (prefers-color-scheme: dark){html:not(.omarchy):root:not([data-theme=\"light\"]) body.panel{%s}}\n", darkP)
 		fmt.Fprintf(&b, "html:not(.omarchy):root[data-theme=\"dark\"] body.panel{%s}\n", darkP)
 	}
+	return b.String()
+}
+
+// wallpaperCSS is lookCSS's picture half: the owner's own background, which
+// only the management page draws.
+func wallpaperCSS(s settings.Settings) string {
+	var b strings.Builder
 	if s.Wallpaper != 0 {
 		if fi, err := os.Stat(settings.WallpaperPath()); err == nil && fi.Mode().IsRegular() {
 			// the picture fills the window behind the pages, under a veil of
@@ -83,6 +90,21 @@ func lookCSS(s settings.Settings) string {
 		}
 	}
 	return b.String()
+}
+
+// lookCSS is the stylesheet that draws s's accent and wallpaper, "" for
+// magpie's own look. It never applies under Omarchy, whose theme is the
+// look there.
+func lookCSS(s settings.Settings) string {
+	return accentCSS(s) + wallpaperCSS(s)
+}
+
+// portalLookCSS is the user portal's share of the same look: the accent and
+// the surfaces it tints, and nothing of the owner's own — no wallpaper, no
+// font choice. The portal serves it at /portal/look.css from its own origin,
+// so its CSP needs no inline style and its cache stays no-store.
+func portalLookCSS(s settings.Settings) string {
+	return accentCSS(s)
 }
 
 type rgb [3]float64
@@ -133,18 +155,18 @@ var (
 	black = rgb{0, 0, 0}
 	// the themes' backgrounds (app.css --bg and --card), what the accent
 	// is read against as text
-	lightBg   = rgb{0xf4, 0xf4, 0xf6}
-	darkBg    = rgb{0x1a, 0x1a, 0x1e}
-	darkCard  = rgb{0x23, 0x23, 0x27}
+	lightBg   = rgb{0xf7, 0xf7, 0xf7}
+	darkBg    = rgb{0x0a, 0x0a, 0x0a}
+	darkCard  = rgb{0x15, 0x15, 0x15}
 	accentInk = 4.5 // WCAG AA for text: the accent is a link's colour too
 	// the surfaces a chosen option's text sits on (--mark): the light
 	// theme's darkest, a tab's --pill-hover, and the dark theme's lightest,
 	// the header switch's thumb (--seg-thumb over --seg-track)
-	lightPick = rgb{0xe9, 0xe9, 0xee}
-	darkPick  = rgb{0x4c, 0x4c, 0x52}
+	lightPick = rgb{0xe8, 0xe8, 0xe8}
+	darkPick  = rgb{0x26, 0x26, 0x26}
 	// the dark theme's chosen thumb before it is tinted (--mark-fill): the
 	// header switch's thumb as it reads over the page
-	darkFill = rgb{0x3a, 0x3a, 0x3f}
+	darkFill = rgb{0x26, 0x26, 0x26}
 	// how much of the theme's background lies over the picture
 	wallVeil = "color-mix(in srgb,var(--bg) 84%,transparent)"
 )
@@ -190,8 +212,8 @@ func inkOn(c, toward rgb, against ...rgb) rgb {
 func accentVars(c rgb, dark bool) string {
 	a := accentOn(c, dark)
 	fg := white
-	if contrast(a, rgb{0x14, 0x14, 0x1a}) > contrast(a, white) {
-		fg = rgb{0x14, 0x14, 0x1a}
+	if contrast(a, rgb{0x0a, 0x0a, 0x0a}) > contrast(a, white) {
+		fg = rgb{0x0a, 0x0a, 0x0a}
 	}
 	soft, sel := white.mix(a, 0.09), white.mix(a, 0.11)
 	fill := white.mix(a, 0.12)
@@ -215,10 +237,10 @@ type surface struct {
 // The themes' grounds (app.css :root and its dark blocks, and body.panel's
 // own in each theme). The light theme's cards stay white, as on a Mac.
 var (
-	lightSurfaces = []surface{{"--bg", lightBg}, {"--card-2", rgb{0xf9, 0xf9, 0xfb}}, {"--pill", rgb{0xf1, 0xf1, 0xf4}}, {"--pill-hover", lightPick}, {"--seg-track", rgb{0xe6, 0xe6, 0xeb}}, {"--line", rgb{0xe3, 0xe3, 0xe8}}, {"--line-2", rgb{0xec, 0xec, 0xf0}}}
-	darkSurfaces  = []surface{{"--bg", darkBg}, {"--card", darkCard}, {"--card-2", rgb{0x1f, 0x1f, 0x23}}, {"--pill", rgb{0x2d, 0x2d, 0x33}}, {"--pill-hover", rgb{0x36, 0x36, 0x3d}}, {"--line", rgb{0x33, 0x33, 0x39}}, {"--line-2", rgb{0x2c, 0x2c, 0x32}}}
-	// --pop-bg, a menu's ground, is translucent: rgba(38, 38, 43, .96)
-	darkPop            = rgb{38, 38, 43}
+	lightSurfaces = []surface{{"--bg", lightBg}, {"--card-2", rgb{0xfa, 0xfa, 0xfa}}, {"--pill", rgb{0xf2, 0xf2, 0xf2}}, {"--pill-hover", lightPick}, {"--seg-track", rgb{0xee, 0xee, 0xee}}, {"--line", rgb{0xdc, 0xdc, 0xdc}}, {"--line-2", rgb{0xec, 0xec, 0xec}}, {"--sidebar", rgb{0xf5, 0xf5, 0xf5}}}
+	darkSurfaces  = []surface{{"--bg", darkBg}, {"--card", darkCard}, {"--card-2", rgb{0x1a, 0x1a, 0x1a}}, {"--pill", rgb{0x1f, 0x1f, 0x1f}}, {"--pill-hover", rgb{0x26, 0x26, 0x26}}, {"--line", rgb{0x2b, 0x2b, 0x2b}}, {"--line-2", rgb{0x24, 0x24, 0x24}}, {"--sidebar", rgb{0x18, 0x18, 0x18}}}
+	// --pop-bg, a menu's ground, is translucent: rgba(30, 30, 30, .94)
+	darkPop            = rgb{30, 30, 30}
 	lightPanelSurfaces = []surface{{"--bg", rgb{0xf2, 0xf2, 0xf5}}, {"--card-2", rgb{0xf8, 0xf8, 0xfa}}, {"--pill-hover", rgb{0xf4, 0xf4, 0xf7}}, {"--skel", rgb{0xee, 0xee, 0xf2}}, {"--skel-hi", rgb{0xe2, 0xe2, 0xe8}}}
 	darkPanelSurfaces  = []surface{{"--bg", rgb{0x1b, 0x1c, 0x20}}, {"--card", rgb{0x25, 0x26, 0x2c}}, {"--card-2", rgb{0x21, 0x22, 0x27}}, {"--pill", rgb{0x2e, 0x2f, 0x36}}, {"--pill-hover", rgb{0x38, 0x39, 0x42}}}
 	// how much of the colour's hue the grounds take: enough that the dark
@@ -338,7 +360,7 @@ func tintVars(c rgb, surfaces []surface, dark bool) string {
 // popVar is the dark theme's menu ground, tinted as its other grounds are.
 func popVar(c rgb) string {
 	p := ground(darkPop, c, true)
-	return fmt.Sprintf("--pop-bg:rgba(%d,%d,%d,.96)", int(math.Round(p[0])), int(math.Round(p[1])), int(math.Round(p[2])))
+	return fmt.Sprintf("--pop-bg:rgba(%d,%d,%d,.94)", int(math.Round(p[0])), int(math.Round(p[1])), int(math.Round(p[2])))
 }
 
 // appearanceRoutes serve the look's stylesheet and the wallpaper, and take

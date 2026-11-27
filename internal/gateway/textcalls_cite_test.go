@@ -9,8 +9,8 @@ import (
 // Anthropic's own): a text block whose citations_delta come before its
 // text. Held while it may turn out to be a written call, the block's
 // start still goes before its citations: a client that is told of a
-// block's citations before the block itself (DeepSeek's chat page, the
-// Anthropic SDKs) drops them or fails.
+// block's citations before the block itself (the Anthropic SDKs) drops
+// them or fails.
 func TestTextCallsCitationAfterItsBlock(t *testing.T) {
 	stream := `event: message_start
 data: {"type":"message_start","message":{"id":"m","type":"message","role":"assistant","model":"x","content":[],"usage":{"input_tokens":1,"output_tokens":1}}}

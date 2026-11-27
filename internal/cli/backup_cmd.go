@@ -151,6 +151,9 @@ func restoreCmd(args []string) error {
 	if r.Settings {
 		fmt.Print("; settings")
 	}
+	if r.Platform {
+		fmt.Print("; platform accounts and policy")
+	}
 	fmt.Printf("; %d profiles; %d agent settings changed", r.Profiles, r.Agents)
 	if r.Library {
 		fmt.Print("; library")

@@ -93,11 +93,16 @@ type Filter struct {
 	// days, the chart's hours and Day are read in; nil is this computer's
 	Zone      *time.Location
 	CallerKey string
-	RouteID   int64
-	Model     string // exact model selected in the ranking
-	Agent     string
-	Provider  string // a provider's id, as the ledger's rows have it
-	Purpose   string // PurposeOf's key; empty keeps every purpose
+	// Owner narrows to one platform account's calls, by Record.CallerKeyOwner.
+	// A record with no owner (one written before the field, or made with no
+	// user's key) is no account's and is left out when this is set: a user's
+	// page never inherits another's history.
+	Owner    string
+	RouteID  int64
+	Model    string // exact model selected in the ranking
+	Agent    string
+	Provider string // a provider's id, as the ledger's rows have it
+	Purpose  string // PurposeOf's key; empty keeps every purpose
 	// Account narrows to the calls a subscription account answered, by its
 	// name as Record.Account gives it (#557)
 	Account string
@@ -203,6 +208,9 @@ func (f Filter) keepsRecord(r *Record, codexIdentity bool, subagent, parentAgent
 		}
 	}
 	if f.CallerKey != "" && r.CallerKeyID != f.CallerKey && (f.CallerKey != NoCallerKey || r.CallerKeyID != "") {
+		return false
+	}
+	if f.Owner != "" && r.CallerKeyOwner != f.Owner {
 		return false
 	}
 	if f.RouteID != 0 && r.RouteID != f.RouteID {

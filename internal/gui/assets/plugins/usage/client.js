@@ -134,7 +134,6 @@ magpie.plugin("usage", (ctx) => {
     <div class="row-head" id="sessListHead" hidden>
       <span class="label" data-t>Latest sessions</span>
       <span class="grow"></span>
-      <button class="text sess-all" id="sessAll" type="button" data-feature="sessions" data-t>All sessions</button>
       <input class="sess-filter" id="sessQ" type="search" spellcheck="false" autocomplete="off" placeholder="Search sessions" data-tp>
     </div>
     <div class="list sess-list" id="sessList"></div>

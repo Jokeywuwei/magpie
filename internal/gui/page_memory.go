@@ -100,28 +100,59 @@ var pageAwayFor = 30 * time.Second
 
 var pageAway struct {
 	sync.Mutex
-	t  *time.Timer
-	at time.Time
+	// seq is the timer armed last: a callback whose seq isn't this one has
+	// been superseded (or belongs to a synctest bubble that ended) and has
+	// nothing to do. Nothing here calls Reset or Stop.
+	seq   uint64
+	armed bool
+	at    time.Time
 }
 
-// awayPage arms forgetAwayPage for pageAwayFor from now.
+// awayPage arms forgetAwayPage for pageAwayFor from now. A timer already
+// pending re-arms itself for the rest of the wait when it fires, so a page
+// that goes away again only moves at.
 func awayPage() {
 	pageAway.Lock()
 	defer pageAway.Unlock()
-	pageAway.at = time.Now()
-	if pageAway.t != nil {
-		pageAway.t.Reset(pageAwayFor)
+	now := time.Now()
+	// a timer made inside a testing/synctest bubble ended with that bubble:
+	// armed with an at far in this world's past, it is stale, and a timer
+	// of this world replaces it
+	stale := pageAway.armed && now.Sub(pageAway.at) > 2*pageAwayFor
+	pageAway.at = now
+	if pageAway.armed && !stale {
 		return
 	}
-	pageAway.t = time.AfterFunc(pageAwayFor, forgetAwayPage)
+	pageAway.armed = true
+	pageAway.seq++
+	seq := pageAway.seq
+	time.AfterFunc(pageAwayFor, func() { forgetAwayPage(seq) })
 }
 
 // forgetAwayPage lets go of the Sessions and Usage pages' caches when no
 // read of theirs has been in flight, or ended, since the page went away.
-func forgetAwayPage() {
+func forgetAwayPage(seq uint64) {
 	pageAway.Lock()
+	if !pageAway.armed || pageAway.seq != seq {
+		pageAway.Unlock()
+		return
+	}
 	at := pageAway.at
-	pageAway.t = nil
+	pageAway.Unlock()
+	if idle := time.Since(at); idle < pageAwayFor {
+		pageAway.Lock()
+		if pageAway.armed && pageAway.seq == seq {
+			pageAway.seq++
+			next := pageAway.seq
+			time.AfterFunc(pageAwayFor-idle, func() { forgetAwayPage(next) })
+		}
+		pageAway.Unlock()
+		return
+	}
+	pageAway.Lock()
+	if pageAway.armed && pageAway.seq == seq {
+		pageAway.armed = false
+	}
 	pageAway.Unlock()
 	pageReads.Lock()
 	asked := pageReads.n != 0 || pageReads.last.After(at)

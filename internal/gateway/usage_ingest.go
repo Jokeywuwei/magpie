@@ -111,6 +111,10 @@ func (s *Server) usageIngest(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	}
+	if who.Owner != "" {
+		writeError(w, provider.Chat, http.StatusForbidden, "a platform user's key may not report usage: this computer's usage is read from its own calls")
+		return
+	}
 	if heldKey(who) {
 		writeError(w, provider.Chat, http.StatusForbidden, "this gateway key is held to a budget, models or accounts, so it may not report usage")
 		return

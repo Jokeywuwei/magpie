@@ -4204,7 +4204,10 @@ function ledSaid(p, model) {
   return part;
 }
 
-const USAGE_TABS = [["usage", "Overview"], ["requests", "Requests"], ["sessions", "Sessions"], ["context", "Context"]];
+// the Sessions tab is the Sessions page's: a page the relay doesn't serve
+// (magpie.page finds none) has no tab here either
+const USAGE_TABS = [["usage", "Overview"], ["requests", "Requests"], ["sessions", "Sessions"], ["context", "Context"]]
+  .filter(([id]) => id !== "sessions" || magpie.page("sessions"));
 let usageTab = "usage";
 try { const k = localStorage.getItem("magpie.usageTab"); if (USAGE_TABS.some(([id]) => id === k)) usageTab = k; } catch {}
 let sessAgent = "all";
@@ -5448,15 +5451,16 @@ function sessSpent(s) {
 // Sessions page, where it is resumed, read in full and deleted (#752: the
 // two lists were one done twice, each lacking half).
 // A row opens its session on the Sessions page. With that page switched off
-// (Plugins › Built-in) there is nowhere to open it, so the row unfolds the
-// session's details in place, as a top session's do, instead of looking like
-// a link and doing nothing when clicked (#2311, betacatZ).
+// (Plugins › Built-in), or not served at all (the Web relay), there is
+// nowhere to open it, so the row unfolds the session's details in place, as
+// a top session's do, instead of looking like a link and doing nothing when
+// clicked (#2311, betacatZ).
 function sessionItem(s) {
   const item = el("div", "sess-item");
   item.sess = s;
   const r = el("div", "row sess sess-link");
   const key = s.agent + ":" + s.id;
-  const here = featuresOff.has("sessions");
+  const here = featuresOff.has("sessions") || !magpie.page("sessions");
   const unfolded = here && sessListOpen === key;
   r.tabIndex = 0;
   if (here) {
@@ -5480,8 +5484,9 @@ function sessionItem(s) {
   r.append(go);
   const open = (e) => {
     if (window.getSelection()?.toString()) return;
-    if (!featuresOff.has("sessions")) return magpie.call("sessions", "reveal", s, e);
-    // Sessions is switched off: there is no page to open it on
+    if (!here) return magpie.call("sessions", "reveal", s, e);
+    // Sessions is switched off, or the relay has no Sessions page: the
+    // row opens here
     sessListOpen = sessListOpen === key ? "" : key;
     // one open at a time: the one that was folds
     for (const o of item.parentElement?.querySelectorAll(":scope > .sess-item.open") || []) if (o !== item) o.replaceWith(sessionItem(o.sess));
@@ -5524,8 +5529,8 @@ function sessionDetail(s) {
   return d;
 }
 
-// All sessions: the Sessions page, on the agent picked here if one is
-$("#sessAll").onclick = (e) => magpie.call("sessions", "reveal", sessAgent === "all" ? {} : { agent: sessAgent }, e);
+// All sessions left with the Sessions page: the relay's Usage keeps its
+// own stats, and its list of the latest sessions, without that page.
 $("#sessQ").oninput = (e) => { sessQuery = e.target.value; if (sessions) renderSessions(); };
 $("#sessQ").onkeydown = (e) => { if (e.key === "Escape" && e.target.value) { e.stopPropagation(); e.target.value = ""; sessQuery = ""; if (sessions) renderSessions(); } };
 

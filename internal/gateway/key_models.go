@@ -10,6 +10,7 @@ import (
 	"strings"
 
 	"github.com/yetone/magpie/internal/access"
+	"github.com/yetone/magpie/internal/modelaccess"
 	"github.com/yetone/magpie/internal/provider"
 )
 
@@ -234,6 +235,13 @@ func allows(who access.Identity, ids ...string) bool {
 // one written before the id was given, or an agent's old ref to the
 // provider's own id.
 func modelAllowed(who access.Identity, p provider.Provider, model string) bool {
+	// a user's key is held to the platform's open catalog as well: closing
+	// a model refuses every user key at once, even one that named it, and
+	// the same rule feeds the user's plaza and the key's grant. Magpie's
+	// own and the administrator's keys keep their existing reach.
+	if who.Owner != "" && !modelaccess.AllowsModel(p, model) {
+		return false
+	}
 	if _, spent := spentFor(who, p, model); spent {
 		return false // a limit of the key's that counts it is spent
 	}
@@ -260,9 +268,17 @@ func memberAllowed(who access.Identity, m provider.Member) bool {
 	return modelAllowed(who, m.Provider, m.Model) || len(m.Path) > 0 && allows(who, m.Path...)
 }
 
-// groupNamed says the key names the routing group g itself.
+// groupNamed says the key names the routing group g itself. A user's key
+// may name an open routing group: the group is the model the platform
+// offers, and its members are what the gateway routes over.
 func groupNamed(who access.Identity, g provider.Group) bool {
-	return g.ID != "" && (allows(who, provider.GroupPrefix+g.ID) || who.Allows(g.Ref()))
+	if g.ID == "" {
+		return false
+	}
+	if who.Owner != "" && !modelaccess.Allows(provider.GroupPrefix+g.ID) {
+		return false
+	}
+	return allows(who, provider.GroupPrefix+g.ID) || who.Allows(g.Ref())
 }
 
 // groupAllowed says the key may use the routing group g: it names it, or

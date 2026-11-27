@@ -36,15 +36,16 @@ for (const engine of process.env.BROWSER ? [process.env.BROWSER] : ["chromium", 
             const style = getComputedStyle(element, "::backdrop");
             return style.backdropFilter || style.webkitBackdropFilter;
           });
-          if (platform === "Win32" && !web) {
-            assert.equal(backdrop.filter, "none", "the Windows app must not filter the full-window backdrop");
+          // The Windows app must not filter the full-window backdrop, and
+          // neither does the Linux app (WebKitGTK, no accelerated compositing).
+          if ((platform === "Win32" || platform.startsWith("Linux")) && !web) {
+            assert.equal(backdrop.filter, "none", "the desktop app must not filter the full-window backdrop");
             assert.equal(confirm, "none", "nor the confirmation's");
           } else {
             assert.match(backdrop.filter, /blur\(8px\)/, "other surfaces keep their existing blur");
-            assert.match(backdrop.filter, /saturate\(1\.1\)/);
-            assert.match(confirm, /blur\(4px\)/, "the confirmation keeps its blur");
+            assert.match(confirm, /blur\(8px\)/, "the confirmation keeps its blur");
           }
-          assert.equal(backdrop.background, "rgba(0, 0, 0, 0.28)", "the dimming veil remains");
+          assert.equal(backdrop.background, "rgba(0, 0, 0, 0.55)", "the dimming veil remains");
           assert.equal(backdrop.pointerEvents, "auto", "the backdrop still receives clicks");
         });
       }

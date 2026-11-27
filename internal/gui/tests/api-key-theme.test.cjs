@@ -13,7 +13,7 @@ async function palette(page, selectors) {
       const hex = root.getPropertyValue(name).trim();
       return `rgb(${[1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16)).join(", ")})`;
     };
-    const colors = Object.fromEntries(["bg", "card", "card-2", "fg", "fg-2", "muted", "ctl-fg", "pill", "line", "accent", "accent-fg"]
+    const colors = Object.fromEntries(["bg", "card", "card-2", "fg", "fg-2", "muted", "ctl-fg", "pill", "line", "accent", "accent-fg", "primary", "primary-fg"]
       .map((name) => [name, rgb("--" + name)]));
     const elements = Object.fromEntries(Object.entries(selectors).map(([name, selector]) => {
       const s = getComputedStyle(document.querySelector(selector));
@@ -60,13 +60,13 @@ for (const engine of (process.env.BROWSER ? [process.env.BROWSER] : ["chromium",
         assert.equal(e.masked.color, c.muted);
         assert.equal(e.form.bg, c["card-2"]);
         for (const input of [e.input, e.rename]) {
-          assert.equal(input.bg, c.card, "key inputs must not use the browser's default background");
+          assert.equal(input.bg, c["card-2"], "key inputs must not use the browser's default background");
           assert.equal(input.color, c.fg);
         }
         assert.equal(e.more.color, c.muted); // the key's …, in the row's quiet text
         assert.equal(e.keyPick.bg, "rgba(0, 0, 0, 0)");
-        assert.equal(e.create.bg, c.accent);
-        assert.equal(e.create.color, c["accent-fg"]);
+        assert.equal(e.create.bg, c.primary);
+        assert.equal(e.create.color, c["primary-fg"]);
         gatewayPaints.push(c.bg);
         if (process.env.ARTIFACT_DIR) {
           await fs.mkdir(process.env.ARTIFACT_DIR, { recursive: true });
@@ -85,8 +85,8 @@ for (const engine of (process.env.BROWSER ? [process.env.BROWSER] : ["chromium",
         });
         assert.equal(e.dialog.bg, c.card);
         assert.equal(e.message.color, c["fg-2"]);
-        assert.equal(e.confirm.bg, c.accent);
-        assert.equal(e.confirm.color, c["accent-fg"]);
+        assert.equal(e.confirm.bg, c.primary);
+        assert.equal(e.confirm.color, c["primary-fg"]);
         if (process.env.ARTIFACT_DIR) {
           await page.screenshot({ path: path.join(process.env.ARTIFACT_DIR, `${engine}-${theme}-${scheme}-confirm.png`) });
         }
@@ -111,8 +111,8 @@ for (const engine of (process.env.BROWSER ? [process.env.BROWSER] : ["chromium",
       for (const scheme of ["light", "dark"]) {
         await page.emulateMedia({ colorScheme: scheme });
         await page.waitForTimeout(200);
-        const { colors: c, elements: e } = await palette(page, { card: "#lanList", text: "#lanList .row.pref:last-child .name",
-          key: "#lanList .lan-url", copy: "#lanList .row.pref:last-child .copy" });
+        const { colors: c, elements: e } = await palette(page, { card: "#lanList", text: "#lanList .row.pref:has(.lan-address-controls) .name",
+          key: "#lanList .lan-url", copy: "#lanList .lan-copy .copy" });
         assert.equal(e.card.bg, c.card);
         assert.equal(e.text.color, c.fg);
         assert.equal(e.key.color, c["fg-2"]);

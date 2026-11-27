@@ -871,7 +871,10 @@ func settingsState() settingsJSON {
 	s.AddrEnv = os.Getenv("MAGPIE_ADDR")
 	s.NameEnv = settings.EnvName()
 	s.Log = tilde(applog.Current())
-	s.Builtins = builtinsState()
+	// the built-ins the page is offered: the Web relay's page leaves the
+	// Sessions and Library ones out, as /api/plugins/builtin does, while
+	// the app's window and its browser page keep them
+	s.Builtins = builtinsStateFor(webPage.Load())
 	s.PanelKeys = panelKeysState()
 	s.JSRoutings = middleware.Routings()
 	s.OnNetwork = gateway.OnNetwork()
@@ -1107,14 +1110,20 @@ func servedAs(rw http.ResponseWriter, name string) {
 // v0.1.582's app.js and routing.js (incognito and a hard refresh alike),
 // whose first lines looked for an element the page no longer had, and the
 // page was blank under its tabs.
-func revalidated(next http.Handler) http.Handler {
+func revalidated(next http.Handler) http.Handler { return revalidatedIn(staticFS(), "", next) }
+
+// revalidatedIn is revalidated over fsys, whose files staticSumIn reads:
+// the Web relay's page is its own index.html (index-web.html), so its
+// hashes and ETag come from that page, and cache key prefix keeps the two
+// pages' sums apart in a build that serves both.
+func revalidatedIn(fsys fs.FS, prefix string, next http.Handler) http.Handler {
 	return http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
 		name := strings.TrimPrefix(path.Clean("/"+r.URL.Path), "/")
 		if name == "" {
 			name = "index.html"
 		}
 		servedAs(rw, name)
-		sum, page, ok := staticSum(name, r.URL.Path == "/")
+		sum, page, ok := staticSumIn(fsys, prefix, name, r.URL.Path == "/")
 		if !ok {
 			next.ServeHTTP(rw, r)
 			return
@@ -1152,9 +1161,16 @@ var pageFile = lazyre.New(`(src|href)="([A-Za-z0-9_.-]+(?:/[A-Za-z0-9_.-]+)*\.(?
 // load with app.js alone over a megabyte (#2278). ok is false for a file
 // that can't be read, which isn't kept.
 func staticSum(name string, root bool) (sum [32]byte, page []byte, ok bool) {
-	key := name
+	return staticSumIn(staticFS(), "", name, root)
+}
+
+// staticSumIn is staticSum over fsys: prefix keeps one page's sums apart
+// from another's ("web:" for the Web relay's own index.html) in a build
+// that serves both pages.
+func staticSumIn(fsys fs.FS, prefix, name string, root bool) (sum [32]byte, page []byte, ok bool) {
+	key := prefix + name
 	if root {
-		key = "/"
+		key = prefix + "/"
 	}
 	if staticFixed {
 		if v, hit := staticSums.Load(key); hit {
@@ -1162,12 +1178,12 @@ func staticSum(name string, root bool) (sum [32]byte, page []byte, ok bool) {
 			return a.sum, a.page, true
 		}
 	}
-	b, err := fs.ReadFile(staticFS(), name)
+	b, err := fs.ReadFile(fsys, name)
 	if err != nil {
 		return sum, nil, false
 	}
 	if root {
-		b = versionedPage(b)
+		b = versionedPageIn(fsys, prefix, b)
 		page = b
 	}
 	sum = sha256.Sum256(b)
@@ -1185,10 +1201,14 @@ type staticFile struct {
 	page []byte
 }
 
-func versionedPage(page []byte) []byte {
+func versionedPage(page []byte) []byte { return versionedPageIn(staticFS(), "", page) }
+
+// versionedPageIn is versionedPage over fsys: the scripts and stylesheets
+// are hashed from the same files the page is served with.
+func versionedPageIn(fsys fs.FS, prefix string, page []byte) []byte {
 	return pageFile.ReplaceAllFunc(page, func(m []byte) []byte {
 		g := pageFile.FindSubmatch(m)
-		sum, _, ok := staticSum(string(g[2]), false)
+		sum, _, ok := staticSumIn(fsys, prefix, string(g[2]), false)
 		if !ok {
 			return m
 		}
@@ -1209,7 +1229,28 @@ func Handler(w Windows, gw *gateway.Server) http.Handler {
 		webPage.Store(true)
 	}
 	mux := http.NewServeMux()
-	page := devPage(revalidated(http.FileServer(http.FS(staticFS()))))
+	// the platform's accounts: sign-in, the user's own pages' routes, and
+	// the admin's management of accounts. /api/auth and /api/admin are
+	// served outside magpie web's page key (web.go's publicAPI); each
+	// checks the account and role itself.
+	authRoutes(mux)
+	accountAdminRoutes(mux)
+	// the signed-in account's own API keys (Phase 3)
+	userKeyRoutes(mux)
+	// and its own usage, filtered by the account on the server (Phase 4)
+	userUsageRoutes(mux)
+	// the model plaza and the admin's model-open policy (Phase 5)
+	modelAccessRoutes(mux)
+	// the user-facing portal at /portal/, a page of its own beside the
+	// admin page, served without the admin page's key
+	portalRoutes(mux)
+	// the Web relay's own page is index-web.html; the app's window and its
+	// page served to a browser keep the full index.html
+	fsys, prefix := staticFS(), ""
+	if ownWeb(w) {
+		fsys, prefix = webStaticFS(), "web:"
+	}
+	page := devPage(revalidatedIn(fsys, prefix, http.FileServer(http.FS(fsys))))
 	mux.Handle("/", http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
 		if warmsSessions(r) {
 			warmSessions()
@@ -1232,7 +1273,12 @@ func Handler(w Windows, gw *gateway.Server) http.Handler {
 		s := settings.Load()
 		// and the text size, which the Mac's header measures against the
 		// traffic lights
-		boot := map[string]any{"lang": s.Lang, "theme": s.Theme, "textSize": s.TextSize, "web": isWeb(w)}
+		boot := map[string]any{"lang": s.Lang, "theme": s.Theme, "textSize": s.TextSize, "web": isWeb(w),
+			// relay: this is `magpie web`'s own page (index-web.html), whose
+			// product is the model relay alone. The app's page served to a
+			// browser is web but not relay, and keeps its Agents, Sessions
+			// and Library.
+			"relay": ownWeb(w)}
 		// and the version that served the page: a browser's page reloads
 		// once another answers in its place (visamzh on X), as after its
 		// own restart to update (backAsNew)
@@ -1289,8 +1335,9 @@ func Handler(w Windows, gw *gateway.Server) http.Handler {
 			boot["gateway"] = true
 		}
 		// and the built-in plugins it leaves out (builtins.go), gone
-		// before the first paint rather than after the settings come
-		list := builtinsState()
+		// before the first paint rather than after the settings come; the
+		// Web relay's page leaves its own two out of the list and of this
+		list := builtinsStateFor(ownWeb(w))
 		boot["featuresOff"] = builtinsOff(list)
 		// and where the gateway listens, so the sidebar's line at its foot
 		// is drawn from the start, not held back until providers has come
@@ -1338,7 +1385,7 @@ func Handler(w Windows, gw *gateway.Server) http.Handler {
 		// here so app.js's core carries no code for it (applyPrefs keeps
 		// it current); the app's windows keep "magpie"
 		if n, ok := boot["name"].(string); ok && isWeb(w) {
-			t, _ := json.Marshal(n + " · magpie")
+			t, _ := json.Marshal(n + " · MiniRelay")
 			out = append(append(append(out, "document.title = "...), t...), ";\n"...)
 		}
 		if css := lookCSS(s); css != "" {
@@ -1727,7 +1774,7 @@ func Handler(w Windows, gw *gateway.Server) http.Handler {
 	}
 	privacyModelRoutes(mux, w)
 	maskingRoutes(mux)
-	builtinRoutes(mux)
+	builtinRoutes(mux, ownWeb(w))
 	mux.HandleFunc("GET /api/settings", func(rw http.ResponseWriter, r *http.Request) {
 		access.MigrateLegacyLANKeyBestEffort()
 		writeJSON(rw, settingsState())

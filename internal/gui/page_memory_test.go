@@ -112,10 +112,10 @@ func TestPageAwayLetsStatsGo(t *testing.T) {
 	pageAwayFor = 20 * time.Millisecond
 	t.Cleanup(func() {
 		pageAway.Lock()
-		if pageAway.t != nil {
-			pageAway.t.Stop()
-			pageAway.t = nil
-		}
+		// a timer still pending sees a seq of its own no more, and does
+		// nothing; nothing here stops it, as a bubble's would be fatal to
+		pageAway.armed = false
+		pageAway.seq++
 		pageAway.Unlock()
 		pageAwayFor = old
 		pageReads.Lock()

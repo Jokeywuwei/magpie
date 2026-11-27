@@ -3,6 +3,7 @@ package access
 import (
 	"crypto/sha256"
 	"crypto/subtle"
+	"encoding/hex"
 	"errors"
 	"fmt"
 	"math"
@@ -249,7 +250,22 @@ func Check(secret string) (Identity, error) {
 	if err != nil || secret == "" {
 		return Identity{}, errUnknown
 	}
-	i := slices.IndexFunc(keys, func(k Key) bool { return subtle.ConstantTimeCompare([]byte(secret), []byte(k.Secret)) == 1 })
+	sum := sha256.Sum256([]byte(secret))
+	sumHex := hex.EncodeToString(sum[:])
+	// a key of magpie's own is its secret; a user's is its hash. Every
+	// key is compared, so which one matched takes no different time.
+	i := -1
+	for n, k := range keys {
+		var match bool
+		if k.Owner != "" {
+			match = k.Hash != "" && subtle.ConstantTimeCompare([]byte(sumHex), []byte(k.Hash)) == 1
+		} else {
+			match = subtle.ConstantTimeCompare([]byte(secret), []byte(k.Secret)) == 1
+		}
+		if match && i < 0 {
+			i = n
+		}
+	}
 	if i < 0 {
 		s := settings.Load()
 		// A read-only config directory may prevent the first store write. Never
@@ -258,7 +274,7 @@ func Check(secret string) (Identity, error) {
 			k := legacyLANKey(s.LANKey)
 			// sum as Check gives the same key once migrated, so the
 			// caller's identity is one before and after
-			return Identity{KeyID: k.ID, KeyName: k.Name, Default: true, sum: sha256.Sum256([]byte(k.Secret))}, nil
+			return Identity{KeyID: k.ID, KeyName: k.Name, Default: true, sum: sum}, nil
 		}
 		return Identity{}, errUnknown
 	}
@@ -270,9 +286,29 @@ func Check(secret string) (Identity, error) {
 	if k.expired(now) {
 		return Identity{}, &Refused{Why: fmt.Sprintf("the gateway key %q expired at %s: ask for a new one", k.Name, k.Expires.UTC().Format(time.RFC3339))}
 	}
+	// a user key from before model access gets one explicit grant, saved
+	// before it is used: if that can't be written, the key is refused
+	// rather than let use whatever is open on each read
+	if k.Owner != "" && !k.ModelsSet {
+		if fillLegacyModels(keys) {
+			if err := save(keys); err != nil {
+				return Identity{}, &Refused{Why: fmt.Sprintf("magpie can't record the gateway key %q's model access now: %v", k.Name, err)}
+			}
+		}
+		k = keys[i]
+	}
 	who, err := identityOf(k, keys, now)
-	who.sum = sha256.Sum256([]byte(k.Secret))
-	return who, err
+	if err != nil {
+		return who, err
+	}
+	who.sum = sum
+	// a user key's last use, written at most once a minute: a write on
+	// every request would hold the store's lock for each one
+	if k.Owner != "" && (k.LastUsed.IsZero() || now.Sub(k.LastUsed) >= time.Minute) {
+		keys[i].LastUsed = now
+		_ = save(keys)
+	}
+	return who, nil
 }
 
 // Current: who, a key Check took earlier, is still one it takes now, by
@@ -295,7 +331,14 @@ func Current(who Identity) bool {
 		return false // the legacy sharing key not yet in the store is never a browser's
 	}
 	k := keys[i]
-	if k.Off || k.Secret == "" || k.expired(Now()) || sha256.Sum256([]byte(k.Secret)) != who.sum {
+	if k.Off || k.expired(Now()) {
+		return false
+	}
+	if k.Owner != "" {
+		if k.Hash == "" || hex.EncodeToString(who.sum[:]) != k.Hash {
+			return false
+		}
+	} else if k.Secret == "" || sha256.Sum256([]byte(k.Secret)) != who.sum {
 		return false
 	}
 	_, err = identityOf(k, keys, Now())
@@ -353,10 +396,18 @@ func identityOf(k Key, keys []Key, now time.Time) (Identity, error) {
 		return Identity{}, &Refused{Why: fmt.Sprintf("the gateway key %q names an account group, and magpie can't read its account groups now: %v", k.Name, err)}
 	}
 	k.Accounts = accounts
-	who := Identity{KeyID: k.ID, KeyName: k.Name, Limit: k.Limit, More: k.More, Models: HeldModels(k.Models, k.Accounts), Aliases: k.Aliases, AccountModels: len(k.Models) == 0 && picksAccounts(k.Accounts), Accounts: k.Accounts, MCP: k.MCP, Quotas: k.Quotas, ReadOnly: k.ReadOnly, Browser: k.Browser, Admin: adminOf(k), Memory: memoryOf(k), Expires: k.Expires, Issues: k.Issues && k.Issuer == "" && !k.Browser, MaxConcurrency: k.MaxConcurrency, ServiceTier: k.ServiceTier, Redact: k.Redact}
+	who := Identity{KeyID: k.ID, KeyName: k.Name, Owner: k.Owner, Limit: k.Limit, More: k.More, Models: HeldModels(k.Models, k.Accounts), Aliases: k.Aliases, AccountModels: len(k.Models) == 0 && picksAccounts(k.Accounts), Accounts: k.Accounts, MCP: k.MCP, Quotas: k.Quotas, ReadOnly: k.ReadOnly, Browser: k.Browser, Admin: adminOf(k), Memory: memoryOf(k), Expires: k.Expires, Issues: k.Issues && k.Issuer == "" && !k.Browser, MaxConcurrency: k.MaxConcurrency, ServiceTier: k.ServiceTier, Redact: k.Redact}
+	// a user's key is a user's: whatever the file says, it never manages
+	// magpie, never uses Magpie Memory, never issues keys, never uses any
+	// MCP server or tool, and is never the sharing key. The empty list on an
+	// ownerless key means every tool; on a user's key it must mean none.
+	if k.Owner != "" {
+		who.Admin, who.Memory, who.Issues, who.Browser, who.ReadOnly = "", false, false, false, false
+		who.MCP = []string{NoMCP}
+	}
 	// the default key as Default tells it: marked LAN, or the id the
 	// settings name (settings read only for an unmarked key)
-	who.Default = k.LAN || (k.ID != "" && settings.Shared().LANKeyID == k.ID)
+	who.Default = k.Owner == "" && (k.LAN || (k.ID != "" && settings.Shared().LANKeyID == k.ID))
 	if who.Default {
 		who.Admin, who.Memory = "", false
 	}

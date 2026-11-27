@@ -6,8 +6,8 @@
 // app.js imports this when Settings draws or the look changed, so it
 // weighs nothing on the core.
 
-// the presets: magpie's own first, then a few quiet ones
-const ACCENTS = () => [["", t("Default"), "#4f46e5"], ["#2563eb", t("Blue")], ["#0d9488", t("Teal")], ["#16a34a", t("Green")], ["#ea580c", t("Orange")], ["#db2777", t("Pink")], ["#52525b", t("Graphite")]];
+// the presets: the system's brand blue first, then a few quiet ones
+const ACCENTS = () => [["", t("Default"), "var(--accent)"], ["#2563eb", t("Blue")], ["#0d9488", t("Teal")], ["#16a34a", t("Green")], ["#ea580c", t("Orange")], ["#db2777", t("Pink")], ["#52525b", t("Graphite")]];
 
 window.lookPaint = async function () {
   try {
@@ -60,7 +60,7 @@ function drawAccent(s, keep) {
   if (mine) own.style.setProperty("--sw", now);
   const input = el("input");
   input.type = "color";
-  input.value = mine ? now : "#4f46e5";
+  input.value = mine ? now : "#4fc5fc";
   input.tabIndex = -1;
   // the picker reports as the reader drags; the choice is saved when it closes
   input.onchange = () => input.value.toLowerCase() !== now && pick(input.value.toLowerCase());

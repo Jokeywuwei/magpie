@@ -1595,10 +1595,12 @@
     return d;
   }
   // toolsFlip gives a plugin's tools to every agent or hides them, among
-  // the row's buttons (on the tools line it sat a line below them)
+  // the row's buttons (on the tools line it sat a line below them). The
+  // Web relay has no Library page to see or undo it on, so it offers none.
   function toolsFlip(e) {
     const sv = e.toolsServer;
     if (!sv || gatewayMode || featuresOff.has("library")) return null;
+    if (typeof PRODUCT_HIDES !== "undefined" && PRODUCT_HIDES.includes("library")) return null;
     const f = el("button", "text pm-tools-flip", t(sv.on ? "Hide from agents" : "Give to agents"));
     f.onclick = (ev) => {
       ev.stopPropagation();

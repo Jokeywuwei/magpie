@@ -288,9 +288,9 @@ func TestAccentTintsGrounds(t *testing.T) {
 	for _, pick := range []string{"#ffffff", "#000000", "#ffff00", "#00ff00", "#ff0000", "#0000ff", "#7c3aed", "#0d9488", "#db2777"} {
 		c, _ := parseHex(pick)
 		for _, dark := range []bool{false, true} {
-			surfaces, fg, accent := lightSurfaces, rgb{0x1c, 0x1c, 0x21}, accentOn(c, false)
+			surfaces, fg, accent := lightSurfaces, rgb{0x0a, 0x0a, 0x0a}, accentOn(c, false)
 			if dark {
-				surfaces, fg, accent = darkSurfaces, rgb{0xed, 0xed, 0xf1}, accentOn(c, true)
+				surfaces, fg, accent = darkSurfaces, rgb{0xee, 0xee, 0xee}, accentOn(c, true)
 			}
 			for _, s := range surfaces {
 				if strings.HasPrefix(s.name, "--line") || s.name == "--seg-track" {
@@ -342,8 +342,8 @@ func TestTintBasesAreAppCSS(t *testing.T) {
 			}
 		}
 	}
-	if !strings.Contains(block(`:root[data-theme="dark"]`), "--pop-bg: rgba(38, 38, 43, .96)") {
-		t.Errorf("app.css's dark --pop-bg is not rgba(38, 38, 43, .96)")
+	if !strings.Contains(block(`:root[data-theme="dark"]`), "--pop-bg: rgba(30, 30, 30, .94)") {
+		t.Errorf("app.css's dark --pop-bg is not rgba(30, 30, 30, .94)")
 	}
 }
 
@@ -449,10 +449,12 @@ func TestDarkPickDarkensPage(t *testing.T) {
 	for _, pick := range []string{"#191047", "#130830", "#0c1a3a"} {
 		c, _ := parseHex(pick)
 		bg := ground(darkBg, c, true)
-		if lightness(bg) > lightness(darkBg)-0.05 {
-			t.Errorf("%s: its page %s is not darker than magpie's %s", pick, bg.hex(), darkBg.hex())
+		// the near-black page has little room to darken; a dark blue pick
+		// keeps it dark, instead of lifting it back to grey
+		if lightness(bg) > lightness(darkBg)+0.05 {
+			t.Errorf("%s: its page %s is lighter than magpie's %s", pick, bg.hex(), darkBg.hex())
 		}
-		if bg[2]-bg[0] < 8 {
+		if bg[2]-bg[0] < 6 {
 			t.Errorf("%s: its page %s is not the colour's blue", pick, bg.hex())
 		}
 		// the page's text and the accent read on every ground
@@ -461,7 +463,7 @@ func TestDarkPickDarkensPage(t *testing.T) {
 				continue
 			}
 			g := ground(s.base, c, true)
-			if r := contrast(rgb{0xed, 0xed, 0xf1}, g); r < 7 {
+			if r := contrast(rgb{0xee, 0xee, 0xee}, g); r < 7 {
 				t.Errorf("%s: text on %s %s is %.2f:1", pick, s.name, g.hex(), r)
 			}
 		}

@@ -98,8 +98,11 @@ func TestPageNamesItsFilesByContent(t *testing.T) {
 		t.Errorf("/: Content-Type %q", ct)
 	}
 	body := page.Body.String()
-	for _, f := range []string{"app.js", "plugins.js", "plugins/routing/client.js", "plugins/routing/routing.css", "plugins/sessions/client.js", "plugins/sessions/sessions.css", "plugins/library/client.js", "plugins/library/library.css", "context.js", "i18n.js", "compat.js", "app.css", "context.css"} {
-		b, err := fs.ReadFile(staticFS(), f)
+	// magpie web's page is index-web.html: it names no Sessions or Library
+	// scripts, which only the app's own window loads
+	web := webStaticFS()
+	for _, f := range []string{"app.js", "plugins.js", "plugins/routing/client.js", "plugins/routing/routing.css", "context.js", "i18n.js", "compat.js", "app.css", "context.css"} {
+		b, err := fs.ReadFile(web, f)
 		if err != nil {
 			t.Fatal(err)
 		}

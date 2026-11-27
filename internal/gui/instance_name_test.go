@@ -58,7 +58,7 @@ func TestInstanceName(t *testing.T) {
 	// a browser tab is titled from the first paint; the app's window isn't
 	tab := httptest.NewRecorder()
 	Handler(webTab{}, nil).ServeHTTP(tab, httptest.NewRequest("GET", "/boot.js", nil))
-	if !strings.Contains(tab.Body.String(), "\ndocument.title = \"Tokyo box · magpie\";\n") {
+	if !strings.Contains(tab.Body.String(), "\ndocument.title = \"Tokyo box · MiniRelay\";\n") {
 		t.Fatalf("a browser tab's boot.js sets no title: %.300s", tab.Body)
 	}
 	app := httptest.NewRecorder()

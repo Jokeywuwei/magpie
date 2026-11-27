@@ -8,17 +8,22 @@ navHides(); // the pages built-in plugins switched off have, from boot.js
 // as it was (molvqingtai, lc on Discord): a page asked for (?view=, a link
 // from the tray or a reload) first, then the one kept; a page gateway mode
 // leaves out, or one there is no longer, gives way to the first page.
-// the pages the window can open on besides the first (Agents)
-const OPEN_VIEWS = ["providers", "plugins", "settings", ...magpie.pages()];
+// the pages the window can open on. The app's own window (and its page in
+// a browser) keeps Agents; the Web relay has no Agents page, its first page
+// being Providers.
+const OPEN_VIEWS = [...(relay ? [] : ["agents"]), "providers", "plugins", "settings", ...magpie.pages()];
 function keptView() {
   const asked = params.get("view");
-  if (asked === "agents" || OPEN_VIEWS.includes(asked)) return asked;
+  // a removed product entry's old address opens Providers, never the page
+  // the reader last left: that would look as if the page were still there
+  if (relay && ["agents", "sessions", "library"].includes(asked)) return "providers";
+  if (OPEN_VIEWS.includes(asked)) return asked;
   let v = "";
   try { v = localStorage.getItem("magpie.lastView") || ""; } catch { /* none kept */ }
   // one gateway mode leaves out, show() makes Providers; one left out of the sidebar isn't reopened
   return OPEN_VIEWS.includes(v) && !navMine().includes(v) ? v : "";
 }
-const firstView = mode === "window" ? keptView() || (navMine().includes("agents") ? "providers" : "") : "";
+const firstView = mode === "window" ? keptView() || (relay || navMine().includes("agents") ? "providers" : "") : "";
 // from the tray panel's More in Plugins (q): Discover, once show() picked the tab (#3579)
 if (OPEN_VIEWS.includes(firstView)) show(firstView).then(() => view === "plugins" && params.has("q") && window.pluginQuery?.(params.get("q")));
 else if (mode === "window" && !gatewayMode && !sideNav()) slide($("#nav"), "nav");

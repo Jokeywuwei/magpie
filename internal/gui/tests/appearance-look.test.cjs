@@ -105,7 +105,7 @@ for (const engine of (process.env.BROWSER ? [process.env.BROWSER] : ["chromium",
     const sw = page.locator("#accentPick .swatch");
     assert.equal(await sw.count(), 8, "magpie's own, six presets and the reader's own");
     assert.deepEqual(await chosen(page), [""], "magpie's own is chosen at first");
-    assert.equal(await accentNow(page), "#4f46e5");
+    assert.equal(await accentNow(page), "#006cad");
     assert.deepEqual(log.filter(([k]) => k === "css"), [], "magpie's own look needs no stylesheet");
 
     await page.locator('#accentPick .swatch[data-accent="#0d9488"]').click();
@@ -122,7 +122,7 @@ for (const engine of (process.env.BROWSER ? [process.env.BROWSER] : ["chromium",
 
     // back to magpie's own: nothing drawn over it
     await page.locator('#accentPick .swatch[data-accent=""]').click();
-    await page.waitForFunction(() => getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() === "#4f46e5");
+    await page.waitForFunction(() => getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() === "#006cad");
     assert.equal(log.filter(([k]) => k === "settings").at(-1)[1].accent, "");
     assert.deepEqual(errors, []);
   });
@@ -130,9 +130,10 @@ for (const engine of (process.env.BROWSER ? [process.env.BROWSER] : ["chromium",
   // CHENGJIAHEGOXIS on X: 「选中任意强调色没反应」. The accent reached
   // only buttons, links and bars, none of them on Settings, so a colour
   // picked changed nothing in sight. What is chosen (the open page in the
-  // sidebar, a switch's or tab's chosen option) is in --mark: the text's
-  // own ink by default, the colour picked once there is one, in the window
-  // and the panel, light and dark, over a picture too.
+  // sidebar, a switch's or tab's chosen option) is in --mark: the theme's
+  // chosen ink by default (#fafafa dark, #0a0a0a light), the colour picked
+  // once there is one, in the window and the panel, light and dark, over a
+  // picture too.
   for (const theme of ["light", "dark"]) {
     // the chosen option's ink, and the probe's for a colour
     const inks = (page, sel) => page.evaluate((sel) => {
@@ -160,13 +161,13 @@ for (const engine of (process.env.BROWSER ? [process.env.BROWSER] : ["chromium",
       await page.waitForFunction(() => document.body.classList.contains("side-nav"));
       const sel = ["#themeSegs .opt.on", "#birdSegs .opt.on", "body.side-nav #prefs.on svg"];
       const before = await settled(page, sel);
-      same(before, before.fg, "magpie's own look: what is chosen is in the text's ink");
+      same(before, before.mark, "magpie's own look: what is chosen is in --mark");
       // 「主题深色依然还是灰色」: the chosen option's thumb is tinted too,
-      // and is its own grey, exactly as before, with no accent
+      // and is its own --seg-thumb grey with no accent
       const thumbs = ["#themeSegs .segs > .thumb", "#birdSegs .segs > .thumb", "#reduceMotionSegs .segs > .thumb"];
       const grounds = () => page.evaluate((sel) => sel.map((s) => { const e = document.querySelector(s); return e ? getComputedStyle(e).backgroundColor : "missing " + s; }), thumbs);
-      const card = await page.evaluate(() => { const p = document.createElement("i"); p.style.background = "var(--card)"; document.body.append(p); const c = getComputedStyle(p).backgroundColor; p.remove(); return c; });
-      assert.deepEqual(await grounds(), thumbs.map(() => card), "magpie's own look: the thumb is the card's grey");
+      const thumb = await page.evaluate(() => { const p = document.createElement("i"); p.style.background = "var(--seg-thumb)"; document.body.append(p); const c = getComputedStyle(p).backgroundColor; p.remove(); return c; });
+      assert.deepEqual(await grounds(), thumbs.map(() => thumb), "magpie's own look: the thumb is --seg-thumb");
       const rgbOf = (h) => `rgb(${parseInt(h.slice(1, 3), 16)}, ${parseInt(h.slice(3, 5), 16)}, ${parseInt(h.slice(5, 7), 16)})`;
       for (const v of ["#0d9488", "#db2777"]) {
         await page.locator(`#accentPick .swatch[data-accent="${v}"]`).click();
@@ -180,8 +181,8 @@ for (const engine of (process.env.BROWSER ? [process.env.BROWSER] : ["chromium",
       await page.locator('#accentPick .swatch[data-accent=""]').click();
       await page.waitForFunction(() => !document.getElementById("lookCSS")?.textContent);
       const back = await settled(page, sel);
-      same(back, back.fg, "back to magpie's own");
-      assert.deepEqual(await grounds(), thumbs.map(() => card), "back to magpie's own thumb");
+      same(back, back.mark, "back to magpie's own");
+      assert.deepEqual(await grounds(), thumbs.map(() => thumb), "back to magpie's own thumb");
       assert.deepEqual(errors, []);
     });
 
@@ -193,7 +194,7 @@ for (const engine of (process.env.BROWSER ? [process.env.BROWSER] : ["chromium",
           const { page, errors } = await open(browser, { theme, accent }, width, query, sel[0]);
           const r = await settled(page, sel);
           if (accent) assert.notEqual(r.mark, r.fg);
-          same(r, accent ? r.mark : r.fg, `${query} ${accent || "default"}`);
+          same(r, r.mark, `${query} ${accent || "default"}`);
           assert.deepEqual(errors, []);
           await page.context().close();
         }
@@ -226,7 +227,7 @@ for (const engine of (process.env.BROWSER ? [process.env.BROWSER] : ["chromium",
         assert.notEqual(pink.list === grey.list && pink.sidebar === grey.sidebar && pink.body === grey.body, true, `wallpaper=${wallpaper}: something tinted`);
         if (!wallpaper) {
           assert.equal(pink.body, rgbOf(varOf("#db2777", "--bg", dark)), "the page's ground is tinted");
-          assert.equal(pink.sidebar, rgbOf(varOf("#db2777", "--bg", dark)), "the sidebar's ground is tinted");
+          assert.equal(pink.sidebar, rgbOf(varOf("#db2777", "--sidebar", dark)), "the sidebar's ground is tinted");
         }
         await page.locator('#accentPick .swatch[data-accent=""]').click();
         await page.waitForFunction(() => !document.getElementById("lookCSS")?.textContent);

@@ -240,6 +240,8 @@ func TestSettingsSaveKeepsWhatItDoesNotSend(t *testing.T) {
 	was.OnTop = true                                  // the title bar's pin, window/ontop
 	was.ImageResolution = "4K"                        // Settings > Images' Resolution row, sent by that row alone
 	was.Name = "Tokyo box"                            // Network and sharing's Advanced › Name, sent by its own row alone
+	// Privacy › Models' folder, set by that page's own route (privacy-model)
+	was.RedactModelDir = "/models"
 	// Settings > Usage's Bark row has its own route (settings/bark)
 	was.BarkServer, was.BarkKey, was.BarkDaily = "https://bark.example.com", "kept", "21:30"
 	// the Routing groups page's defaults for every group (groups/defaults)

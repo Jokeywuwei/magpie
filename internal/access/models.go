@@ -78,14 +78,18 @@ func HeldModels(models, accounts []string) []string {
 }
 
 // Restricted says the key may use only the models or accounts it lists.
-func (who Identity) Restricted() bool { return len(who.Models) > 0 || len(who.Accounts) > 0 }
+func (who Identity) Restricted() bool {
+	return len(who.Models) > 0 || len(who.Accounts) > 0 || who.Owner != ""
+}
 
 // Allows says one of ids is among the key's models; any, for a key that
 // lists none. An Identity's models are already HeldModels: a key that
 // names accounts and no model may use its accounts' providers' models.
 func (who Identity) Allows(ids ...string) bool {
 	if len(who.Models) == 0 {
-		return true
+		// a user's key is never an all-models key: its explicit empty
+		// grant (or one whose open models are all gone) allows none
+		return who.Owner == ""
 	}
 	for _, id := range ids {
 		if id != "" && ModelAllowed(who.Models, id) {

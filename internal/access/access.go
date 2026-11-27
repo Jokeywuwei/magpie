@@ -26,11 +26,24 @@ import (
 )
 
 const Prefix = "sk-magpie-key-"
+
+// UserPrefix is a platform user's own key: distinct from the keys magpie
+// made for itself, so a turned-off or deleted user key is refused even on
+// this computer, where a stale magpie key has long been let on as no key.
+const UserPrefix = "sk-magpie-user-"
+
 const legacyLANPrefix = "sk-magpie-"
 const revokedLANPrefix = "sk-magpie-revoked-"
 
 func Managed(secret string) bool {
 	return strings.HasPrefix(secret, legacyLANPrefix)
+}
+
+// UserSecret: secret has a user key's form. A request carrying one is
+// never taken as an anonymous request from this computer: if it isn't an
+// enabled user key, it is refused.
+func UserSecret(secret string) bool {
+	return strings.HasPrefix(secret, UserPrefix)
 }
 
 // Named: secret has a named gateway key's form (sk-magpie-…), or is the
@@ -135,6 +148,29 @@ type Key struct {
 	LAN    bool   `json:"lan,omitempty"` // default key and durable migration marker
 	Secret string `json:"secret,omitempty"`
 	Masked string `json:"masked,omitempty"`
+	// Owner is the platform account a user's key belongs to (internal/
+	// identity): "" for the keys magpie made for itself, its sharing key
+	// and the administrator's. Only a user's own key has it, only such a
+	// key is kept hashed, and the gateway checks its owner is enabled.
+	Owner string `json:"owner,omitempty"`
+	// Hash is SHA-256 of a user key's secret, as hex. Secret stays empty
+	// then: the full key is shown once, when it is made, and never here.
+	Hash   string `json:"hash,omitempty"`
+	Prefix string `json:"prefix,omitempty"` // the first characters, to name it in a list
+	// ModelsSet says a user's Models are the grant it was made with: a
+	// key from before this field has none and is filled once from the
+	// platform's open models, so an empty list is no grant at all, never
+	// every model. Magpie's own and the administrator's keys leave it
+	// unset and keep the old empty-is-all meaning.
+	ModelsSet bool `json:"modelsSet,omitempty"`
+	// LegacyModels marks a user key whose empty model list was filled
+	// once from the platform's open models when this rule arrived.
+	LegacyModels bool `json:"legacyModels,omitempty"`
+	// CreatedAt is when a user key was made; LastUsed is when it last
+	// signed a request, at most a minute stale (the store is written for
+	// that once a minute, not on every request).
+	CreatedAt time.Time `json:"createdAt,omitzero"`
+	LastUsed  time.Time `json:"lastUsed,omitzero"`
 	// Limit is the key's own budget (#585); nil for none.
 	Limit *Limit `json:"limit,omitempty"`
 	// More are its limits after the first (#2227), each a window of its
@@ -144,6 +180,8 @@ type Key struct {
 	// Models are the models the key may use (#882): "<provider>/<model>",
 	// "<provider>/*" or a group's "group/<name>"; none for every model,
 	// unless it lists accounts: then its accounts' providers' (HeldModels).
+	// A user's key is never given every model by an empty list: its own
+	// grant (ModelsSet) is exact, and is empty only when it may use none.
 	Models []string `json:"models,omitempty"`
 	// Aliases are the names the key gives models (tsingchao on X): a name
 	// its client asks by, the model "<provider>/<model>" it stands for.
@@ -264,9 +302,13 @@ const MaxKeyConcurrency = 1000
 // models and the accounts it may use.
 type Identity struct {
 	KeyID, KeyName string
-	Limit          *Limit
-	More           []Limit
-	Models         []string
+	// Owner is the platform account the user's key belongs to, "" for
+	// magpie's own and the administrator's keys. It is set only from the
+	// key store: no header, query or model id can name it.
+	Owner  string
+	Limit  *Limit
+	More   []Limit
+	Models []string
 	// Aliases are Key.Aliases; an issued key has none.
 	Aliases map[string]string
 	// AccountModels says Models are only HeldModels' "<provider>/*" of
@@ -382,6 +424,16 @@ func List() ([]Key, error) {
 	}
 	for i := range keys {
 		k := &keys[i]
+		if k.Owner != "" {
+			// a user's key is known by its prefix; its hash never leaves
+			if k.Prefix != "" {
+				k.Masked = k.Prefix + "…"
+			} else {
+				k.Masked = "…"
+			}
+			k.Secret, k.Hash = "", ""
+			continue
+		}
 		if len(k.Secret) > 8 {
 			prefix := legacyLANPrefix
 			if strings.HasPrefix(k.Secret, Prefix) {
@@ -395,7 +447,7 @@ func List() ([]Key, error) {
 				k.Masked += k.Secret[len(k.Secret)-4:]
 			}
 		}
-		k.Secret = ""
+		k.Secret, k.Hash = "", ""
 	}
 	return keys, nil
 }
@@ -591,9 +643,24 @@ func Update(action string, in Change) (string, error) {
 				if err != nil {
 					return "", err
 				}
-				secret = Prefix + token
+				if keys[i].Owner != "" {
+					secret = UserPrefix + token
+				} else {
+					secret = Prefix + token
+				}
 			}
-			keys[i].Secret = secret
+			if keys[i].Owner != "" {
+				// a user's key is kept hashed even when rotated from the
+				// management API: the new secret is shown by that call once
+				if in.Secret != "" {
+					if _, err = ownSecret(in.Secret, slices.Delete(slices.Clone(keys), i, i+1)); err != nil {
+						return "", err
+					}
+				}
+				keys[i].Secret, keys[i].Hash, keys[i].Prefix = "", hashSecret(secret), prefixOf(secret)
+			} else {
+				keys[i].Secret = secret
+			}
 		case "rename-key":
 			keys[i].Name = name
 		case "limit-key":
@@ -670,6 +737,15 @@ func Update(action string, in Change) (string, error) {
 			if err != nil {
 				return "", err
 			}
+			// An ownerless key's empty list is every model, as it always was.
+			// A platform user's key is a grant of exact models: empty is not
+			// every model, and silently storing it made a full-scope key.
+			if keys[i].Owner != "" {
+				if len(ms) == 0 {
+					return "", errors.New("a platform user's key needs at least one model: turn the key off to stop it")
+				}
+				keys[i].ModelsSet = true
+			}
 			keys[i].Models = ms
 		case "aliases-key":
 			as, err := CleanAliases(in.Aliases)
@@ -693,6 +769,16 @@ func Update(action string, in Change) (string, error) {
 			mcp, err := CleanMCP(in.MCP)
 			if err != nil {
 				return "", err
+			}
+			// A platform user's key gets model calls alone in this release:
+			// its tools are refused even if this store says otherwise.
+			if keys[i].Owner != "" {
+				if len(mcp) == 0 {
+					mcp = []string{NoMCP}
+				}
+				if len(mcp) != 1 || mcp[0] != NoMCP {
+					return "", errors.New("a platform user's key can't use MCP servers or tools")
+				}
 			}
 			keys[i].MCP = mcp
 		case "quotas-key":
@@ -1070,7 +1156,7 @@ func CleanAdmin(v string) (string, error) {
 // adminOf is the management level a key really has: none for a key that
 // can't hold it, whatever the file says.
 func adminOf(k Key) string {
-	if k.Issuer != "" || k.ReadOnly || k.Browser || !k.Expires.IsZero() || k.LAN {
+	if k.Owner != "" || k.Issuer != "" || k.ReadOnly || k.Browser || !k.Expires.IsZero() || k.LAN {
 		return ""
 	}
 	return k.Admin
@@ -1079,5 +1165,5 @@ func adminOf(k Key) string {
 // memoryOf is whether a key really may use Magpie Memory from another
 // computer: never one that can't hold it, whatever the file says.
 func memoryOf(k Key) bool {
-	return k.Memory && k.Issuer == "" && !k.ReadOnly && !k.Browser && k.Expires.IsZero() && !k.LAN
+	return k.Owner == "" && k.Memory && k.Issuer == "" && !k.ReadOnly && !k.Browser && k.Expires.IsZero() && !k.LAN
 }

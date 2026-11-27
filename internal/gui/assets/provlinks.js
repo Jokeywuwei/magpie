@@ -45,6 +45,9 @@ const SHEET_ROWS = {
   claude: [["Prompt cache · main conversation", ".claude-cache", 0], ["Prompt cache · subagents", ".claude-cache", 1], ["Commit signature (Co-Authored-By)", ".claude-attribution", 0]],
 };
 function sheetLinks(box) {
+  // an agent's sheet lives on the Agents page, which the relay no longer
+  // has: these rows have nowhere to open
+  if (typeof PRODUCT_HIDES !== "undefined" && PRODUCT_HIDES.includes("agents")) return;
   const by = new Map();
   for (const a of state.agents) {
     if (a.id.includes("@wsl:") || !agentPrefsOf(a)) continue;

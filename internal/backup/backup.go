@@ -118,9 +118,14 @@ type Bundle struct {
 	// put back, memory by memory, never put over what is there. Nil from
 	// a magpie before it, or with no memory.
 	Memory *memory.Bundle `json:"memory,omitempty"`
+	// Platform is the user portal's own state: accounts, sessions, the
+	// open-model policy and the registration switch. It travels with a full
+	// backup (keys true) and is nil in a backup without keys, from an older
+	// magpie, or when none of those files exists.
+	Platform *Platform `json:"platform,omitempty"`
 	// Usage is the history of the calls made here and of the accounts'
-	// windows (WithUsage): merged where it is put back, never put over
-	// what is there. Nil when left out, and from a magpie before it.
+	// windows (WithUsage): merged where it is put back, never put over what
+	// is there. Nil when left out, and from a magpie before it.
 	Usage *Usage `json:"usage,omitempty"`
 }
 
@@ -213,10 +218,11 @@ var ErrCorrupt = errors.New("not a magpie backup")
 // ErrCorrupt does, but is never rebuilt over by a sync on its own.
 var ErrNotBackup = errors.New("not a magpie backup")
 
-// BundleVersion is the bundle's structure: 2 carries the per-part
+// BundleVersion is the bundle's structure: 3 carries the platform state
+// (accounts, sessions, model access, registration); 2 carries the per-part
 // credential markers (ProvidersKeys, SettingsKeys, LibraryKeys) as their
 // own three-state flags; 1 and before had the whole-bundle Keys alone.
-const BundleVersion = 2
+const BundleVersion = 3
 
 // Flag is a per-part credential marker as a bundle field takes one: the
 // part's own, written when a sync merged it. Absent (nil) is a whole
@@ -248,7 +254,7 @@ func (b Bundle) scopedKeys(part string) bool {
 // header that looks like one, and the library's servers no environment
 // variable or header that looks like one (their names stay).
 func Collect(keys bool, app string) (Bundle, error) {
-	b := Bundle{Version: 1, Created: time.Now().UTC(), App: app, Keys: keys}
+	b := Bundle{Version: BundleVersion, Created: time.Now().UTC(), App: app, Keys: keys}
 	// a providers.json that can't be read stops the backup: carried as no
 	// providers, it would take them all away where it is put back, or where
 	// sync mirrors it
@@ -284,6 +290,12 @@ func Collect(keys bool, app string) (Bundle, error) {
 			b.AccountGroups = &groups
 		} else if !errors.Is(err, os.ErrNotExist) {
 			return b, err
+		}
+		// the portal's accounts and policy are not credentials, but they
+		// are what makes a user key mean anything after a restore. A
+		// --no-keys backup leaves them out with the keys.
+		if b.Platform, err = collectPlatform(); err != nil {
+			return b, fmt.Errorf("platform state: %w", err)
 		}
 	}
 	for _, p := range stored {
@@ -485,10 +497,13 @@ type Parts struct {
 	// Usage merges the backup's usage history into this computer's
 	// (usage.MergeLog): a call here already is never added again.
 	Usage bool
+	// Platform puts the portal's accounts, sessions, model access and
+	// registration switch back; nothing from an older backup.
+	Platform bool
 }
 
 // All is every part.
-var All = Parts{Providers: true, Settings: true, Profiles: true, Agents: true, Library: true, SignIns: true, Memory: true, Usage: true}
+var All = Parts{Providers: true, Settings: true, Profiles: true, Agents: true, Library: true, SignIns: true, Memory: true, Usage: true, Platform: true}
 
 // Result says what a restore did.
 type Result struct {
@@ -502,6 +517,7 @@ type Result struct {
 	Plugins      []string          `json:",omitempty"`
 	PluginErrors map[string]string `json:",omitempty"`
 	Settings     bool
+	Platform     bool `json:",omitempty"` // the portal's accounts and policy came back
 	Profiles     int
 	Agents       int      // agent fields changed
 	Skipped      []string // agent fields left alone: the agent is not on this machine, or the value failed
@@ -524,6 +540,9 @@ type Result struct {
 // machine are set.
 func Restore(b Bundle, parts Parts) (Result, error) {
 	var r Result
+	if b.Version > BundleVersion {
+		return r, errors.New("this backup was made by a newer magpie; update magpie to put it back")
+	}
 	// the sign-ins first: the subscriptions the providers name are signed
 	// in to then, and aren't listed as not signed in (SignIn)
 	if parts.SignIns && b.SignIns != nil {
@@ -720,6 +739,12 @@ func Restore(b Bundle, parts Parts) (Result, error) {
 			return r, fmt.Errorf("the usage history: %w", err)
 		}
 		r.Usage = &n
+	}
+	if parts.Platform && b.Platform != nil {
+		if err := restorePlatform(b.Platform); err != nil {
+			return r, err
+		}
+		r.Platform = true
 	}
 	return r, nil
 }

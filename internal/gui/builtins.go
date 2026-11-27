@@ -62,8 +62,18 @@ type builtinJSON struct {
 }
 
 // builtinsState composes plugins.yml again, brings the runtime to it, and
-// says every built-in plugin, in their order.
-func builtinsState() []builtinJSON {
+// says every built-in plugin, in their order. The app's own window sees all.
+func builtinsState() []builtinJSON { return builtinsStateFor(false) }
+
+// removedBuiltins are the built-ins the Web relay's page does not offer:
+// its product has no Agents, Sessions or Library. The app's own window
+// keeps them, and so does the runtime: only the page's list and switches
+// leave them out.
+var removedBuiltins = map[string]bool{"sessions": true, "library": true}
+
+// builtinsStateFor is builtinsState for the Web relay's page (web), which
+// leaves removedBuiltins out, or for the app's own window.
+func builtinsStateFor(web bool) []builtinJSON {
 	cs, err := pluginrt.Refresh()
 	byID := map[string]pluginrt.Composed{}
 	for _, c := range cs {
@@ -77,6 +87,9 @@ func builtinsState() []builtinJSON {
 	}
 	out := []builtinJSON{}
 	for _, m := range pluginrt.Registered() {
+		if web && removedBuiltins[m.ID] {
+			continue
+		}
 		c, s := byID[m.ID], st[m.ID]
 		j := builtinJSON{ID: m.ID, Name: m.Name, Sub: m.Sub, On: s.State == pluginrt.Active, Chosen: c.Chosen, Source: c.Source, State: s.State, Why: s.Why, InUse: c.InUse, Parts: s.Parts, Schema: m.Schema(), Config: c.Config}
 		j.SetAt, j.Opens = m.SetAt, m.Opens
@@ -146,10 +159,12 @@ func builtinConfig(list []builtinJSON) map[string]map[string]any {
 // builtinRoutes: GET /api/plugins/builtin is every built-in plugin; POST
 // {"id", "on"} switches one, kept in plugins.yml as the user's own choice,
 // and {"id", "config"} sets its settings, only as their schema allows.
-// One in use is refused off.
-func builtinRoutes(mux *http.ServeMux) {
+// One in use is refused off. web is the Web relay's page: it is not given
+// removedBuiltins at all, and a switch or config for one is refused as
+// unknown, so the page has no hidden row and no other way in.
+func builtinRoutes(mux *http.ServeMux, web bool) {
 	mux.HandleFunc("GET /api/plugins/builtin", func(rw http.ResponseWriter, r *http.Request) {
-		writeJSON(rw, builtinsState())
+		writeJSON(rw, builtinsStateFor(web))
 	})
 	mux.HandleFunc("POST /api/plugins/builtin", func(rw http.ResponseWriter, r *http.Request) {
 		var in struct {
@@ -161,8 +176,12 @@ func builtinRoutes(mux *http.ServeMux) {
 			fail(rw, err)
 			return
 		}
+		if web && removedBuiltins[in.ID] {
+			fail(rw, fmt.Errorf("no built-in plugin %q", in.ID))
+			return
+		}
 		var b *builtinJSON
-		for _, x := range builtinsState() {
+		for _, x := range builtinsStateFor(web) {
 			if x.ID == in.ID {
 				b = &x
 				break
@@ -192,6 +211,6 @@ func builtinRoutes(mux *http.ServeMux) {
 			fail(rw, err)
 			return
 		}
-		writeJSON(rw, builtinsState())
+		writeJSON(rw, builtinsStateFor(web))
 	})
 }

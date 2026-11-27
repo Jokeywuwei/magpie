@@ -99,7 +99,7 @@ func TestWebAppAddsToHomeScreen(t *testing.T) {
 	}
 	var raw map[string]any
 	json.Unmarshal(rec.Body.Bytes(), &raw)
-	if raw["name"] != "magpie" || raw["display"] != "standalone" || m.StartURL == "" {
+	if raw["name"] != "MiniRelay" || raw["display"] != "standalone" || m.StartURL == "" {
 		t.Errorf("manifest: name %v, display %v, start_url %q", raw["name"], raw["display"], m.StartURL)
 	}
 	big := false
@@ -132,8 +132,15 @@ func TestWebAppAddsToHomeScreen(t *testing.T) {
 		{"POST", "/manifest.json"},
 		{"PUT", "/icons/icon-512.png"},
 	} {
-		if rec := do(c.method, c.path, false); rec.Code != http.StatusUnauthorized {
-			t.Errorf("%s %s without the cookie: %d, want 401", c.method, c.path, rec.Code)
+		rec := do(c.method, c.path, false)
+		// the management page itself sends a browser to the platform
+		// sign-in; every other path is still the page key's 401
+		want := http.StatusUnauthorized
+		if c.path == "/" && c.method == "GET" {
+			want = http.StatusFound
+		}
+		if rec.Code != want {
+			t.Errorf("%s %s without the cookie: %d, want %d", c.method, c.path, rec.Code, want)
 		}
 	}
 }

@@ -80,10 +80,12 @@ func TestWebKey(t *testing.T) {
 // the start-up log.
 func TestWebGuardBookmark(t *testing.T) {
 	const key = "0123456789abcdef-2033"
-	h := webHandler("3430", key, webCookieAge, nil, http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) { rw.WriteHeader(http.StatusTeapot) }))
-	do := func(r *http.Request) *httptest.ResponseRecorder {
+	next := http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) { rw.WriteHeader(http.StatusTeapot) })
+	h := webHandler("3430", key, webCookieAge, nil, next)
+	g := webGuard("magpie_web_3430", key, webCookieAge, nil, next)
+	do := func(handler http.Handler, r *http.Request) *httptest.ResponseRecorder {
 		rec := httptest.NewRecorder()
-		h.ServeHTTP(rec, r)
+		handler.ServeHTTP(rec, r)
 		return rec
 	}
 	page := func(cookie string) *http.Request {
@@ -96,36 +98,43 @@ func TestWebGuardBookmark(t *testing.T) {
 	}
 
 	// the link's cookie, and the form's below, are Chrome's high priority
-	link := do(httptest.NewRequest("GET", "/?view=usage&k="+key, nil))
+	link := do(h, httptest.NewRequest("GET", "/?view=usage&k="+key, nil))
 	if sc := link.Header().Get("Set-Cookie"); link.Code != http.StatusSeeOther || !strings.HasSuffix(sc, "; Priority=High") || !strings.HasPrefix(sc, "magpie_web_3430="+key+";") {
 		t.Fatalf("link: %d %q", link.Code, sc)
 	}
 
+	// no key and no session: the administrator sign-in, not the old form
+	redirect := do(h, page(""))
+	if redirect.Code != http.StatusFound || redirect.Header().Get("Location") != "/portal/login?next=%2F%3Fview%3Dusage" {
+		t.Fatalf("no cookie and no session: %d %q", redirect.Code, redirect.Header().Get("Location"))
+	}
+
 	// the reporter's case: the stale value first, the right one after
-	if c := do(page("magpie_web_3430=0123456789abcdef-old; magpie_web_3430=" + key)).Code; c != http.StatusTeapot {
+	if c := do(g, page("magpie_web_3430=0123456789abcdef-old; magpie_web_3430="+key)).Code; c != http.StatusTeapot {
 		t.Fatalf("stale cookie first: %d", c)
 	}
 
-	// no cookie: a form, saying none was sent, and never the key
-	rec := do(page(""))
+	// the page key's own way in still has its form, saying none was sent,
+	// and never the key
+	rec := do(g, page(""))
 	body := rec.Body.String()
 	if rec.Code != http.StatusUnauthorized || !strings.Contains(body, "sent no sign-in cookie") || !strings.Contains(body, `action="`+webSignInPath+`"`) || !strings.Contains(body, `value="/?view=usage"`) || strings.Contains(body, key) {
 		t.Fatalf("no cookie: %d %s", rec.Code, body)
 	}
 	// a cookie with another key: says so
-	if body := do(page("magpie_web_3430=0123456789abcdef-old")).Body.String(); !strings.Contains(body, "holds a key that isn") {
+	if body := do(g, page("magpie_web_3430=0123456789abcdef-old")).Body.String(); !strings.Contains(body, "holds a key that isn") {
 		t.Fatalf("other key: %s", body)
 	}
 	// the page's own fetches get a plain 401 with the reason
 	r := httptest.NewRequest("GET", "/api/state", nil)
-	if rec := do(r); rec.Code != http.StatusUnauthorized || !strings.Contains(rec.Body.String(), "sent no sign-in cookie") {
+	if rec := do(h, r); rec.Code != http.StatusUnauthorized || !strings.Contains(rec.Body.String(), "sent no sign-in cookie") {
 		t.Fatalf("api: %d %s", rec.Code, rec.Body.String())
 	}
 
 	post := func(k, back string) *httptest.ResponseRecorder {
 		r := httptest.NewRequest("POST", webSignInPath, strings.NewReader(url.Values{"key": {k}, "back": {back}}.Encode()))
 		r.Header.Set("Content-Type", "application/x-www-form-urlencoded")
-		return do(r)
+		return do(h, r)
 	}
 	// a wrong key pasted: turned away again, no cookie
 	if rec := post("nope-nope-nope-nope", "/?view=usage"); rec.Code != http.StatusUnauthorized || len(rec.Result().Cookies()) != 0 {

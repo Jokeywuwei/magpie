@@ -24,7 +24,10 @@ func init() {
 			}
 			return 0, nil
 		},
-		Parts:  []pluginrt.Part{{Slot: "nav.page", Key: "sessions"}},
+		Parts: []pluginrt.Part{{Slot: "nav.page", Key: "sessions"}},
+		// Loaded by the app's own window and its browser page; the Web
+		// relay's page (index-web.html) leaves them out, and kernel.js
+		// makes no page for it there.
 		Client: []string{"i18n.js", "sessions.css", "client.js"},
 	})
 }

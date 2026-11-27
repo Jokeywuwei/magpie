@@ -88,7 +88,9 @@ for (const engine of (process.env.BROWSER ? [process.env.BROWSER] : ["chromium",
     assert.equal(await attr('meta[name="apple-mobile-web-app-status-bar-style"]', "content"), "default", "the status bar keeps its own ground, the page starting under it");
     const manifest = JSON.parse(await fs.readFile(path.join(assets, await attr('link[rel="manifest"]', "href")), "utf8"));
     assert.equal(manifest.display, "standalone");
-    assert.equal(manifest.name, "magpie");
+    assert.equal(manifest.name, "MiniRelay");
+    assert.equal(manifest.background_color, "#f7f7f7");
+    assert.equal(manifest.theme_color, "#f7f7f7");
     // the files are there (TestWebAppAddsToHomeScreen checks how they are served)
     for (const ic of [...manifest.icons, { src: await attr('link[rel="apple-touch-icon"]', "href") }]) {
       await fs.access(path.join(assets, ic.src));
@@ -117,7 +119,7 @@ for (const engine of (process.env.BROWSER ? [process.env.BROWSER] : ["chromium",
     const page = await openStandalone(t, phone, { top: 47, bottom: 34, left: 0, right: 0 });
     assert.equal(await page.evaluate(() => matchMedia("(display-mode: standalone)").matches), true, "the page is a home-screen app");
     assert.equal(await page.evaluate(() => matchMedia("(pointer: coarse)").matches), true, "on a touch screen");
-    assert.deepEqual(await themeColours(page), ["#f4f4f6"], "the light window's colour");
+    assert.deepEqual(await themeColours(page), ["#f7f7f7"], "the light window's colour");
     for (const s of [".top .brand", ".top .actions", ".top #nav"]) {
       const b = await box(page, s);
       assert.ok(b.y >= 47, `${s} under the status bar: ${b.y}`);
@@ -135,6 +137,6 @@ for (const engine of (process.env.BROWSER ? [process.env.BROWSER] : ["chromium",
 
   test(`${engine}: opened from the home screen in the dark`, async (t) => {
     const page = await openStandalone(t, { ...phone, colorScheme: "dark" }, { top: 47, bottom: 34, left: 0, right: 0 });
-    assert.deepEqual(await themeColours(page), ["#1a1a1e"], "the dark window's colour");
+    assert.deepEqual(await themeColours(page), ["#0a0a0a"], "the dark window's colour");
   });
 }

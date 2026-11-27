@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#0a0a0a">
+<meta name="robots" content="noindex">
+<title data-t>MiniRelay · AI model relay platform</title>
+<link rel="icon" href="/portal/bird.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/portal/portal.css">
+</head>
+<body data-page="__PAGE__">
+<a class="skip" href="#main" data-t>Skip to main content</a>
+
+<main id="main" class="wrap">
+  <section class="page" data-view="home">
+    <div class="hero">
+      <p class="eyebrow" data-t>AI model relay platform</p>
+      <h1><span data-t>One entry,</span><br><span data-t>every AI model</span></h1>
+      <p class="lede" data-t>One API for OpenAI, Anthropic and Gemini protocols; MiniRelay handles provider routing, fallback, keys and usage, keeping the integration inside the platform.</p>
+      <div class="cta" id="homeCta">
+        <a class="btn primary lg" href="/portal/register" data-t>Create an account</a>
+        <a class="btn ghost lg" href="/portal/login" data-t>Sign in to the console</a>
+      </div>
+      <p class="hero-note" data-t>Users sign in to the web with an account and call models with an API Key; the two are managed separately.</p>
+    </div>
+
+    <div class="features" aria-label="Platform capabilities" data-ta="Platform capabilities">
+      <article class="card feature">
+        <span class="ico" aria-hidden="true">⇄</span>
+        <h3 data-t>Multi-protocol support</h3>
+        <p data-t>OpenAI Chat Completions, Responses, Anthropic Messages and Gemini generateContent, forwarded through one entry as the client sends them.</p>
+      </article>
+      <article class="card feature">
+        <span class="ico" aria-hidden="true">⤯</span>
+        <h3 data-t>Routing and fallback</h3>
+        <p data-t>Choose providers and accounts by quota, order, weight or speed; a failure moves to the next available target.</p>
+      </article>
+      <article class="card feature">
+        <span class="ico" aria-hidden="true">◫</span>
+        <h3 data-t>Keys and usage</h3>
+        <p data-t>API Keys are separate from web accounts and can be disabled on their own; the Gateway records requests, models, tokens and latency.</p>
+      </article>
+      <article class="card feature">
+        <span class="ico" aria-hidden="true">◌</span>
+        <h3 data-t>Privacy and masking</h3>
+        <p data-t>Keys, personal data and custom words are recognised and replaced before sending, then restored in the reply, so less sensitive data leaves the platform.</p>
+      </article>
+    </div>
+
+    <section class="quickstart" aria-labelledby="quickstart-title">
+      <div class="section-head">
+        <p class="eyebrow" data-t>Quick start</p>
+        <h2 id="quickstart-title" data-t>Three steps to call a model</h2>
+      </div>
+      <ol class="steps">
+        <li><b data-t>Sign in to the console</b><span data-t>Use your platform account to open your console.</span></li>
+        <li><b data-t>Create an API Key</b><span data-t>The console issues, disables and deletes keys per account (wired in Phase 3).</span></li>
+        <li><b data-t>Replace the Base URL</b><span data-t>Point your client at the platform and call models with the key.</span></li>
+      </ol>
+      <pre class="code" aria-label="Call example" data-ta="Call example"><code>curl https://&lt;your platform address&gt;/v1/chat/completions \
+  -H "Authorization: Bearer &lt;YOUR_API_KEY&gt;" \
+  -H "Content-Type: application/json" \
+  -d '{"model":"&lt;model ID&gt;","messages":[{"role":"user","content":"hello"}]}'</code></pre>
+      <p class="note" data-t>Find model IDs in the model plaza; models the platform has not opened do not appear in the call list.</p>
+    </section>
+  </section>
+
+  <section class="page" data-view="login">
+    <div class="auth-shell">
+      <a class="auth-brand" href="/portal/" aria-label="MiniRelay" data-ta="MiniRelay home">
+        <span class="mark" aria-hidden="true"></span>
+        <span class="brand-name">MiniRelay</span>
+      </a>
+      <div class="auth-card">
+        <p class="eyebrow" data-t>Welcome back</p>
+        <h1 data-t>Sign in</h1>
+        <p class="sub" data-t>Use your email or username to open the console</p>
+        <form id="loginForm" novalidate>
+          <label class="field"><span data-t>Email or username</span>
+            <input name="email" type="text" autocomplete="username" inputmode="email" placeholder="you@example.com or username" data-tp="you@example.com or username" required>
+          </label>
+          <label class="field"><span data-t>Password</span>
+            <input name="password" type="password" autocomplete="current-password" placeholder="At least 8 characters" data-tp="At least 8 characters" required>
+          </label>
+          <p class="form-error" id="loginError" role="alert" hidden></p>
+          <button class="btn primary wide" type="submit" data-t>Sign in</button>
+        </form>
+        <p class="switch"><span data-t>No account yet?</span> <a href="/portal/register" data-t>Register</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="page" data-view="register">
+    <div class="auth-shell">
+      <a class="auth-brand" href="/portal/" aria-label="MiniRelay" data-ta="MiniRelay home">
+        <span class="mark" aria-hidden="true"></span>
+        <span class="brand-name">MiniRelay</span>
+      </a>
+      <div class="auth-card">
+        <p class="eyebrow" data-t>Create an account</p>
+        <h1 data-t>Register</h1>
+        <p class="sub" data-t>You enter the console after registering; API Keys and accounts are managed separately</p>
+        <form id="registerForm" novalidate>
+          <label class="field"><span data-t>Email</span>
+            <input name="email" type="email" autocomplete="username" inputmode="email" placeholder="you@example.com" required>
+          </label>
+          <label class="field"><span><span data-t>Display name</span> <small data-t>Optional</small></span>
+            <input name="name" type="text" autocomplete="nickname" placeholder="Team or your name" data-tp="Team or your name" maxlength="80">
+          </label>
+          <label class="field"><span data-t>Password</span>
+            <input name="password" type="password" autocomplete="new-password" placeholder="At least 8 characters" data-tp="At least 8 characters" required>
+          </label>
+          <label class="field"><span data-t>Confirm password</span>
+            <input name="confirm" type="password" autocomplete="new-password" placeholder="Enter the password again" data-tp="Enter the password again" required>
+          </label>
+          <p class="form-error" id="registerError" role="alert" hidden></p>
+          <button class="btn primary wide" type="submit" data-t>Create an account</button>
+        </form>
+        <p class="switch"><span data-t>Already have an account?</span> <a href="/portal/login" data-t>Sign in</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="page" data-view="console">
+    <div class="page-head">
+      <div class="page-title">
+        <h1 data-t>Overview</h1>
+        <p class="sub" data-t>Usage and requests for this account</p>
+      </div>
+      <div class="page-actions">
+        <div class="account" data-account></div>
+      </div>
+    </div>
+
+    <div class="summary-strip" id="consoleSummary">
+      <div class="summary-cell"><span class="label" data-t>Total requests</span><b class="summary-figure" data-summary="calls">—</b></div>
+      <div class="summary-cell"><span class="label" data-t>Success</span><b class="summary-figure" data-summary="success">—</b></div>
+      <div class="summary-cell"><span class="label" data-t>Failed</span><b class="summary-figure" data-summary="failed">—</b></div>
+      <div class="summary-cell"><span class="label" data-t>Total tokens</span><b class="summary-figure" data-summary="total">—</b></div>
+    </div>
+
+    <article class="card usage-card" id="usageCard">
+      <div class="panel-head usage-head">
+        <div>
+          <h2 data-t>Usage statistics</h2>
+          <p class="key-sub" data-t>Real Gateway calls made by this account's API Keys, for the selected time range.</p>
+        </div>
+        <div class="segs" id="usagePeriod" role="group" aria-label="Time range">
+          <button class="chip" type="button" data-period="today" data-t>Today</button>
+          <button class="chip" type="button" data-period="yesterday" data-t>Yesterday</button>
+          <button class="chip on" type="button" data-period="7d" data-t>Last 7 days</button>
+          <button class="chip" type="button" data-period="30d" data-t>Last 30 days</button>
+          <button class="chip" type="button" data-period="all" data-t>All</button>
+        </div>
+      </div>
+      <p class="form-error" id="usageError" role="alert" hidden></p>
+      <div class="usage-stats" id="usageStats" aria-live="polite">
+        <div class="stat"><span data-t>Total requests</span><b data-stat="calls">—</b></div>
+        <div class="stat"><span data-t>Success</span><b data-stat="success">—</b></div>
+        <div class="stat"><span data-t>Failed</span><b data-stat="failed">—</b></div>
+        <div class="stat"><span data-t>Input tokens</span><b data-stat="input">—</b></div>
+        <div class="stat"><span data-t>Output tokens</span><b data-stat="output">—</b></div>
+        <div class="stat"><span data-t>Total tokens</span><b data-stat="total">—</b></div>
+      </div>
+    </article>
+
+    <div class="charts-grid">
+      <article class="card chart-card">
+        <div class="chart-card-head">
+          <h3 data-t>Daily usage</h3>
+          <span data-t>By total tokens</span>
+        </div>
+        <div class="usage-chart" id="usageChart" aria-label="Daily token usage trend" data-ta="Daily token usage trend"></div>
+        <div class="usage-axis" id="usageAxis"></div>
+      </article>
+      <article class="card chart-card">
+        <div class="chart-card-head">
+          <h3 data-t>Model usage</h3>
+          <span data-t>By total tokens</span>
+        </div>
+        <div id="usageModels"></div>
+        <div class="empty-state" id="usageModelsEmpty" hidden>
+          <span class="empty-ico" aria-hidden="true">◌</span>
+          <b data-t>No model calls in this time range.</b>
+          <p data-t>Model usage appears after this account's API Keys make calls.</p>
+        </div>
+      </article>
+    </div>
+
+    <article class="card logs-card" id="logsCard">
+      <div class="panel-head logs-head">
+        <div>
+          <h2 data-t>Request details</h2>
+          <p class="key-sub" data-t>Every request through the Gateway; only this account's records.</p>
+        </div>
+        <div class="log-filters">
+          <div class="segs" id="logStateFilters" role="group" aria-label="Status">
+            <button class="chip on" type="button" data-log-state="all" data-t>All</button>
+            <button class="chip" type="button" data-log-state="success" data-t>Success</button>
+            <button class="chip" type="button" data-log-state="failed" data-t>Failed</button>
+          </div>
+          <label class="visually-hidden" for="logModel" data-t>Model</label>
+          <select id="logModel"><option value="" data-t>All models</option></select>
+          <div class="log-auto">
+            <button class="am-toggle" id="logAuto" type="button" role="switch" aria-checked="false" aria-label="Auto refresh" data-ta="Auto refresh"></button>
+            <span data-t>Auto refresh</span>
+          </div>
+          <button class="btn ghost sm log-refresh" id="logRefresh" type="button" aria-label="Refresh" data-ta="Refresh">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14.5-4M4 5v6h6M4 13a8 8 0 0 0 14.5 4M20 19v-6h-6"/></svg>
+          </button>
+        </div>
+      </div>
+      <p class="form-error" id="logError" role="alert" hidden></p>
+      <div class="log-list" id="logList" aria-live="polite"></div>
+      <p class="key-empty" id="logEmpty" hidden data-t>No requests under these filters.</p>
+      <div class="log-foot">
+        <span id="logTotal"></span>
+        <div class="pager">
+          <button class="btn ghost sm" id="logPrev" type="button" data-t>Previous page</button>
+          <span id="logPage"></span>
+          <button class="btn ghost sm" id="logNext" type="button" data-t>Next page</button>
+        </div>
+      </div>
+    </article>
+
+    <p class="note" data-t>Requests are recorded by the Gateway; only this account's records are shown.</p>
+  </section>
+
+  <section class="page" data-view="keys">
+    <div class="page-head">
+      <div class="page-title">
+        <h1 data-t>API keys</h1>
+        <p class="sub" data-t>Keys used to call models, belonging to this account.</p>
+      </div>
+      <div class="page-actions">
+        <span class="tag" id="keyCount">—</span>
+        <button class="btn primary" id="keyNew" type="button" data-t>Create key</button>
+      </div>
+    </div>
+
+    <article class="card keys-card">
+      <p class="form-error" id="keyError" role="alert" hidden></p>
+      <form id="keyCreate" class="key-create" hidden novalidate>
+        <div class="key-create-main">
+          <label class="field"><span data-t>Name</span>
+            <input name="name" type="text" maxlength="120" placeholder="e.g. My laptop" data-tp="e.g. My laptop" autocomplete="off" required>
+          </label>
+          <div class="key-model-field">
+            <div class="key-model-head">
+              <span data-t>Models available</span>
+              <span class="key-model-all"><button class="linkish" id="keyModelsAll" type="button" data-t>Select all</button><button class="linkish" id="keyModelsNone" type="button" data-t>Select none</button></span>
+            </div>
+            <div class="key-model-pick" id="keyModelPick" aria-live="polite"></div>
+            <p class="key-model-note" id="keyModelNote" aria-live="polite"></p>
+          </div>
+        </div>
+        <div class="key-create-actions">
+          <button class="btn primary" type="submit" data-t>Create</button>
+          <button class="btn ghost" id="keyCancel" type="button" data-t>Cancel</button>
+        </div>
+      </form>
+      <div class="key-secret" id="keySecret" hidden>
+        <div class="key-secret-head"><b data-t>This is the full key, shown only once</b><span data-t>It is not shown again after closing or reloading; copy it now.</span></div>
+        <div class="key-secret-row">
+          <code id="keySecretValue"></code>
+          <button class="btn row-action sm" id="keyCopy" type="button" data-t>Copy</button>
+          <button class="btn ghost sm" id="keySecretClose" type="button" data-t>Close</button>
+        </div>
+      </div>
+      <div class="key-table-head" aria-hidden="true">
+        <span data-t>Name</span><span data-t>Key</span><span data-t>Model grants</span><span data-t>Status</span><span class="key-table-actions" data-t>Actions</span>
+      </div>
+      <div class="key-list" id="keyList" aria-live="polite"></div>
+      <p class="key-empty" id="keyEmpty" hidden data-t>No API Key yet. After creating one, paste it into your client's API Key field to call models.</p>
+    </article>
+  </section>
+
+  <section class="page" data-view="profile">
+    <div class="page-head">
+      <div class="page-title">
+        <h1 data-t>Profile</h1>
+        <p class="sub" data-t>Account details and token activity</p>
+      </div>
+      <div class="page-actions">
+        <button class="btn ghost" id="profileSignOut" type="button" data-t>Sign out</button>
+      </div>
+    </div>
+
+    <article class="card profile-top">
+      <div class="profile-avatar-wrap">
+        <span class="profile-avatar" id="profileAvatar" aria-hidden="true">—</span>
+        <span class="profile-badge" id="profileBadge">—</span>
+      </div>
+      <h2 class="profile-name" id="profileName">—</h2>
+      <div class="profile-meta">
+        <span class="profile-uid"><span data-t>Account ID</span> <code id="profileUid">—</code>
+          <button class="btn icon-btn" id="profileUidCopy" type="button" aria-label="Copy account ID" data-ta="Copy account ID">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M15 5H5a2 2 0 0 0-2 2v10"/></svg>
+          </button>
+        </span>
+        <span class="profile-joined" id="profileJoined"></span>
+      </div>
+      <div class="profile-stats">
+        <div class="profile-stat"><span data-t>Tokens · last year</span><b id="profileYear">—</b></div>
+        <div class="profile-stat"><span data-t>Peak day</span><b id="profilePeak">—</b></div>
+        <div class="profile-stat"><span data-t>Current streak</span><b id="profileCurrent">—</b></div>
+        <div class="profile-stat"><span data-t>Longest streak</span><b id="profileLongest">—</b></div>
+      </div>
+    </article>
+
+    <article class="card activity-card">
+      <div class="activity-head">
+        <h2 data-t>Token activity</h2>
+        <div class="segs" id="activityTabs" role="group" aria-label="Activity view" data-ta="Activity view">
+          <button class="chip on" type="button" data-activity="daily" data-t>Daily view</button>
+          <button class="chip" type="button" data-activity="weekly" data-t>Weekly view</button>
+          <button class="chip" type="button" data-activity="cumulative" data-t>Cumulative view</button>
+        </div>
+      </div>
+      <p class="form-error" id="profileError" role="alert" hidden></p>
+      <div class="heatmap-scroll">
+        <div class="heatmap" id="heatmap">
+          <div class="heatmap-months" id="heatmapMonths"></div>
+          <div class="heatmap-grid" id="heatmapGrid" role="img" aria-label="Token activity heatmap" data-ta="Token activity heatmap"></div>
+        </div>
+      </div>
+      <p class="heatmap-empty" id="heatmapEmpty" hidden data-t>No token activity yet</p>
+      <div class="heatmap-foot">
+        <span data-t>Less → More</span>
+        <span class="heatmap-legend" aria-hidden="true"><i class="l1"></i><i class="l2"></i><i class="l3"></i><i class="l4"></i><i class="l5"></i></span>
+      </div>
+    </article>
+
+    <div class="info-grid">
+      <div class="info-cell">
+        <span class="info-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+        <div class="info-main"><b class="info-value" id="infoEmail">—</b><span class="info-label" data-t>Login account</span></div>
+      </div>
+      <div class="info-cell">
+        <span class="info-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 20 6v5c0 4.5-3.4 7.6-8 9-4.6-1.4-8-4.5-8-9V6l8-3Z"/></svg></span>
+        <div class="info-main"><b class="info-value" id="infoRole">—</b><span class="info-label" data-t>Account permission</span></div>
+      </div>
+      <div class="info-cell">
+        <span class="info-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/></svg></span>
+        <div class="info-main"><b class="info-value" id="infoJoined">—</b><span class="info-label" data-t>Registered</span></div>
+      </div>
+      <div class="info-cell">
+        <span class="info-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="3.5"/><path d="m10.5 12.5 8-8m-3 0h3v3"/></svg></span>
+        <div class="info-main"><b class="info-value" id="infoKeyCount">—</b><span class="info-label" data-t>API Keys</span></div>
+        <a class="btn row-action sm info-action" href="/portal/keys" data-t>Manage keys</a>
+      </div>
+      <div class="info-cell">
+        <span class="info-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+        <div class="info-main"><b class="info-value" id="infoLastLogin">—</b><span class="info-label" data-t>Last sign-in</span></div>
+      </div>
+      <div class="info-cell">
+        <span class="info-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9h14M5 15h14M10 3 8 21M16 3l-2 18"/></svg></span>
+        <div class="info-main"><b class="info-value info-mono" id="infoUid">—</b><span class="info-label" data-t>Account ID</span></div>
+        <button class="btn icon-btn info-action" id="infoUidCopy" type="button" aria-label="Copy account ID" data-ta="Copy account ID">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M15 5H5a2 2 0 0 0-2 2v10"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <article class="card admin-entry" id="adminEntry" hidden>
+      <div class="panel-head"><h3 data-t>User registration</h3><span class="tag admin" data-t>Administrator</span></div>
+      <div class="admin-registration">
+        <div class="admin-registration-who">
+          <span id="registrationSub" data-t>Reading…</span>
+        </div>
+        <button class="am-toggle" id="registrationToggle" type="button" role="switch" aria-checked="false" aria-label="Allow new user registration" data-ta="Allow new user registration" disabled></button>
+      </div>
+      <p class="form-error" id="registrationError" role="alert" hidden></p>
+    </article>
+  </section>
+
+  <section class="page" data-view="models">
+    <div class="page-head">
+      <div class="page-title">
+        <h1 data-t>Model plaza</h1>
+        <p class="sub" data-t>Models the platform currently opens, from the Gateway's real catalogue. Closed models are not listed and cannot be called with a user key.</p>
+      </div>
+      <div class="page-actions">
+        <div class="account" data-account></div>
+      </div>
+    </div>
+
+    <div class="plaza-layout">
+      <aside class="provider-panel">
+        <p class="provider-head" id="providersLabel" data-t>Providers</p>
+        <div class="provider-list" id="providerList" role="group" aria-labelledby="providersLabel"></div>
+      </aside>
+
+      <section class="plaza-main" aria-labelledby="plazaProvider">
+        <p class="form-error" id="modelError" role="alert" hidden></p>
+
+        <div class="plaza-head">
+          <div class="plaza-title">
+            <h2 id="plazaProvider" data-t>All models</h2>
+            <p id="plazaCount" class="plaza-count">—</p>
+          </div>
+          <div class="plaza-controls">
+            <div class="segs" id="modelStateFilters" role="group" aria-label="Availability" data-ta="Availability">
+              <button class="chip on" type="button" data-avail="all" data-t>All</button>
+              <button class="chip" type="button" data-avail="available" data-t>Available</button>
+              <button class="chip" type="button" data-avail="unavailable" data-t>Unavailable</button>
+            </div>
+            <label class="search"><span class="visually-hidden" data-t>Search models</span>
+              <input id="modelSearch" type="search" placeholder="Search model name, ID or provider" data-tp="Search model name, ID or provider" autocomplete="off" spellcheck="false">
+            </label>
+          </div>
+        </div>
+
+        <div class="plaza-protocols">
+          <span class="plaza-label" data-t>Protocol</span>
+          <div class="chips" id="modelFilters" role="group" aria-label="Filter by protocol" data-ta="Filter by protocol">
+            <button class="chip on" type="button" data-filter="all" data-t>All</button>
+            <button class="chip" type="button" data-filter="openai">OpenAI</button>
+            <button class="chip" type="button" data-filter="anthropic">Anthropic</button>
+            <button class="chip" type="button" data-filter="gemini">Gemini</button>
+          </div>
+        </div>
+
+        <div class="model-grid" id="modelLoading" aria-hidden="true">
+          <div class="model-card skeleton"><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="model-card skeleton"><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+        <div class="model-grid" id="modelList" hidden aria-live="polite"></div>
+        <div class="empty card" id="modelEmpty" hidden>
+          <span class="empty-mark" aria-hidden="true">◇</span>
+          <b id="modelEmptyTitle" data-t>No models open yet</b>
+          <p id="modelEmptyText" data-t>When the administrator opens models, their names, providers, protocol support, availability and call examples appear here.</p>
+          <a class="btn ghost" id="modelEmptyAction" href="/portal/console" data-t>Go to the console</a>
+        </div>
+        <p class="note" id="modelNote" hidden></p>
+      </section>
+    </div>
+  </section>
+
+  <section class="page" data-view="admin-models">
+    <div class="page-head">
+      <div class="page-title">
+        <p class="eyebrow" data-t>Administrator · Model catalogue</p>
+        <h1 data-t>Model access</h1>
+        <p class="sub" data-t>This decides what the model plaza shows, which models user keys may request, and whether the Gateway passes them. Closing takes effect immediately.</p>
+      </div>
+      <div class="page-actions">
+        <a class="btn ghost" href="/portal/console" data-t>Back to the console</a>
+        <div class="account" data-account></div>
+      </div>
+    </div>
+
+    <div class="admin-summary card">
+      <div class="astat"><span data-t>Platform models</span><b id="adminModelTotal">—</b></div>
+      <div class="astat"><span data-t>Opened</span><b id="adminModelOpen" class="open">—</b></div>
+      <div class="astat"><span data-t>Closed</span><b id="adminModelClosed">—</b></div>
+    </div>
+
+    <div class="admin-groups-only card">
+      <div class="who">
+        <b data-t>Plaza shows routing groups only</b>
+        <p data-t>On: the model plaza and new API-key grants offer open routing groups alone. Provider models stay available to agents and administrators. Off: every open model is offered.</p>
+      </div>
+      <div class="am-toggle-wrap">
+        <button type="button" class="am-toggle" id="adminGroupsOnly" role="switch" aria-checked="false" aria-label="Plaza shows routing groups only" data-ta="Plaza shows routing groups only"></button>
+        <span class="am-toggle-label" id="adminGroupsOnlyLabel" data-t>Off</span>
+      </div>
+    </div>
+
+    <p class="form-error" id="adminModelsError" role="alert" hidden></p>
+    <div class="toolbar">
+      <label class="search"><span class="visually-hidden" data-t>Search models</span>
+        <input id="adminModelSearch" type="search" placeholder="Search model name, ID or provider" data-tp="Search model name, ID or provider" autocomplete="off" spellcheck="false">
+      </label>
+      <div class="chips" id="adminModelFilters" role="group" aria-label="Filter by open state" data-ta="Filter by open state">
+        <button class="chip on" type="button" data-state="all" data-t>All</button>
+        <button class="chip" type="button" data-state="open" data-t>Opened</button>
+        <button class="chip" type="button" data-state="closed" data-t>Closed</button>
+      </div>
+      <button class="btn ghost sm" id="adminModelsRefresh" type="button" data-t>Refresh</button>
+    </div>
+
+    <div class="empty card" id="adminModelsLoading">
+      <span class="empty-mark" aria-hidden="true">⋯</span>
+      <b data-t>Reading the model catalogue…</b>
+    </div>
+    <div class="admin-model-list" id="adminModelList" hidden aria-live="polite"></div>
+    <div class="empty card" id="adminModelsEmpty" hidden>
+      <span class="empty-mark" aria-hidden="true">◇</span>
+      <b id="adminModelsEmptyTitle" data-t>No models to manage yet</b>
+      <p id="adminModelsEmptyText" data-t>Add and enable providers and models in the original admin page first; they appear here automatically. Routing groups appear too once made.</p>
+      <a class="btn ghost" href="/" data-t>Open the original admin page</a>
+    </div>
+    <p class="note" data-t>Names and descriptions change what users see, not model IDs. A model that is open but temporarily unavailable is still listed and marked unavailable; the Gateway decides whether a call succeeds.</p>
+  </section>
+</main>
+
+<nav class="dock" id="dock" aria-label="Portal navigation" data-ta="Portal navigation"></nav>
+
+<footer class="footer">
+  <div class="footer-in">
+    <span class="footer-brand" data-t>MiniRelay · AI model relay platform</span>
+    <span class="sep" aria-hidden="true">·</span>
+    <span class="footer-nav">
+      <a href="/portal/" data-t>Home</a>
+      <a href="/portal/models" data-t>Model plaza</a>
+      <a href="/portal/console" data-t>Console</a>
+    </span>
+    <span class="lang-switch" role="group" aria-label="Language" data-ta="Language">
+      <button type="button" data-lang="zh" aria-pressed="true">中文</button>
+      <button type="button" data-lang="en" aria-pressed="false">English</button>
+    </span>
+  </div>
+</footer>
+
+<dialog class="modal" id="keyModelsDialog" aria-labelledby="keyModelsTitle">
+  <form class="modal-card" id="keyModelsForm" novalidate>
+    <div class="modal-head">
+      <div><p class="eyebrow">API Key</p><h2 id="keyModelsTitle" data-t>Model access</h2></div>
+      <button class="btn ghost sm" id="keyModelsClose" type="button" data-t>Close</button>
+    </div>
+    <p class="key-sub" id="keyModelsSub" data-t>This key may call only the checked models; a model the platform closed cannot be called even if it was checked.</p>
+    <div class="key-model-head"><span data-t>Open models</span><span class="key-model-all"><button class="linkish" id="keyDialogAll" type="button" data-t>Select all</button><button class="linkish" id="keyDialogNone" type="button" data-t>Select none</button></span></div>
+    <div class="key-model-pick" id="keyModelsPick" aria-live="polite"></div>
+    <p class="key-model-note" id="keyModelsNote" aria-live="polite"></p>
+    <p class="form-error" id="keyModelsError" role="alert" hidden></p>
+    <div class="modal-actions">
+      <button class="btn ghost" id="keyModelsCancel" type="button" data-t>Cancel</button>
+      <button class="btn primary" type="submit" data-t>Save model access</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog class="modal" id="modelDetail" aria-labelledby="detailName">
+  <div class="modal-card detail-card">
+    <div class="modal-head">
+      <div class="detail-title">
+        <p class="eyebrow" id="detailProvider"></p>
+        <h2 id="detailName"></h2>
+        <code id="detailId"></code>
+      </div>
+      <button class="btn ghost sm" id="detailClose" type="button" data-t>Close</button>
+    </div>
+    <div class="detail-badges" id="detailBadges"></div>
+    <p class="detail-desc" id="detailDesc" hidden></p>
+    <dl class="detail-grid" id="detailGrid"></dl>
+    <div class="detail-call">
+      <div class="detail-call-head">
+        <b data-t>Call example</b>
+        <div class="detail-tabs" id="detailTabs" role="group" aria-label="Protocol" data-ta="Protocol"></div>
+        <button class="btn ghost sm" id="detailCopy" type="button" data-t>Copy</button>
+      </div>
+      <pre class="code"><code id="detailCode"></code></pre>
+    </div>
+    <p class="note" id="detailNote"></p>
+  </div>
+</dialog>
+
+<dialog class="modal" id="adminModelEdit" aria-labelledby="adminEditTitle">
+  <form class="modal-card" id="adminModelEditForm" novalidate>
+    <div class="modal-head">
+      <div><p class="eyebrow" data-t>Model</p><h2 id="adminEditTitle" data-t>Edit display info</h2><code id="adminEditId"></code></div>
+      <button class="btn ghost sm" id="adminEditClose" type="button" data-t>Close</button>
+    </div>
+    <label class="field"><span data-t>Name users see</span>
+      <input name="name" type="text" maxlength="80" autocomplete="off" placeholder="Defaults to the model name" data-tp="Defaults to the model name">
+    </label>
+    <label class="field"><span><span data-t>Description</span> <small data-t>Optional, up to 500 characters</small></span>
+      <textarea name="description" maxlength="500" rows="4" placeholder="What this model is good at, and what limits it has" data-tp="What this model is good at, and what limits it has"></textarea>
+    </label>
+    <label class="checkline"><input name="open" type="checkbox"><span data-t>Open in the model plaza and allow user keys to call it</span></label>
+    <p class="form-error" id="adminEditError" role="alert" hidden></p>
+    <div class="modal-actions">
+      <button class="btn ghost" id="adminEditCancel" type="button" data-t>Cancel</button>
+      <button class="btn primary" type="submit" data-t>Save</button>
+    </div>
+  </form>
+</dialog>
+
+<noscript><p class="noscript" data-t>This page needs JavaScript to sign in and show the console.</p></noscript>
+<script src="/portal/i18n.js"></script>
+<script src="/portal/usage.js"></script>
+<script src="/portal/models.js"></script>
+<script src="/portal/admin-models.js"></script>
+<script src="/portal/portal.js"></script>
+</body>
+</html>

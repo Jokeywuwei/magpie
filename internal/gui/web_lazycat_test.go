@@ -394,8 +394,8 @@ func TestWebBoxSignInChecksItsValue(t *testing.T) {
 		reached = true
 		rw.WriteHeader(http.StatusTeapot)
 	}))
-	if w := onePortCall(t, h, "GET", "/", lazyCatPeer, lazyCatDomain, "", over(lazyCatSignedIn, "Accept", "text/html")...); w.Code != http.StatusUnauthorized || reached {
-		t.Errorf("the box's headers without MAGPIE_WEB_SIGN_IN: %d, reached %v", w.Code, reached)
+	if w := onePortCall(t, h, "GET", "/", lazyCatPeer, lazyCatDomain, "", over(lazyCatSignedIn, "Accept", "text/html")...); w.Code != http.StatusFound || reached || w.Header().Get("Location") != "/portal/login?next=%2F" {
+		t.Errorf("the box's headers without MAGPIE_WEB_SIGN_IN: %d, reached %v, to %q", w.Code, reached, w.Header().Get("Location"))
 	}
 }
 

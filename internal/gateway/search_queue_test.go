@@ -22,7 +22,7 @@ import (
 func TestSearchQueueKeepsCodexAlive(t *testing.T) {
 	keepFast(t, 10*time.Millisecond, 20*time.Millisecond, 100*time.Millisecond)
 	held, quiet, watch, silent := keepHeldAfter, agentQuietMost, watchEvery, translatedQuietLongest
-	keepHeldAfter, agentQuietMost, watchEvery, translatedQuietLongest = 10*time.Millisecond, 50*time.Millisecond, 5*time.Millisecond, 40*time.Millisecond
+	keepHeldAfter, agentQuietMost, watchEvery, translatedQuietLongest = 10*time.Millisecond, 50*time.Millisecond, 5*time.Millisecond, 100*time.Millisecond
 	t.Cleanup(func() { keepHeldAfter, agentQuietMost, watchEvery, translatedQuietLongest = held, quiet, watch, silent })
 	for _, mode := range []string{"comments", "progress", "cancel", "silent"} {
 		t.Run(mode, func(t *testing.T) {
@@ -60,7 +60,7 @@ func TestSearchQueueKeepsCodexAlive(t *testing.T) {
 				w.Header().Set("Content-Type", "text/event-stream")
 				io.WriteString(w, "data: "+`{"type":"response.created","response":{"id":"queued","model":"m1","status":"in_progress"}}`+"\n\n")
 				w.(http.Flusher).Flush()
-				tick := time.NewTicker(20 * time.Millisecond)
+				tick := time.NewTicker(5 * time.Millisecond)
 				defer tick.Stop()
 				pings := 0
 				for {

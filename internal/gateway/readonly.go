@@ -42,10 +42,7 @@ var readOnlyRoutes = map[string]bool{
 	"GET " + routeEventsPath:          true,
 	"GET " + OwnMCPPath:               true,
 	"GET " + KeyPagePath:              true,
-	// the chat page's own files, answered without a key (chatpage.go)
-	"GET " + ChatPagePath:                true,
-	"GET " + ChatPagePath + "/{path...}": true,
-	"GET " + keyPageData:                 true,
+	"GET " + keyPageData:              true,
 	// the join carries a password, not a key (join.go)
 	"GET " + JoinPagePath: true,
 	"GET " + joinData:     true,

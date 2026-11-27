@@ -190,6 +190,8 @@ const usage = `magpie — one place to pick every agent's model
   magpie agents                   list every supported agent
   magpie settings [list|get <key>|set <key> <value>|reset <key>] [--json]
                                   every setting the window's Settings page saves, read and set as it saves them (magpie settings help)
+  magpie user [list|add <email> [--role admin]|passwd <email>|role <email> <role>|disable|enable|remove <email> --yes]
+                                  the platform's accounts: the first admin is made here, with no default password (magpie user help)
   magpie update [check] [--proxy <url>] [--mirror <prefix>] [--addr host:port] [--force]
                                   install the newest release (check: only say if there is one); the running
                                   magpie is restarted into it, found by --addr, MAGPIE_ADDR or the address it
@@ -706,6 +708,8 @@ func run(args []string) error {
 		return claudeCodeCmd(args[1:])
 	case "settings":
 		return settingsCmd(args[1:])
+	case "user", "users":
+		return userCmd(args[1:])
 	}
 
 	// the agent of a plugin that is gone (deleted on disk) is no agent

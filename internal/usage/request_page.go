@@ -299,13 +299,15 @@ type rowChunk struct {
 // rowMsg is the Text of a row's Claude message id, after rowText's, and
 // rowError its error's
 const (
-	rowMsg   = 37
+	// rowOwner is the Text of the account a user's key belongs to.
+	rowOwner = 37
+	rowMsg   = 38
 	rowError = 9
 	// rowClient is the Text of the client's own name, when the user counts
 	// it as another agent (Row.Client, #1958)
 	rowClient = 33
 	// rowTexts is how many strings a row has: rowText's and the message id
-	rowTexts = 38
+	rowTexts = 39
 )
 
 // rowVaried are the strings that differ call by call: the error, the
@@ -371,8 +373,8 @@ func (c *rowChunk) shape(t [rowTexts]uint32) uint32 {
 // reason ("Upstream stop reason", #1927) and the service tiers (#1784)
 // among them: a string left out comes back empty from the cache, in the
 // page and in /v1/magpie/usage/requests (TestRowTextHoldsEveryString)
-func rowText(r *Row) [37]*string {
-	return [37]*string{&r.Agent, &r.Provider, &r.Host, &r.SessionProvider, &r.SessionAccount, &r.Model, &r.Requested, &r.Served, &r.Effort, &r.Error, &r.ErrType, &r.RequestID, &r.Endpoint, &r.Session, &r.NativeSession, &r.Kind, &r.Source, &r.Via, &r.ProviderKeyID, &r.ProviderKeyName, &r.CallerKeyID, &r.CallerKeyName, &r.Archive, &r.Operation, &r.ProviderAccount, &r.ResponseID, &r.Upstream, &r.Subagent, &r.ParentAgent, &r.Stop, &r.TierAsked, &r.TierSent, &r.TierServed, &r.Client, &r.CallerIssuerID, &r.ClientIP, &r.Wire}
+func rowText(r *Row) [38]*string {
+	return [38]*string{&r.Agent, &r.Provider, &r.Host, &r.SessionProvider, &r.SessionAccount, &r.Model, &r.Requested, &r.Served, &r.Effort, &r.Error, &r.ErrType, &r.RequestID, &r.Endpoint, &r.Session, &r.NativeSession, &r.Kind, &r.Source, &r.Via, &r.ProviderKeyID, &r.ProviderKeyName, &r.CallerKeyID, &r.CallerKeyName, &r.Archive, &r.Operation, &r.ProviderAccount, &r.ResponseID, &r.Upstream, &r.Subagent, &r.ParentAgent, &r.Stop, &r.TierAsked, &r.TierSent, &r.TierServed, &r.Client, &r.CallerIssuerID, &r.ClientIP, &r.Wire, &r.CallerKeyOwner}
 }
 func (c *rowChunk) add(r Row, msg string, order int64, failed bool) {
 	if c.dict == nil {
@@ -1977,6 +1979,11 @@ func mapFor[K comparable, V any](m map[K]V, n int) map[K]V {
 // ReleaseScratch lets go of what the request matching keeps between calls,
 // and the priced blocks no query holds.
 func ReleaseScratch() {
+	scratchSweep.Lock()
+	scratchSweep.armed = false
+	scratchSweep.seq++ // a timer still pending has nothing left to do
+	scratchSweep.at, scratchSweep.last = time.Time{}, time.Time{}
+	scratchSweep.Unlock()
 	keptMatch.Store(nil)
 	keptPicks.Store(nil)
 	keptSeen.Store(nil)
@@ -2004,24 +2011,68 @@ var scratchLinger = 30 * time.Second
 
 var scratchSweep struct {
 	sync.Mutex
-	t *time.Timer
+	// seq is the timer armed last: a callback whose seq isn't this one
+	// has been superseded (or let go by ReleaseScratch) and does nothing.
+	seq   uint64
+	armed bool
+	at    time.Time // when the armed timer was made
+	last  time.Time // the last pairing that put the scratch back
+}
+
+// armScratch starts one sweep timer; scratchSweep is locked.
+func armScratch(d time.Duration) {
+	scratchSweep.seq++
+	seq := scratchSweep.seq
+	scratchSweep.at = time.Now()
+	time.AfterFunc(d, func() { scratchSweepFire(seq) })
 }
 
 // lingerScratch has the kept scratch let go scratchLinger after the last
-// pairing put it back.
+// pairing put it back. A timer made inside a testing/synctest bubble ends
+// with that bubble; the next world sees it armed with an at far in its
+// past, and arms a timer of its own. Nothing here calls Reset or Stop:
+// those are what a timer from another world panics on.
 func lingerScratch() {
 	scratchSweep.Lock()
 	defer scratchSweep.Unlock()
-	if scratchSweep.t == nil {
-		scratchSweep.t = time.AfterFunc(scratchLinger, func() {
-			keptMatch.Store(nil)
-			keptPicks.Store(nil)
-			keptSeen.Store(nil)
-			releaseRows()
-		})
+	scratchSweep.last = time.Now()
+	stale := scratchSweep.armed && time.Since(scratchSweep.at) > 2*scratchLinger
+	if scratchSweep.armed && !stale {
 		return
 	}
-	scratchSweep.t.Reset(scratchLinger)
+	scratchSweep.armed = true
+	armScratch(scratchLinger)
+}
+
+// scratchSweepFire lets the scratch go once nothing has paired for
+// scratchLinger, or arms what is left of the wait when something has.
+func scratchSweepFire(seq uint64) {
+	scratchSweep.Lock()
+	if !scratchSweep.armed || scratchSweep.seq != seq {
+		scratchSweep.Unlock()
+		return
+	}
+	last := scratchSweep.last
+	scratchSweep.Unlock()
+	// a pairing since the timer was armed waits the whole linger from
+	// itself, as Reset did
+	if idle := time.Since(last); idle < scratchLinger {
+		scratchSweep.Lock()
+		if scratchSweep.armed && scratchSweep.seq == seq {
+			armScratch(scratchLinger - idle)
+		}
+		scratchSweep.Unlock()
+		return
+	}
+	scratchSweep.Lock()
+	if scratchSweep.armed && scratchSweep.seq == seq {
+		scratchSweep.armed = false
+	}
+	scratchSweep.Unlock()
+	keptMatch.Store(nil)
+	keptPicks.Store(nil)
+	keptSeen.Store(nil)
+	releaseRows()
 }
 
 // sized is s[:n], zeroed, in s's array when it holds n

@@ -18,6 +18,7 @@ import (
 
 	"github.com/yetone/magpie/internal/access"
 	"github.com/yetone/magpie/internal/budget"
+	"github.com/yetone/magpie/internal/identity"
 	"github.com/yetone/magpie/internal/netguard"
 	"github.com/yetone/magpie/internal/provider"
 	"github.com/yetone/magpie/internal/settings"
@@ -620,7 +621,7 @@ func lanGuard(next http.Handler) http.Handler {
 		// opened before the key it asks for is typed; its data isn't
 		// magpie's CA, too: public, and fetched before the computer
 		// asking trusts magpie's https:// (https.go)
-		if remote && (keyPageOpen(r) || caFileOpen(r) || chatPageOpen(r)) {
+		if remote && (keyPageOpen(r) || caFileOpen(r)) {
 			next.ServeHTTP(w, r)
 			return
 		}
@@ -817,6 +818,14 @@ func identifyCaller(w http.ResponseWriter, r *http.Request) (*http.Request, bool
 		writeError(w, provider.Chat, http.StatusUnauthorized, refused.Why)
 		return r, false
 	}
+	// a user's key is never a local agent's stale key: one that is turned
+	// off, deleted or rotated away is refused on this computer too, rather
+	// than let on as a request with no key
+	if !ok && access.UserSecret(callerKey(r)) {
+		log.Printf("refused %s %s from %s: the user API key is turned off or no longer here", r.Method, r.URL.Path, r.RemoteAddr)
+		writeError(w, provider.Chat, http.StatusUnauthorized, "this API key is turned off or no longer exists")
+		return r, false
+	}
 	if !ok && !local(r) {
 		if over, retry := tooManyAuthFails(); over {
 			// A flood of wrong keys: stop answering each one (no 401 oracle,
@@ -832,6 +841,17 @@ func identifyCaller(w http.ResponseWriter, r *http.Request) (*http.Request, bool
 		return r, false
 	}
 	if ok {
+		// a user's key signs in for an account: the account must still be
+		// here and enabled, or the key stops with it. Read from the key
+		// store alone; no header, query or model id can name an owner.
+		if who.Owner != "" {
+			u, err := identity.ByID(who.Owner)
+			if err != nil || u.Disabled {
+				log.Printf("refused %s %s from %s: the account of gateway key %q is disabled or gone", r.Method, r.URL.Path, r.RemoteAddr, who.KeyName)
+				writeError(w, provider.Chat, http.StatusUnauthorized, "the account this gateway key belongs to is disabled or no longer here")
+				return r, false
+			}
+		}
 		r = r.WithContext(access.WithIdentity(r.Context(), who))
 		// the names the key gives models, before any route reads one
 		r = aliasRequest(r, who)
@@ -871,7 +891,7 @@ func appendUsage(r *http.Request, rec usage.Record) {
 		rec.Subagent, rec.ParentAgent = subagentOf(r.Header)
 	}
 	who := access.Caller(r.Context())
-	rec.CallerKeyID, rec.CallerKeyName, rec.CallerIssuerID = who.KeyID, who.KeyName, who.IssuerID()
+	rec.CallerKeyID, rec.CallerKeyName, rec.CallerIssuerID, rec.CallerKeyOwner = who.KeyID, who.KeyName, who.IssuerID(), who.Owner
 	rec.Local = local(r)
 	rec.ClientIP = clientIP(r)
 	if r.Context().Value(observedKey{}) != nil {

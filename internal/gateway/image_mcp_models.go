@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/yetone/magpie/internal/access"
+	"github.com/yetone/magpie/internal/modelaccess"
 	"github.com/yetone/magpie/internal/provider"
 )
 
@@ -126,8 +127,19 @@ func mediaModelsFor(r *http.Request, video bool) (all, shown []string, def strin
 	return all, shown, def
 }
 
-// refAllowed says the key may use ref, a model or a routing group.
+// refAllowed says the key may use ref, a model or a routing group. A
+// user's key is held to the platform's open models there too, and to an
+// open routing group it names.
 func refAllowed(who access.Identity, ref string) bool {
+	if who.Owner != "" {
+		if provider.IsGroupRef(ref) {
+			g, ms, ok := provider.FindGroup(ref)
+			return ok && modelaccess.Allows(ref) && groupAllowed(who, g, ms)
+		}
+		if modelaccess.GroupsOnly() || !modelaccess.Allows(ref) {
+			return false
+		}
+	}
 	if provider.IsGroupRef(ref) {
 		g, ms, ok := provider.FindGroup(ref)
 		return ok && groupAllowed(who, g, ms)

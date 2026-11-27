@@ -1,5 +1,23 @@
 # Notes for coding agents
 
+## UI work and visual system
+
+Before any change that affects the user portal, its components or its styles,
+load the `oil-ui` skill, then read
+[docs/product-v2/DARK-UI-SYSTEM.md](docs/product-v2/DARK-UI-SYSTEM.md).
+That file is the canonical visual direction for the portal: near-black canvas,
+hairline cards, bottom floating dock, one white primary action, state colour
+only in dots and bars. `docs/product-v2/DESIGN.md` still governs business
+structure, accessibility, responsive rules, theme injection, CSP, privacy and
+i18n; when the two disagree, DARK-UI-SYSTEM wins the visual choice and
+DESIGN.md wins the functional constraint. The P0/P1 reports and UI-AUDIT are
+history, not new-page visual specs.
+
+Do not add page-local colours, radii, fonts or shadows: extend the token system
+in DARK-UI-SYSTEM first, then implement. The admin backend keeps its sidebar
+and 13px compact density; the portal uses the bottom dock. Do not copy the
+reference product's brand, logo, copy, images or data.
+
 ## Subsystem design and review
 
 Before changing a documented subsystem, read its

@@ -44,6 +44,10 @@ type Record struct {
 	ProviderAccount string `json:"providerAccount,omitempty"`
 	CallerKeyID     string `json:"callerKeyId,omitempty"`
 	CallerKeyName   string `json:"callerKeyName,omitempty"`
+	// CallerKeyOwner is the platform account the caller's key belongs to
+	// (access.Identity.Owner), "" for magpie's own and admin keys: the
+	// dimension a user's own usage reads by.
+	CallerKeyOwner string `json:"callerKeyOwner,omitempty"`
 	// CallerIssuerID is the key CallerKeyID was issued under (an issued,
 	// short-lived key: access.IssueKey), whose limits count this call too.
 	CallerIssuerID string `json:"callerIssuerId,omitempty"`

@@ -15,6 +15,12 @@
 (() => {
   const plugins = new Map(); // id → { id, config, onConfig: [], disposers: [] }
   const pages = new Map(); // key → { plugin, part, main, mounted, broken }
+  // Product entries the Web relay no longer serves: their Go plugin still
+  // applies (the gateway's MCP hub, the sessions store and the credentials
+  // stay), but it adds no page here, so no route, markup or client hook is
+  // made for it. index-web.html loads none of their scripts; the app's own
+  // window, and its page served to a browser, keeps both pages.
+  const removedPages = new Set(window.bootPrefs?.relay ? ["sessions", "library"] : []);
   let started = false;
 
   function context(p) {
@@ -39,6 +45,7 @@
 
   function add(p, slot, part) {
     if (slot !== "page") throw new Error(`no slot ${slot}`);
+    if (removedPages.has(part.key)) return; // a product entry this build doesn't serve
     if (!/^[a-z][a-z0-9-]*$/.test(part.key || "") || pages.has(part.key) || document.getElementById("view-" + part.key)) {
       throw new Error(`page ${part.key} is taken`);
     }
